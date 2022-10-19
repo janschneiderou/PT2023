@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="PT2023.PracticeMode"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PT2023"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000" Background="Transparent">
+    <Grid Width="1000" Height="800" >
+        <Image Source="Images/frame.png" Stretch="Fill" />
+        <Image Name="myImage" HorizontalAlignment="Left" Height="599" Margin="60,60,0,0" VerticalAlignment="Top" Width="750"/>
+        <Button Name="Button_Pause_Play" BorderThickness="0" Background="Transparent" Height="50" Width="50" HorizontalAlignment="Left" Margin="108,700,0,0" VerticalAlignment="Top" Click="Button_Pause_Play_Click">
+            <Image Source="Images/btn_pause_play.png" />
+        </Button>
+        <Label Name="DebugLabel" Content="Label" HorizontalAlignment="Left" Margin="201,707,0,0" VerticalAlignment="Top" Height="83" Width="215"/>
+        <Label Name="FeedbackLabel" Visibility="Collapsed" Content="HERE is the FEEDBACK!!!"  Foreground="Red" Height="80" Width="400" Margin="0,0,0,0" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+        <Label Name="ScriptLabel" Visibility="Collapsed" Content=""  Foreground="LightBlue" Height="80" Margin="10,297,155,0" FontSize="20" VerticalAlignment="Top" HorizontalContentAlignment="Center" />
+        <ScrollViewer Width="176" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="700" Margin="824,50,0,50" >
+            <Canvas>
+                <Label Content="Posture Elements" Canvas.Left="20" Canvas.Top="5" FontWeight="Bold" Foreground="White"/>
+                <CheckBox Content="Arms Crossed" Name="CB_ArmsCrossed" Canvas.Left="30" Canvas.Top="35" IsChecked="True" Unchecked="CB_ArmsCrossed_Checked" Checked="CB_ArmsCrossed_Checked" Foreground="White"/>
+                <CheckBox Content="Legs Crossed" Name="CB_LegsCrossed" Canvas.Left="30" Canvas.Top="65" IsChecked="True" Unchecked="CB_LegsCrossed_Checked" Checked="CB_LegsCrossed_Checked" Foreground="White"/>
+                <CheckBox Content="Gestures" Name="CB_Gestures" Canvas.Left="30" Canvas.Top="95" IsChecked="True" Unchecked="CB_Gestures_Checked" Checked="CB_Gestures_Checked" Foreground="White"/>
+                <CheckBox Content="Dancing" Name="CB_Dancing" Canvas.Left="30" Canvas.Top="125" IsChecked="True" Unchecked="CB_Dancing_Checked" Checked="CB_Dancing_Checked" Foreground="White"/>
+                <CheckBox Content="Hands Visible" Name="CB_Hands" Canvas.Left="30" Canvas.Top="155" IsChecked="True" Unchecked="CB_Hands_Checked" Checked="CB_Hands_Checked" Foreground="White"/>
+                <CheckBox Content="Hands near Face" Name="CB_Hands_Face" Canvas.Left="30" Canvas.Top="185" IsChecked="True" Unchecked="CB_Hands_Face_Checked" Checked="CB_Hands_Face_Checked" Foreground="White"/>
+                <Label Content="Volume Elements" Canvas.Left="20" Canvas.Top="210" FontWeight="Bold" Foreground="White" />
+                <CheckBox Content="Speak Loud" Name="CB_Loud" Canvas.Left="30" Canvas.Top="235" IsChecked="True" Unchecked="CB_Loud_Checked"  Checked="CB_Loud_Checked" Foreground="White"/>
+                <CheckBox Content="Speak Soft" Name="CB_Soft" Canvas.Left="30" Canvas.Top="265" IsChecked="True" Unchecked="CB_Soft_Checked" Checked="CB_Soft_Checked" Foreground="White"/>
+                <CheckBox Content="Use Pauses" Name="CB_Pauses" Canvas.Left="30" Canvas.Top="295" IsChecked="True" Unchecked="CB_Pauses_Checked" Checked="CB_Pauses_Checked" Foreground="White"/>
+                <CheckBox Content="Speak" Name="CB_Speak" Canvas.Left="30" Canvas.Top="325" IsChecked="True" Unchecked="CB_Speak_Checked" Checked="CB_Speak_Checked" Foreground="White"/>
+                <Label Content="Scripts Stuff" Canvas.Left="20" Canvas.Top="360" FontWeight="Bold" Foreground="White" />
+                <CheckBox Content="Show Script" Name="CB_Show_Script" Canvas.Left="30" Canvas.Top="385" IsChecked="True" Unchecked="CB_Show_Script_Checked" Checked="CB_Show_Script_Checked" Foreground="White"/>
+
+
+            </Canvas>
+        </ScrollViewer>
+
+        <Grid Name="Grid_Pause" Visibility="Collapsed" Width="300" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent">
+            <Image Source="Images\container3.png"  Stretch="Fill"  />
+            <Label Content="Do you want to stop practicing?" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0" Height="60"/>
+            <Button Name="Button_yes_Exit" BorderThickness="0" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="Transparent" Height="60" Width="60" Margin="50,45,0,0" Click="Button_yes_Exit_Click"  >
+                <Image Source="Images/btn_yes.png" />
+            </Button>
+            <Button Name="Button_keep_practicing" BorderThickness="0"  FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="Transparent" Height="60" Width="60" Margin="189,45,0,0" Click="Button_keep_practicing_Click" >
+                <Image Source="Images/btn_no.png" />
+            </Button>
+        </Grid>
+        <local:CountDown x:Name="myCountDown" HorizontalAlignment="Left" Margin="270,226,0,0" VerticalAlignment="Top" countdownFinished="myCountDown_countdownFinished" />
+
+
+
+    </Grid>
+</UserControl>

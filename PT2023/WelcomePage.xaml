@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="PT2023.WelcomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PT2023"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" >
+    <Grid Name="myGrid">
+        <Image Source="Images\background1.jpg" Name="backgroundImg" Stretch="Fill"  />
+        <Image Source="Images\Title.png" VerticalAlignment="Top" HorizontalAlignment="Center" Height="90"/>
+        <Grid Name="Grid_for_Mode_Selection" Visibility="Visible">
+            <Grid Name="PracticeGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="42,70,620,225" Width="200" >
+                <Image Source="Images\container3.png"  Stretch="Fill"  />
+                <Button  HorizontalAlignment="Left" BorderThickness="0" Margin="10,41,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent" Click="Button_Click_1" Height="50" Width="50">
+                    <Image Source="Images/btn_start.png" />
+                </Button>
+                <Label Content="Practice Presentation" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+                <CheckBox Content="Script" HorizontalAlignment="Left" Margin="87,75,0,0" VerticalAlignment="Top" Name="checkBoxScript" />
+                <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="87,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeleton"/>
+
+            </Grid>
+            <Grid Name="AddScriptGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="42,220,620,225" Width="200" >
+                <Image Source="Images\container3.png"  Stretch="Fill"  />
+                <Button Name="Button_add_Script" BorderThickness="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="50" Width="50" Click="Button_add_Script_Click">
+                    <Image Source="Images/btn_add.png" />
+                </Button>
+                <Label Content="Add s Script" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+
+            </Grid>
+            <Grid Name="MemoriseScriptGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,70,0,0" Width="200" >
+                <Image Source="Images\container3.png"  Stretch="Fill"  />
+                <Button Name="Button_add_Memory"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="50" Width="50" Click="Button_add_Memory_Click" >
+                    <Image Source="Images/btn_Go.png" />
+                </Button>
+                <Label Content="Memorise your Script" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+
+            </Grid>
+        </Grid>
+        <Label Content="Select Camera" HorizontalAlignment="Left" Margin="22,0,0,10" VerticalAlignment="Bottom" FontWeight="Bold" Foreground="White"/>
+        <ComboBox Name="cameraSelector" HorizontalAlignment="Left" Margin="144,0,0,10" VerticalAlignment="Bottom" Width="120" SelectionChanged="cameraSelector_SelectionChanged"/>
+        <Button  HorizontalAlignment="Left" Margin="439,0,0,10" VerticalAlignment="Bottom" Click="Button_Click" BorderThickness="0" Background="Transparent" Height="50" Width="80">
+            <Image Source="Images/btn_volume.png" />
+        </Button>
+        <Button  HorizontalAlignment="Right" Margin="0,0,20,10"   VerticalAlignment="Bottom" Height="50" BorderThickness="0" Click="Button_Click_2" Background="Transparent">
+            <Image Source="Images/btn_exit.png" />
+        </Button>
+
+
+
+    </Grid>
+</UserControl>
