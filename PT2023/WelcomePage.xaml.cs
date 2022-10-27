@@ -32,6 +32,7 @@ namespace PT2023
         public PracticeMode practiceMode;
         public WorkingWithScript workingWithScript;
         public MemoryScript memoryScript;
+        public PracticeSentences practiceSentences;
 
         #region speech stuff
         private SpeechToText speechToText;
@@ -94,6 +95,10 @@ namespace PT2023
             {
                 memoryScript.recongnizedWord( text);
             }
+            if(practiceSentences!=null)
+            {
+                practiceSentences.recognizedWord( text);
+            }
             
             
         }
@@ -130,6 +135,8 @@ namespace PT2023
             }
             
         }
+
+        #region handling selections
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -188,7 +195,26 @@ namespace PT2023
 
         }
 
-      
+        private void Button_Practice_Sentence_Click(object sender, RoutedEventArgs e)
+        {
+            Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            practiceSentences = new PracticeSentences();
+
+            if (checkBoxSkeletonPractice.IsChecked == true)
+            {
+                practiceSentences.showSkeleton = true;
+            }
+
+            myGrid.Children.Add(practiceSentences);
+            practiceSentences.Margin = new Thickness(0, 0, 0, 0);
+            practiceSentences.VerticalAlignment = VerticalAlignment.Center;
+            practiceSentences.HorizontalAlignment = HorizontalAlignment.Center;
+            practiceSentences.exitEvent += PracticeSentences_exitEvent;
+        }
+
+       
+
+        #endregion
 
         #region exit events
 
@@ -219,11 +245,22 @@ namespace PT2023
         }
 
 
+        private void PracticeSentences_exitEvent(object sender, string x)
+        {
+            Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                myGrid.Children.Remove(practiceSentences);
+                Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+            }));
+        }
+
+
         #endregion
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+       
     }
 }

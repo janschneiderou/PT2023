@@ -18,7 +18,7 @@ namespace PT2023
         public static double t_pauseThreshold = 1000;
 
         public static double t_speekingTooLongTime = 5000;
-        public static double t_pausingTooLongTime = 5000;
+        public static double t_pausingTooLongTime = 7000;
 
         public static double t_guessTime = 500;
         public static int t_sentencesWithoutPauses = 3;
@@ -97,6 +97,10 @@ namespace PT2023
                     m_speakingLongMistake = false;
                     sentencesCounter = 0;
                 }
+                if(currentTime-pauseTimeStart> t_pausingTooLongTime)
+                {
+                    m_pausingLongMistake = true;
+                }
 
             }
             else
@@ -109,7 +113,7 @@ namespace PT2023
                 {
                     analyseSoftSpeaking();
                 }
-                
+                m_pausingLongMistake = false;
 
                 if (currentAudioLevel < t_isSpeakingThreshold && isProbablySpeaking == true)
                 {

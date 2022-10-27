@@ -21,6 +21,8 @@ namespace PT2023
         public  static List<Word> words = new List<Word>();
 
 
+        private string currentLanguage = "en-GB";
+
         public delegate void SpeechRecognized(object sender, string text);
         public event SpeechRecognized speechRecognizedEvent;
 
@@ -34,7 +36,7 @@ namespace PT2023
             try
             {
                 // create the engine
-                speechRecognitionEngine = createSpeechEngine("en-GB");
+                speechRecognitionEngine = createSpeechEngine(currentLanguage);
 
                 // hook to events
                 speechRecognitionEngine.AudioLevelUpdated += new EventHandler<AudioLevelUpdatedEventArgs>(engine_AudioLevelUpdated);

@@ -267,7 +267,7 @@ namespace PT2023
                             Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
                                 if (poseAnalysis != null)
                                 {
-                                    DebugLabel.Content = "Andlge LeftUP=" + poseAnalysis.calcArmsMovement2.currentGesture + "\n";
+                                    DebugLabel.Content = "Andlge LeftUP=" + CalcArmsMovement2D.currentGesture + "\n";
                                 }
                             }));
                         
@@ -470,6 +470,8 @@ namespace PT2023
 
         #endregion
 
+        #region checkboxes
+
         private void CB_Speak_Checked(object sender, RoutedEventArgs e)
         {
             if(CB_Speak.IsChecked == false)
@@ -625,6 +627,9 @@ namespace PT2023
             }
         }
 
+        #endregion
+
+        #region Pause Start and Exit
         private void Button_Pause_Play_Click(object sender, RoutedEventArgs e)
         {
             if(f_isAnalysing==true)
@@ -683,6 +688,6 @@ namespace PT2023
             readyToPresent = true;
         }
 
-       
+        #endregion
     }
 }

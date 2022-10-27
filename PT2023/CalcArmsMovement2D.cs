@@ -9,7 +9,7 @@ namespace PT2023
     public class CalcArmsMovement2D
     {
         public enum Gesture { nogesture, small, medium, big };//TODO
-        public Gesture currentGesture;
+        public  static Gesture currentGesture;
         public Gesture previousGesture;
         public Gesture prePreviousGesture;
 

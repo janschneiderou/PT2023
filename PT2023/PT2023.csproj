@@ -294,6 +294,14 @@
   <ItemGroup>
     <Resource Include="Images\btn_speak.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\correct.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\wrong.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets" Condition="Exists('..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

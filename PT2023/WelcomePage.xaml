@@ -36,6 +36,17 @@
                 <Label Content="Memorise your Script" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
 
             </Grid>
+
+            <Grid Name="PracticeSentenceGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,222,0,0" Width="200" >
+                <Image Source="Images\container3.png"  Stretch="Fill"  />
+                <Button Name="Button_Practice_Sentence"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="50" Width="50" Click="Button_Practice_Sentence_Click" >
+                    <Image Source="Images/btn_start.png" />
+                </Button>
+                <Label Content="Practice sentences" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+                <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="87,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeletonPractice"/>
+            </Grid>
+
+
         </Grid>
         <Label Content="Select Camera" HorizontalAlignment="Left" Margin="22,0,0,10" VerticalAlignment="Bottom" FontWeight="Bold" Foreground="White"/>
         <ComboBox Name="cameraSelector" HorizontalAlignment="Left" Margin="144,0,0,10" VerticalAlignment="Bottom" Width="120" SelectionChanged="cameraSelector_SelectionChanged"/>

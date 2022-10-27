@@ -240,7 +240,7 @@ namespace PT2023
             }
             else if (VolumeAnalysis.isSpeaking)
             {
-                if(calcArmsMovement2.currentGesture == CalcArmsMovement2D.Gesture.nogesture)
+                if(CalcArmsMovement2D.currentGesture == CalcArmsMovement2D.Gesture.nogesture)
                 {
                     
                     if((startSpeakingCounter> t_sentencesWithoutGestures && calcArmsMovement2.prePreviousGesture == CalcArmsMovement2D.Gesture.nogesture) 
