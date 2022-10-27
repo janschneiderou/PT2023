@@ -105,7 +105,8 @@ namespace PT2023
            
 
             foreach (PresentationAction ba in l_newMistakes)
-            {
+            { 
+                DateTime currentTime = DateTime.Now;
                 bool isAlreadyThere = false;
                 foreach (PresentationAction a in l_mistakesL)
                 {
@@ -124,7 +125,7 @@ namespace PT2023
                     else
                     {
                        l_mistakesL.Add(ba);
-
+                        PracticeMode.loggingString = PracticeMode.loggingString + "<Start>" + ba.myMistake + " timestart =" + currentTime.ToString() + "</start>\n";
                     }
                
 
@@ -136,6 +137,7 @@ namespace PT2023
         {
             int[] nolongerErrors = new int[l_mistakesL.Count];
             int i = 0;
+            DateTime currentTime = DateTime.Now;
 
             foreach (PresentationAction a in l_mistakesL)
             {
@@ -154,7 +156,8 @@ namespace PT2023
             {
                 if (nolongerErrors[j - 1] == 0)
                 {
-                   // logTimeMistakes(j - 1);
+                    // logTimeMistakes(j - 1);
+                    PracticeMode.loggingString = PracticeMode.loggingString + "<stop>" + ((PresentationAction)l_mistakesL[j-1]).myMistake + " timestop =" + currentTime.ToString() + "</stop> \n";
                     l_mistakesL.RemoveAt(j - 1);
                 }
             }

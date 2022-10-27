@@ -139,7 +139,7 @@ namespace PT2023
             {
                 m_speakingLoudMistake=true;
             }
-            else
+            else if (currentAudioLevel < t_loudSpeakingThreshold)
             {
                 isProbablySpeakingLoud = false;
                 m_speakingLoudMistake = false;
@@ -153,11 +153,11 @@ namespace PT2023
                 softTimeStart = currentTime;
                 isProbablySpeakingSoft = true;
             }
-            else if (currentAudioLevel > t_loudSpeakingThreshold && (currentTime - loudTimeStart) > t_guessTime)
+            else if (currentAudioLevel < t_softSpeakingThreshold && (currentTime - softTimeStart) > t_guessTime)
             {
                 m_speakingSoftMistake = true;
             }
-            else
+            else if (currentAudioLevel > t_softSpeakingThreshold)
             {
                 isProbablySpeakingSoft = false;
                 m_speakingSoftMistake = false;

@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="PT2023.PracticePresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PT2023"
+             mc:Ignorable="d" 
+              d:DesignHeight="800" d:DesignWidth="1000">
+    <Grid Width="1000" Height="800" >
+        <Image Source="Images/frame.png" Stretch="Fill" />
+        <Image Name="myImage" HorizontalAlignment="Left" Height="599" Margin="60,60,0,0" VerticalAlignment="Top" Width="750"/>
+        <Button Name="Button_Pause_Play" BorderThickness="0" Background="Transparent" Height="50" Width="50" HorizontalAlignment="Left" Margin="108,700,0,0" VerticalAlignment="Top" Click="Button_Pause_Play_Click">
+            <Image Source="Images/btn_pause_play.png" />
+        </Button>
+        
+    </Grid>
+</UserControl>

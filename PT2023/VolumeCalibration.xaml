@@ -17,6 +17,7 @@
         <Slider Name="SoftSpeakingSlider" ValueChanged="SoftSpeakingSlider_ValueChanged" HorizontalAlignment="Left" Margin="32,106,0,0" VerticalAlignment="Top" Width="120" Minimum="0" Maximum="100"/>
         <Slider Name="LoudSpeakingSlider" ValueChanged="LoudSpeakingSlider_ValueChanged" HorizontalAlignment="Left" Margin="32,56,0,0" VerticalAlignment="Top" Width="120" Minimum="0" Maximum="100"/>
         <Label  Name="volumeLabel" Content="Volume = " HorizontalAlignment="Left" Margin="60,5,0,0" VerticalAlignment="Top"/>
+        <Label Name="speakingThresholdLabel" Content="" HorizontalAlignment="Left" Margin="157,152,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

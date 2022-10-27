@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
+using System.Speech;
+using System.Speech.Synthesis;
 
 using Emgu.CV;
 using Emgu.CV.CvEnum;
@@ -32,7 +34,7 @@ namespace PT2023
 
         bool showScript = true;
 
-        bool readyToPresent=false;
+        public static bool readyToPresent=false;
         
 
         #endregion
@@ -77,20 +79,37 @@ namespace PT2023
         VolumeAnalysis volumeAnalysis;
         RulesAnaliserFIFO rulesAnaliserFIFO;
 
-       
+        #region logging
+        public static string loggingString="";
+        #endregion
+
+        #region text2Speech
+        SpeechSynthesizer speechSynthesizerObj;
+        #endregion
+
+
 
         public PracticeMode()
         {
+            
+
+
             InitializeComponent();
 
+            speechSynthesizerObj = new SpeechSynthesizer();
+            loggingString = "";
             readyToPresent = false;
             myCountDown.startAnimation();
 
-            if (withScript==false)
+            if (withScript == false)
             {
                 CB_Show_Script.IsEnabled = false;
+                CB_Show_Script.IsChecked = false;
+                CB_Show_Script_Checked(null, null);
             }
-            
+           
+
+
             f_isAnalysing = true;
 
             poseAnalysis = new PoseAnalysis();
@@ -274,6 +293,36 @@ namespace PT2023
 
         #region do script stuff
 
+        private void buttonSpeak_Click(object sender, RoutedEventArgs e)
+        {
+            speechSynthesizerObj.Dispose();
+            if ((string)ScriptLabel.Content != "")
+            {
+                
+                speechSynthesizerObj = new SpeechSynthesizer();
+                 
+                speechSynthesizerObj.SpeakAsync((string)ScriptLabel.Content);
+               
+            }
+        }
+
+
+        private void buttonBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (WelcomePage.currentWord > 0)
+            {
+                WelcomePage.currentWord--;
+            }
+        }
+
+        private void buttonNext_Click(object sender, RoutedEventArgs e)
+        {
+            if (WelcomePage.currentWord < SpeechToText.words.Count)
+            {
+                WelcomePage.currentWord++;
+               
+            }
+        }
 
         public void recognizedWord(string text)
         {
@@ -306,6 +355,8 @@ namespace PT2023
         {
             withScript = true;
             CB_Show_Script.IsEnabled = true;
+            CB_Show_Script.IsChecked = true;
+            CB_Show_Script_Checked(null, null);
         }
 
         #endregion
@@ -557,12 +608,20 @@ namespace PT2023
             if(CB_Show_Script.IsChecked == false)
             {
                 showScript= false;
+                scrptCanvas.Visibility = Visibility.Collapsed;
+                buttonBack.Visibility = Visibility.Collapsed;
+                buttonNext.Visibility = Visibility.Collapsed;
                 ScriptLabel.Visibility = Visibility.Collapsed;
+                buttonSpeak.Visibility = Visibility.Collapsed;
             }
             else 
             {
                 showScript = true;
-                ScriptLabel.Visibility= Visibility.Visible;
+                scrptCanvas.Visibility= Visibility.Visible;
+                buttonBack.Visibility = Visibility.Visible;
+                buttonNext.Visibility = Visibility.Visible;
+                ScriptLabel.Visibility = Visibility.Visible;
+                buttonSpeak.Visibility = Visibility.Visible;
             }
         }
 
@@ -573,12 +632,16 @@ namespace PT2023
                 
                 f_isAnalysing = false;
                 Grid_Pause.Visibility = Visibility.Visible;
+                DateTime currentTime = DateTime.Now;
+                loggingString = loggingString + "<PauseTimeStart>" + currentTime.ToString() + "</PauseTimeStart>";
             }
             else
             {
                
                 f_isAnalysing = true;
                 Grid_Pause.Visibility = Visibility.Collapsed;
+                DateTime currentTime = DateTime.Now;
+                loggingString = loggingString + "<PauseTimeStop>" + currentTime.ToString() + "</PauseTimeStop>";
             }
             
 
@@ -592,12 +655,16 @@ namespace PT2023
         private void Button_keep_practicing_Click(object sender, RoutedEventArgs e)
         {
             Grid_Pause.Visibility = Visibility.Collapsed;
-           
-            f_isAnalysing=true;
+            DateTime currentTime = DateTime.Now;
+            loggingString = loggingString + "<PauseTimeStop>" + currentTime.ToString() + "</PauseTimeStop>";
+
+            f_isAnalysing =true;
         }
 
         public void doExitStuff()
         {
+            DateTime currentTime = DateTime.Now;
+            loggingString = loggingString + "<StopTIme>" + currentTime.ToString() + "</StopTime>";
             m_Webcam.Stop();
             m_Webcam.ImageGrabbed -= M_Webcam_ImageGrabbed;
             m_posenet = null;
@@ -611,7 +678,11 @@ namespace PT2023
         private void myCountDown_countdownFinished(object sender)
         {
             myCountDown.Visibility=Visibility.Collapsed;
+            DateTime currentTime = DateTime.Now;
+            loggingString = loggingString + "<StartTIme>" + currentTime.ToString() + "</startTime>";
             readyToPresent = true;
         }
+
+       
     }
 }

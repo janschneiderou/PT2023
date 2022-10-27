@@ -63,6 +63,8 @@ namespace PT2023
            
             VolumeAnalysis.t_isSpeakingThreshold= (int)isSpeakingSlider.Value;
 
+            speakingThresholdLabel.Content = (int)isSpeakingSlider.Value;
+
             MyCanvas.Children.Clear();
 
             displayLines();
