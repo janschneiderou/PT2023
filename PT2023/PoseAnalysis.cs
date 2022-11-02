@@ -152,18 +152,19 @@ namespace PT2023
         }
         public void analyseCrossedLegs()
         {
+            
             if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X > m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X &&
-                possibleCrossedLegs == false)
+                possibleCrossedLegs == false && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty==false)
             {
                 startCrossedLegs = currentTime;
                 possibleCrossedLegs = true;
             }
             else if(m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X > m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X &&
-                possibleCrossedLegs == true && currentTime - startCrossedLegs> t_posture)
+                possibleCrossedLegs == true && currentTime - startCrossedLegs> t_posture && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
             {
                 m_CrossedLegs=true;
             }
-            else if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X < m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X)
+            else if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X < m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
             {
                 m_CrossedLegs=false;
                 possibleCrossedLegs=false;

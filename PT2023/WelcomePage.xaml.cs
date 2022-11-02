@@ -88,16 +88,28 @@ namespace PT2023
            
             if(practiceMode!=null)
             {
-                practiceMode.recognizedWord( text);
+                if(practiceMode.Visibility==Visibility.Visible)
+                {
+                    practiceMode.recognizedWord(text);
+                }
+                
             }
 
             if(memoryScript!=null)
             {
-                memoryScript.recongnizedWord( text);
+                if(memoryScript.Visibility==Visibility.Visible)
+                {
+                    memoryScript.recongnizedWord(text);
+                }
+                
             }
             if(practiceSentences!=null)
             {
-                practiceSentences.recognizedWord( text);
+                if(practiceSentences.Visibility==Visibility.Visible)
+                {
+                    practiceSentences.recognizedWord(text);
+                }
+                
             }
             
             
@@ -156,13 +168,13 @@ namespace PT2023
                 practiceMode.showSkeleton = true;
             }
             myGrid.Children.Add(practiceMode);
-            currentWord = 0;
+           
             
             practiceMode.Margin = new Thickness(0, 0, 0, 0);
             practiceMode.VerticalAlignment = VerticalAlignment.Center;
             practiceMode.HorizontalAlignment = HorizontalAlignment.Center;
             practiceMode.Visibility = Visibility.Visible;
-
+            WelcomePage.currentWord = 0;
             practiceMode.exitEvent += PracticeMode_exitEvent;
         }
 
@@ -178,7 +190,7 @@ namespace PT2023
             workingWithScript.VerticalAlignment = VerticalAlignment.Center;
             workingWithScript.HorizontalAlignment = HorizontalAlignment.Center;
             workingWithScript.Visibility = Visibility.Visible;
-
+           
             workingWithScript.exitEvent += WorkingWithScript_exitEvent; 
         }
 
@@ -190,7 +202,7 @@ namespace PT2023
             memoryScript.Margin = new Thickness(0, 0, 0, 0);
             memoryScript.VerticalAlignment = VerticalAlignment.Center;      
             memoryScript.HorizontalAlignment = HorizontalAlignment.Center;
-
+            WelcomePage.currentWord = 0;
             memoryScript.exitEvent += MemoryScript_exitEvent;
 
         }
@@ -210,6 +222,7 @@ namespace PT2023
             practiceSentences.VerticalAlignment = VerticalAlignment.Center;
             practiceSentences.HorizontalAlignment = HorizontalAlignment.Center;
             practiceSentences.exitEvent += PracticeSentences_exitEvent;
+            WelcomePage.currentWord= 0;
         }
 
        
@@ -222,6 +235,7 @@ namespace PT2023
         {
             restartSpeech();
             Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                workingWithScript.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(workingWithScript);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
             }));
@@ -230,6 +244,7 @@ namespace PT2023
         private void PracticeMode_exitEvent(object sender, string x)
         {
             Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                practiceMode.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(practiceMode);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
             }));
@@ -239,6 +254,7 @@ namespace PT2023
         private void MemoryScript_exitEvent(object sender, string x)
         {
             Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                memoryScript.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(memoryScript);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
             }));
@@ -248,6 +264,7 @@ namespace PT2023
         private void PracticeSentences_exitEvent(object sender, string x)
         {
             Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                practiceSentences.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(practiceSentences);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
             }));

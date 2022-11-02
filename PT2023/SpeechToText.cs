@@ -5,6 +5,7 @@ using System.Linq;
 using System.Speech.Recognition;
 using System.Windows;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace PT2023
 {
@@ -35,6 +36,8 @@ namespace PT2023
         {
             try
             {
+
+              //  currentLanguage = CultureInfo.InstalledUICulture.Name.ToString();
                 // create the engine
                 speechRecognitionEngine = createSpeechEngine(currentLanguage);
 

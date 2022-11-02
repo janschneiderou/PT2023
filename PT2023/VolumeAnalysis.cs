@@ -17,8 +17,8 @@ namespace PT2023
 
         public static double t_pauseThreshold = 1000;
 
-        public static double t_speekingTooLongTime = 5000;
-        public static double t_pausingTooLongTime = 7000;
+        public static double t_speekingTooLongTime = 7000;
+        public static double t_pausingTooLongTime = 3000;
 
         public static double t_guessTime = 500;
         public static int t_sentencesWithoutPauses = 3;
