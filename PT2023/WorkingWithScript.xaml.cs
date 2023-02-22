@@ -25,6 +25,7 @@ namespace PT2023
         public event ExitEvent exitEvent;
 
         int MaxCharacters = 40;
+        string path;
 
         public WorkingWithScript()
         {
@@ -38,8 +39,15 @@ namespace PT2023
         {
             try
             {
-                //Run run;
-                string[] lines = File.ReadAllLines(Environment.CurrentDirectory + "\\Scripts\\Script.txt");
+                path = System.IO.Path.Combine(UserManagement.usersPathScripts + "\\Script.txt");
+                MainWindow.scriptPath = path;
+                if (!File.Exists(path))
+                {
+                    FileStream fs = File.Create(path);
+                }
+               
+                    //Run run;
+                    string[] lines = File.ReadAllLines(path);
                 foreach (string s in lines)
                 {
                     scriptText.Text = scriptText.Text + s + System.Environment.NewLine;
@@ -179,7 +187,7 @@ namespace PT2023
         int findeIndexesOfSpace(string line)
         {
             int indexesSpace = -1;
-            int indexesSpaceTemp = -1;
+           
 
             string tempLine = line;
 

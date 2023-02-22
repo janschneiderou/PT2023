@@ -340,15 +340,15 @@ namespace PT2023
             // gestureSize = rightArmAngleChange;
 
 
-            if (gestureSize < 20)
+            if (gestureSize < 10)
             {
                 currentGesture = Gesture.nogesture;
             }
-            else if (gestureSize < 40)
+            else if (gestureSize < 20)
             {
                 currentGesture = Gesture.small;
             }
-            else if (gestureSize < 60)
+            else if (gestureSize < 30)
             {
                 currentGesture = Gesture.medium;
             }

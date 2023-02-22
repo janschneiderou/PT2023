@@ -33,6 +33,7 @@ namespace PT2023
         public WorkingWithScript workingWithScript;
         public MemoryScript memoryScript;
         public PracticeSentences practiceSentences;
+        public UserManagement userManagement;
 
         #region speech stuff
         private SpeechToText speechToText;
@@ -63,6 +64,9 @@ namespace PT2023
             volumeCalibration.Visibility = Visibility.Collapsed;
             volumeCalibration.VerticalAlignment = VerticalAlignment.Bottom;
             volumeCalibration.HorizontalAlignment = HorizontalAlignment.Left;
+
+            addUserMagangement();
+            
         }
 
         #region Speech Analysis Init and delete
@@ -156,6 +160,21 @@ namespace PT2023
             addPracticeMode();
         }
 
+
+        private void addUserMagangement()
+        {
+            userManagement = new UserManagement();
+            myGrid.Children.Add(userManagement);
+            userManagement.Margin = new Thickness(0, 0, 0, 0);
+            userManagement.VerticalAlignment = VerticalAlignment.Center;
+            userManagement.HorizontalAlignment = HorizontalAlignment.Center;
+            userManagement.Visibility = Visibility.Visible;
+            userManagement.exitEvent += UserManagement_exitEvent;
+            Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+        }
+
+        
+
         private void addPracticeMode()
         {
             practiceMode = new PracticeMode();
@@ -178,7 +197,10 @@ namespace PT2023
             practiceMode.exitEvent += PracticeMode_exitEvent;
         }
 
-       
+        private void UserManagementButton_Click(object sender, RoutedEventArgs e)
+        {
+            addUserMagangement();
+        }
 
         private void Button_add_Script_Click(object sender, RoutedEventArgs e)
         {
@@ -225,11 +247,20 @@ namespace PT2023
             WelcomePage.currentWord= 0;
         }
 
-       
+
 
         #endregion
 
         #region exit events
+
+        private void UserManagement_exitEvent(object sender, string x)
+        {
+            Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                userManagement.Visibility = Visibility.Collapsed;
+                myGrid.Children.Remove(userManagement);
+                Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+            }));
+        }
 
         private void WorkingWithScript_exitEvent(object sender, string x)
         {
@@ -278,6 +309,6 @@ namespace PT2023
             System.Windows.Application.Current.Shutdown();
         }
 
-       
+        
     }
 }

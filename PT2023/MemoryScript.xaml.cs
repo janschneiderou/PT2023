@@ -52,7 +52,7 @@ namespace PT2023
             {
 
                 Run run;
-                lines = File.ReadAllLines(Environment.CurrentDirectory + "\\Script.txt");
+                lines = File.ReadAllLines(MainWindow.scriptPath);
                 foreach (string s in lines)
                 {
 

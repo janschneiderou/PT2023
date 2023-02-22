@@ -1,3 +1,6 @@
-﻿Hello
-This is a simple script.
-Each word is a line
+﻿Hello everybody! How are you today? Yellow my dear friends! are you ready and ok?
+This is a simple script that serves as an example of what you can write for your presentation.
+Writting a script for a presentation is always a good practice
+you can also copy the text from a file and paste it here
+In any case, we recommend to use very short and simple sentences. 
+There are few options that one can do... I'm just trying random stuff here.

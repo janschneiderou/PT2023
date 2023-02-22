@@ -143,6 +143,9 @@
     <Compile Include="PresentationAction.cs" />
     <Compile Include="RulesAnaliserFIFO.cs" />
     <Compile Include="SpeechToText.cs" />
+    <Compile Include="UserManagement.xaml.cs">
+      <DependentUpon>UserManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="utils.cs" />
     <Compile Include="VolumeAnalysis.cs" />
     <Compile Include="VolumeCalibration.xaml.cs">
@@ -180,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PracticeSentences.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -53,6 +53,7 @@
         <Button  HorizontalAlignment="Left" Margin="439,0,0,10" VerticalAlignment="Bottom" Click="Button_Click" BorderThickness="0" Background="Transparent" Height="50" Width="80">
             <Image Source="Images/btn_volume.png" />
         </Button>
+        <Button Name="UserManagementButton" Content="User" HorizontalAlignment="Left" Margin="533,0,0,10" VerticalAlignment="Bottom" Click="UserManagementButton_Click" BorderThickness="0"  Height="50" Width="80"/>
         <Button  HorizontalAlignment="Right" Margin="0,0,20,10"   VerticalAlignment="Bottom" Height="50" BorderThickness="0" Click="Button_Click_2" Background="Transparent">
             <Image Source="Images/btn_exit.png" />
         </Button>
