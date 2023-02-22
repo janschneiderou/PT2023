@@ -14,6 +14,7 @@
         <Button Name="Button_Close"  HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Margin="70,0,0,25" VerticalAlignment="Bottom" Click="Button_Close_Click" Height="50" Width="55">
             <Image Source="Images/btn_save_close.png" />
         </Button>
+        <Button Name="chunkButton" Content="Chunk it down" HorizontalAlignment="Left" Margin="175,0,0,25" VerticalAlignment="Bottom" Height="50" Width="91" Click="chunkButton_Click"/>
 
     </Grid>
 </UserControl>

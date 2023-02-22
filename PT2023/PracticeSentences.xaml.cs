@@ -427,7 +427,11 @@ namespace PT2023
         {
             if (WelcomePage.currentWord < SpeechToText.words.Count)
             {
-                if (SpeechToText.words[WelcomePage.currentWord].Text == text)
+
+                if (SpeechToText.words[WelcomePage.currentWord].Text == text
+                    || SpeechToText.words[WelcomePage.currentWord].Text == " " + text
+                    || SpeechToText.words[WelcomePage.currentWord].Text == text + " "
+                    || SpeechToText.words[WelcomePage.currentWord].Text == " " + text + " ")
                 {
                     m_PhraseRecognize = true;
                     Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {

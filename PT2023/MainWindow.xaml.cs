@@ -47,7 +47,7 @@ namespace PT2023
 
             this.WindowState=  System.Windows.WindowState.Maximized;
 
-            scriptPath = Environment.CurrentDirectory + "\\Script.txt";
+            scriptPath = Environment.CurrentDirectory + "\\Scripts\\Script.txt";
             if (!File.Exists(scriptPath))
             {
                 createSampleScriptFile();

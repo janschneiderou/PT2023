@@ -233,9 +233,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Scripts\Script.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Scripts\Script.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="License-LGPL.txt" />
@@ -336,6 +334,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\background3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets" Condition="Exists('..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -348,4 +354,10 @@
   </Target>
   <Import Project="..\packages\Emgu.TF.Lite.runtime.windows.2.4.0.1059\build\Emgu.TF.Lite.runtime.windows.targets" Condition="Exists('..\packages\Emgu.TF.Lite.runtime.windows.2.4.0.1059\build\Emgu.TF.Lite.runtime.windows.targets')" />
   <Import Project="..\packages\Emgu.CV.runtime.windows.4.4.0.4061\build\Emgu.CV.runtime.windows.targets" Condition="Exists('..\packages\Emgu.CV.runtime.windows.4.4.0.4061\build\Emgu.CV.runtime.windows.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(SolutionDir)PT2023\models" "$(TargetDir)models" /s /i /y
+XCOPY "$(SolutionDir)PT2023\Images" "$(TargetDir)Images" /s /i /y
+XCOPY "$(SolutionDir)PT2023\Scripts" "$(TargetDir)Scripts" /s /i /y
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

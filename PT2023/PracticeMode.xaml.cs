@@ -326,9 +326,13 @@ namespace PT2023
 
         public void recognizedWord(string text)
         {
+            
             if (WelcomePage.currentWord < SpeechToText.words.Count)
             {
-                if (SpeechToText.words[WelcomePage.currentWord].Text == text)
+                if (SpeechToText.words[WelcomePage.currentWord].Text == text
+                    || SpeechToText.words[WelcomePage.currentWord].Text == " "+text
+                    || SpeechToText.words[WelcomePage.currentWord].Text == text +" "
+                    || SpeechToText.words[WelcomePage.currentWord].Text == " " + text + " ")
                 {
                     WelcomePage.currentWord++;
                 }
