@@ -22,10 +22,13 @@ namespace PT2023
     public partial class UserManagement : UserControl
     {
         public static string usersPath;
+        public static string presentationPath; 
         public static string usersPathScripts;
         public static string usersPathVideos;
         public static string usersPathLogs;
         public List<string> users;
+        public List<string> presentations;
+        string tempPath;
 
         public delegate void ExitEvent(object sender, string x);
         public event ExitEvent exitEvent;
@@ -34,7 +37,13 @@ namespace PT2023
         {
             InitializeComponent();
 
+            userGrid.Visibility = Visibility.Visible;
+            presentationGrid.Visibility = Visibility.Collapsed;
+
+
             users = new List<string>();
+            presentations = new List<string>();
+
             GetDirectories();
 
 
@@ -45,7 +54,7 @@ namespace PT2023
         {
             string executingDirectory = Directory.GetCurrentDirectory();
             // usersPath = executingDirectory + "\\users"; 
-            usersPath = System.IO.Path.Combine(executingDirectory, "users");
+            usersPath = System.IO.Path.Combine(executingDirectory, "Users");
 
             bool exists = System.IO.Directory.Exists(usersPath);
 
@@ -69,6 +78,33 @@ namespace PT2023
             }
         }
 
+        private void getPresentationsDirectories()
+        {
+            
+            tempPath = System.IO.Path.Combine(usersPath, "Presentations");
+
+            bool exists = System.IO.Directory.Exists(tempPath);
+
+            if (!exists)
+                System.IO.Directory.CreateDirectory(tempPath);
+            try
+            {
+                List<string> temp;
+
+                temp = Directory.GetDirectories(tempPath).ToList();
+                foreach (string s in temp)
+                {
+                    int x = s.LastIndexOf("\\");
+                    presentations.Add(s.Substring(x + 1));
+                }
+
+            }
+            catch (UnauthorizedAccessException)
+            {
+
+            }
+        }
+
         private void usersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             userNameTextBox.Text = (string)usersListBox.SelectedValue;
@@ -77,22 +113,49 @@ namespace PT2023
         private void selectButton_Click(object sender, RoutedEventArgs e)
         {
             usersPath = System.IO.Path.Combine(usersPath, userNameTextBox.Text);
-            usersPathScripts = System.IO.Path.Combine(usersPath, "Scripts");
-            usersPathVideos = System.IO.Path.Combine(usersPath, "Videos");
-            usersPathLogs = System.IO.Path.Combine(usersPath, "Logs");
+            
           
-            MainWindow.scriptPath = System.IO.Path.Combine(usersPathScripts + "\\Script.txt");
+          
 
             bool exists = System.IO.Directory.Exists(usersPath);
             if (!exists)
             {
                 System.IO.Directory.CreateDirectory(usersPath);
+                
+            }
+
+            presentationGrid.Visibility = Visibility.Visible;
+            userGrid.Visibility = Visibility.Collapsed;
+            getPresentationsDirectories();
+            presentationsListBox.ItemsSource = presentations;
+        }
+
+        private void presentationsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            presentationNameTextBox.Text = (string)presentationsListBox.SelectedValue;
+        }
+
+        private void presentationButton_Click(object sender, RoutedEventArgs e)
+        {
+            presentationPath = System.IO.Path.Combine(tempPath, presentationNameTextBox.Text);
+            usersPathScripts = System.IO.Path.Combine(presentationPath, "Scripts");
+            usersPathVideos = System.IO.Path.Combine(presentationPath, "Videos");
+            usersPathLogs = System.IO.Path.Combine(presentationPath, "Logs");
+
+            MainWindow.scriptPath = System.IO.Path.Combine(usersPathScripts + "\\Script.txt");
+
+            bool exists = System.IO.Directory.Exists(presentationPath);
+            if (!exists)
+            {
+                System.IO.Directory.CreateDirectory(presentationPath);
                 System.IO.Directory.CreateDirectory(usersPathScripts);
                 System.IO.Directory.CreateDirectory(usersPathVideos);
                 System.IO.Directory.CreateDirectory(usersPathLogs);
             }
-                
 
+
+            userGrid.Visibility = Visibility.Visible;
+            presentationGrid.Visibility = Visibility.Collapsed;
             exitEvent(this, "");
         }
     }

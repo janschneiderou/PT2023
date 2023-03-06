@@ -8,10 +8,19 @@
              d:DesignHeight="450" d:DesignWidth="600">
     <Grid Width="600" Height="450">
         <Image Source="Images/frame.png" Stretch="Fill" />
-        <Label Content="Select User" HorizontalAlignment="Left" Margin="47,97,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBox Name="userNameTextBox" HorizontalAlignment="Left" Height="26" Margin="138,97,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="162"/>
-        <ListBox SelectionChanged="usersListBox_SelectionChanged" Name="usersListBox" HorizontalAlignment="Left" Height="185" Margin="47,186,0,0" VerticalAlignment="Top" Width="513" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-        <Button Name="selectButton" Click="selectButton_Click" Content="select" HorizontalAlignment="Left" Margin="382,97,0,0" VerticalAlignment="Top"/>
-
+        <Grid x:Name="userGrid" Visibility="Visible">
+            <Label Content="Select User" HorizontalAlignment="Left" Margin="47,97,0,0" VerticalAlignment="Top" Foreground="White"/>
+            <TextBox Name="userNameTextBox" HorizontalAlignment="Left" Height="26" Margin="156,97,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="162"/>
+            <ListBox SelectionChanged="usersListBox_SelectionChanged" Name="usersListBox" HorizontalAlignment="Left" Height="185" Margin="47,186,0,0" VerticalAlignment="Top" Width="513" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+            <Button Name="selectButton" Click="selectButton_Click" Content="select" HorizontalAlignment="Left" Margin="382,97,0,0" VerticalAlignment="Top"/>
+            <Label Content="Select User" HorizontalAlignment="Left" Margin="156,40,0,0" Foreground="White" VerticalAlignment="Top" Height="24" Width="203"/>
+        </Grid>
+        <Grid x:Name="presentationGrid" Visibility="Collapsed">
+            <Label Content="Select Presentation" HorizontalAlignment="Left" Margin="47,97,0,0" VerticalAlignment="Top" Foreground="White"/>
+            <TextBox Name="presentationNameTextBox" HorizontalAlignment="Left" Height="26" Margin="156,97,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="162"/>
+            <ListBox SelectionChanged="presentationsListBox_SelectionChanged" Name="presentationsListBox" HorizontalAlignment="Left" Height="185" Margin="47,186,0,0" VerticalAlignment="Top" Width="513" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+            <Button Name="presentationButton" Click="presentationButton_Click" Content="select" HorizontalAlignment="Left" Margin="382,97,0,0" VerticalAlignment="Top"/>
+            <Label Content="Select Presentation" HorizontalAlignment="Left" Margin="156,40,0,0" Foreground="White" VerticalAlignment="Top" Height="24" Width="203"/>
+        </Grid>
     </Grid>
 </UserControl>

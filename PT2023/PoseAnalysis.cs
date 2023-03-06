@@ -11,6 +11,7 @@ namespace PT2023
         Keypoint[] m_keypoints;
 
         #region Thresholds
+        public static int t_handSize = 10;
         public static double t_posture=500;
         public static double t_gesture=3000;
         public static int t_sentencesWithoutGestures = 3;
@@ -126,29 +127,70 @@ namespace PT2023
         public void analyseCrossedArms()
         {
 
-
-
-            if (m_keypoints[(int)BodyParts.LEFT_WRIST].position.X > m_keypoints[(int)BodyParts.RIGHT_WRIST].position.X &&
+            if (m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.X < m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.X )
+            {
+                if (m_keypoints[(int)BodyParts.LEFT_WRIST].position.X > m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.X &&
+                    m_keypoints[(int)BodyParts.RIGHT_WRIST].position.X < m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.X &&
                 m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y < m_keypoints[(int)BodyParts.LEFT_HIP].position.Y &&
-                m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y > m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.Y
-                && possibleCrossedArms==false)
-            {
-                startCrossedArms = currentTime;
-                possibleCrossedArms = true;
-            }
-            else if (m_keypoints[(int)BodyParts.LEFT_WRIST].position.X > m_keypoints[(int)BodyParts.RIGHT_WRIST].position.X &&
+                m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y > m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.Y &&
+                m_keypoints[(int)BodyParts.RIGHT_WRIST].position.Y < m_keypoints[(int)BodyParts.RIGHT_HIP].position.Y &&
+                m_keypoints[(int)BodyParts.RIGHT_WRIST].position.Y > m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.Y
+                && possibleCrossedArms == false)
+                {
+                    startCrossedArms = currentTime;
+                    possibleCrossedArms = true;
+                }
+                else if (m_keypoints[(int)BodyParts.LEFT_WRIST].position.X > m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.X &&
+                    m_keypoints[(int)BodyParts.RIGHT_WRIST].position.X < m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.X &&
                 m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y < m_keypoints[(int)BodyParts.LEFT_HIP].position.Y &&
-                m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y > m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.Y
-                && possibleCrossedArms == true && currentTime-startCrossedArms> t_posture)
-            {
-                m_CrossedArms = true;
+                m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y > m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.Y &&
+                m_keypoints[(int)BodyParts.RIGHT_WRIST].position.Y < m_keypoints[(int)BodyParts.RIGHT_HIP].position.Y &&
+                m_keypoints[(int)BodyParts.RIGHT_WRIST].position.Y > m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.Y
+                    && possibleCrossedArms == true && currentTime - startCrossedArms > t_posture)
+                {
+                    m_CrossedArms = true;
+                }
+                else if (m_keypoints[(int)BodyParts.LEFT_WRIST].position.X < m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.X 
+                    || m_keypoints[(int)BodyParts.RIGHT_WRIST].position.X > m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.X)
+                {
+                    m_CrossedArms = false;
+                    possibleCrossedArms = false;
+
+                }
             }
-            else if(m_keypoints[(int)BodyParts.LEFT_WRIST].position.X < m_keypoints[(int)BodyParts.RIGHT_WRIST].position.X)
+            else
             {
-                m_CrossedArms = false;
-                possibleCrossedArms=false;
-                
+                if (m_keypoints[(int)BodyParts.LEFT_WRIST].position.X < m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.X &&
+                     m_keypoints[(int)BodyParts.RIGHT_WRIST].position.X > m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.X &&
+                 m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y < m_keypoints[(int)BodyParts.LEFT_HIP].position.Y &&
+                 m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y > m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.Y &&
+                 m_keypoints[(int)BodyParts.RIGHT_WRIST].position.Y < m_keypoints[(int)BodyParts.RIGHT_HIP].position.Y &&
+                 m_keypoints[(int)BodyParts.RIGHT_WRIST].position.Y > m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.Y
+                 && possibleCrossedArms == false)
+                {
+                    startCrossedArms = currentTime;
+                    possibleCrossedArms = true;
+                }
+                else if (m_keypoints[(int)BodyParts.LEFT_WRIST].position.X < m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.X &&
+                    m_keypoints[(int)BodyParts.RIGHT_WRIST].position.X > m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.X &&
+                m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y < m_keypoints[(int)BodyParts.LEFT_HIP].position.Y &&
+                m_keypoints[(int)BodyParts.LEFT_WRIST].position.Y > m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.Y &&
+                m_keypoints[(int)BodyParts.RIGHT_WRIST].position.Y < m_keypoints[(int)BodyParts.RIGHT_HIP].position.Y &&
+                m_keypoints[(int)BodyParts.RIGHT_WRIST].position.Y > m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.Y
+                    && possibleCrossedArms == true && currentTime - startCrossedArms > t_posture)
+                {
+                    m_CrossedArms = true;
+                }
+                else if (m_keypoints[(int)BodyParts.LEFT_WRIST].position.X > m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.X
+                    || m_keypoints[(int)BodyParts.RIGHT_WRIST].position.X < m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.X)
+                {
+                    m_CrossedArms = false;
+                    possibleCrossedArms = false;
+
+                }
             }
+
+            
         }
         public void analyseCrossedLegs()
         {

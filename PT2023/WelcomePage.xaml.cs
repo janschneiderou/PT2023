@@ -32,6 +32,7 @@ namespace PT2023
         public PracticeMode practiceMode;
         public WorkingWithScript workingWithScript;
         public MemoryScript memoryScript;
+        public MemoryScript2 memoryScript2;
         public PracticeSentences practiceSentences;
         public UserManagement userManagement;
 
@@ -49,7 +50,7 @@ namespace PT2023
 
             volumeAnalysis = new VolumeAnalysis();
 
-            initSpeech();
+           // initSpeech();
 
             connectedDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach(FilterInfo fi in connectedDevices)
@@ -115,8 +116,16 @@ namespace PT2023
                 }
                 
             }
-            
-            
+            if (memoryScript2 != null)
+            {
+                if (memoryScript2.Visibility == Visibility.Visible)
+                {
+                    memoryScript2.recongnizedWord(text);
+                }
+
+            }
+
+
         }
 
         public void restartSpeech()
@@ -219,13 +228,13 @@ namespace PT2023
         private void Button_add_Memory_Click(object sender, RoutedEventArgs e)
         {
             Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
-            memoryScript = new MemoryScript();
-            myGrid.Children.Add(memoryScript);
-            memoryScript.Margin = new Thickness(0, 0, 0, 0);
-            memoryScript.VerticalAlignment = VerticalAlignment.Center;      
-            memoryScript.HorizontalAlignment = HorizontalAlignment.Center;
+            memoryScript2 = new MemoryScript2();
+            myGrid.Children.Add(memoryScript2);
+            memoryScript2.Margin = new Thickness(0, 0, 0, 0);
+            memoryScript2.VerticalAlignment = VerticalAlignment.Center;      
+            memoryScript2.HorizontalAlignment = HorizontalAlignment.Center;
             WelcomePage.currentWord = 0;
-            memoryScript.exitEvent += MemoryScript_exitEvent;
+            memoryScript2.exitEvent += MemoryScript2_exitEvent;
 
         }
 
@@ -259,6 +268,7 @@ namespace PT2023
                 userManagement.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(userManagement);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                initSpeech();
             }));
         }
 
@@ -291,6 +301,14 @@ namespace PT2023
             }));
         }
 
+        private void MemoryScript2_exitEvent(object sender, string x)
+        {
+            Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                memoryScript2.Visibility = Visibility.Collapsed;
+                myGrid.Children.Remove(memoryScript2);
+                Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+            }));
+        }
 
         private void PracticeSentences_exitEvent(object sender, string x)
         {

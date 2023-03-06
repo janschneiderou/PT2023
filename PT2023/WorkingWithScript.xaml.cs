@@ -90,7 +90,8 @@ namespace PT2023
 
 
 
-            while (tempLine.Length > MaxCharacters)
+            while (tempLine.Length > MaxCharacters || tempLine.Contains(".") || tempLine.Contains(",")||  tempLine.Contains("!") || 
+                tempLine.Contains("?") || tempLine.Contains(";") || tempLine.Contains(":") )
             {
                 cut = false;
                 position = tempLine.IndexOf("...");
@@ -219,17 +220,20 @@ namespace PT2023
             StringReader reader = new StringReader(scriptText.Text);
             while ((line = reader.ReadLine()) != null)
             {
-                if (line.Length < MaxCharacters)
+                if (line.Length > MaxCharacters || line.Contains(".") || line.Contains(",") 
+                    || line.Contains("!") || line.Contains("?") || line.Contains(";") 
+                    || line.Contains(":") )
                 {
+                    formattedText = formattedText + createChunks(line);
+                }
+                else
+                {
+                    
                     if (line.IndexOf(" ") == 0)
                     {
                         line = line.Substring(1);
                     }
                     formattedText = formattedText + line + System.Environment.NewLine;
-                }
-                else
-                {
-                    formattedText = formattedText + createChunks(line);
                 }
             };
 

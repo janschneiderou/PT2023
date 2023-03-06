@@ -132,6 +132,9 @@
     <Compile Include="MemoryScript.xaml.cs">
       <DependentUpon>MemoryScript.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MemoryScript2.xaml.cs">
+      <DependentUpon>MemoryScript2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PeriodicMovements.cs" />
     <Compile Include="PoseAnalysis.cs" />
     <Compile Include="PracticeMode.xaml.cs">
@@ -175,6 +178,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MemoryScript.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MemoryScript2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
