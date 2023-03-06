@@ -116,7 +116,13 @@ namespace PT2023
                     playing = false;
                 }
             }
-            
+            Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate
+            {
+              
+                gameTextBlock.Text = "";
+
+            }));
+
         }
 
         public string hideWord(int wordsDeleted)
@@ -229,6 +235,7 @@ namespace PT2023
                 countdownLabel.Visibility= Visibility.Visible;
                 currentSecond = 10;
                 playing = true;
+                alreadyShowed = false;
                 resultTextBlock.Text = "";
                 WelcomePage.currentWord = 0;
                
@@ -240,7 +247,8 @@ namespace PT2023
             {
                 countdownLabel.Visibility = Visibility.Collapsed;
                 gameTextBlock.Text = "";
-
+                tempText = "";
+                WelcomePage.currentWord = 0;
                 playing = false;
                 
             }
