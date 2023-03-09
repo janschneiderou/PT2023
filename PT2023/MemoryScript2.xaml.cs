@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using PT2023.LogObjects;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,6 +35,8 @@ namespace PT2023
         string tempText;
         int currentSecond;
 
+        MemorySession memorySession;
+
         int currentLevel = 1;
         public MemoryScript2()
         {
@@ -44,7 +48,8 @@ namespace PT2023
 
         }
 
-        
+        #region gameLogic
+
         public void startMemory()
         {
             while (playing)
@@ -53,7 +58,13 @@ namespace PT2023
                 if (currentSecond > 0)
                 {
                     currentSecond--;
+                    Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate
+                    {
 
+                        correctImage.Visibility = Visibility.Collapsed;
+                        incorrectImage.Visibility = Visibility.Collapsed;
+
+                    }));
 
                 }
                 else
@@ -69,6 +80,7 @@ namespace PT2023
                         resultTextBlock.Inlines.Add(run);
                         WelcomePage.currentWord++;
                         alreadyShowed = false;
+                        incorrectImage.Visibility= Visibility.Visible;
 
                     }));
 
@@ -114,12 +126,14 @@ namespace PT2023
                 else
                 {
                     playing = false;
+                    saveToFile();
                 }
             }
             Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate
             {
               
                 gameTextBlock.Text = "";
+                countdownLabel.Content="";
 
             }));
 
@@ -202,6 +216,7 @@ namespace PT2023
 
                 {
                     alreadyShowed = false;
+                    setSentenceValue(true);
                     WelcomePage.currentWord++;
                     Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
 
@@ -212,6 +227,7 @@ namespace PT2023
                         run = new Run(System.Environment.NewLine);
                         resultTextBlock.Inlines.Add(run);
                         currentSecond=10;
+                        correctImage.Visibility = Visibility.Visible;
                     }));
 
                 }
@@ -227,6 +243,68 @@ namespace PT2023
             }
         }
 
+        #endregion
+
+        #region Logging
+
+        void createSessionStuff()
+        {
+            memorySession = new MemorySession();
+            memorySession.start = DateTime.Now;
+            memorySession.level = currentLevel;
+
+            foreach(Word word in SpeechToText.words)
+            {
+                IdentifiedSentence identifiedSentence = new IdentifiedSentence(word.Text);
+                memorySession.sentences.Add(identifiedSentence);
+            }
+        }
+
+        void setSentenceValue ( bool wasIdentified)
+        {
+            memorySession.sentences[WelcomePage.currentWord].wasIdentified = wasIdentified;
+        }
+
+        void saveToJSON ()
+        {
+            string myString = Newtonsoft.Json.JsonConvert.SerializeObject(memorySession);
+            Console.WriteLine(myString);
+        }
+
+        void saveToFile()
+        {
+            saveToJSON();
+            string path = System.IO.Path.Combine(UserManagement.usersPathLogs + "\\Memory.txt");
+            if (!File.Exists(path))
+            {
+                FileStream fs = File.Create(path);
+                fs.Close();
+                MemorySessions sessions = new MemorySessions();
+                
+                sessions.sessions.Add(memorySession);
+                string myString = Newtonsoft.Json.JsonConvert.SerializeObject(sessions);
+                File.WriteAllText(path, myString);
+
+            }
+            else
+            {
+                string jsonOne = File.ReadAllText(path);
+                MemorySessions sessions = JsonConvert.DeserializeObject<MemorySessions>(jsonOne);
+                if(sessions == null)
+                {
+                    sessions = new MemorySessions();
+                }
+                sessions.sessions.Add(memorySession);
+                string myString = Newtonsoft.Json.JsonConvert.SerializeObject(sessions);
+                File.WriteAllText(path, myString);
+            }
+            
+            
+        }
+
+        #endregion
+
+        #region Interactions
 
         private void Button_Start_Click(object sender, RoutedEventArgs e)
         {
@@ -240,6 +318,8 @@ namespace PT2023
                 WelcomePage.currentWord = 0;
                
                 Thread thread = new Thread(startMemory);
+
+                createSessionStuff();
              
                 thread.Start();
             }
@@ -249,10 +329,16 @@ namespace PT2023
                 gameTextBlock.Text = "";
                 tempText = "";
                 WelcomePage.currentWord = 0;
+                saveToFile();
                 playing = false;
                 
             }
         }
+
+
+       
+
+
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
@@ -284,5 +370,7 @@ namespace PT2023
 
             
         }
+
+        #endregion
     }
 }

@@ -14,7 +14,7 @@
             <RadioButton Name="radioLevel2" GroupName="levelGroupName" Checked="RadioButton_Checked" Foreground="White" Margin="5">2</RadioButton>
             <RadioButton Name="radioLevel3" GroupName="levelGroupName" Checked="RadioButton_Checked" Foreground="White" Margin="5" >3</RadioButton>
             <RadioButton Name="radioLevel4" GroupName="levelGroupName" Checked="RadioButton_Checked" Foreground="White" Margin="5" >4</RadioButton>
-            
+
         </StackPanel>
         <Label Visibility="Collapsed" Name="countdownLabel" Content="10" FontSize="30" Foreground="White" Margin="0,100,50,0" HorizontalAlignment="Right"/>
         <TextBlock Name="gameTextBlock" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap" Background="LightGray" Text="" VerticalAlignment="Top" Height="51" Width="600"
@@ -29,5 +29,7 @@
         <Button Name="Return" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="60,0,0,30" VerticalAlignment="Bottom" Click="Return_Click" Height="50" Width="57" >
             <Image Source="Images/btn_return.png" />
         </Button>
+        <Image Name="correctImage" Visibility="Collapsed" HorizontalAlignment="Left" Height="107" Margin="326,97,0,0" VerticalAlignment="Top" Width="138" Source="/correct.png"/>
+        <Image  Name="incorrectImage" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="341,112,0,0" VerticalAlignment="Top" Width="100" Source="/wrong.png"/>
     </Grid>
 </UserControl>

@@ -81,6 +81,9 @@
     <Reference Include="Emgu.TF.Net45, Version=1.14.0.569, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\packages\EMGU.TF.1.14.0.569\lib\net45\Emgu.TF.Net45.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
@@ -129,6 +132,9 @@
     <Compile Include="CountDown.xaml.cs">
       <DependentUpon>CountDown.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogObjects\IdentifiedSentence.cs" />
+    <Compile Include="LogObjects\MemorySession.cs" />
+    <Compile Include="LogObjects\MemorySessions.cs" />
     <Compile Include="MemoryScript.xaml.cs">
       <DependentUpon>MemoryScript.xaml</DependentUpon>
     </Compile>
@@ -355,6 +361,12 @@
     <Resource Include="Images\background3.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="correct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="wrong.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets" Condition="Exists('..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets')" />
