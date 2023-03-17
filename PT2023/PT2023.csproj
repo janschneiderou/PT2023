@@ -135,6 +135,9 @@
     <Compile Include="LogObjects\IdentifiedSentence.cs" />
     <Compile Include="LogObjects\MemorySession.cs" />
     <Compile Include="LogObjects\MemorySessions.cs" />
+    <Compile Include="LogObjects\PracticeLogAction.cs" />
+    <Compile Include="LogObjects\PracticeSession.cs" />
+    <Compile Include="LogObjects\PracticeSessions.cs" />
     <Compile Include="MemoryScript.xaml.cs">
       <DependentUpon>MemoryScript.xaml</DependentUpon>
     </Compile>
@@ -363,10 +366,48 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="correct.png" />
+    <Resource Include="wrong.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="wrong.png" />
+    <Resource Include="Images\BackgroundPT.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_volume1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_exit1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\container4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_script.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_memory.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_speaking.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BackgroundW.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets" Condition="Exists('..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets')" />

@@ -19,6 +19,9 @@ using System.Speech.Synthesis;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using PT2023.LogObjects;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace PT2023
 {
@@ -81,6 +84,7 @@ namespace PT2023
 
         #region logging
         public static string loggingString="";
+        public static LogObjects.PracticeSession practiceSession;
         #endregion
 
         #region text2Speech
@@ -337,6 +341,7 @@ namespace PT2023
                     WelcomePage.currentWord++;
                 }
             }
+            logRecognisedWord(text);
         }
         void doScriptStuff()
         {
@@ -361,6 +366,27 @@ namespace PT2023
             CB_Show_Script.IsEnabled = true;
             CB_Show_Script.IsChecked = true;
             CB_Show_Script_Checked(null, null);
+        }
+
+        #endregion
+
+        #region logs
+        public void logRecognisedWord(string text)
+        {
+            if (practiceSession != null)
+            {
+                foreach (IdentifiedSentence identifiedSentence in practiceSession.sentences)
+                {
+                    if (identifiedSentence.sentence == text
+                        || identifiedSentence.sentence == " " + text
+                        || identifiedSentence.sentence == text + " "
+                        || identifiedSentence.sentence == " " + text + " ")
+                    {
+                        identifiedSentence.wasIdentified = true;
+                    }
+                }
+            }
+            
         }
 
         #endregion
@@ -642,7 +668,8 @@ namespace PT2023
                 f_isAnalysing = false;
                 Grid_Pause.Visibility = Visibility.Visible;
                 DateTime currentTime = DateTime.Now;
-                loggingString = loggingString + "<PauseTimeStart>" + currentTime.ToString() + "</PauseTimeStart>";
+                pauseLoggingStuff();
+                //loggingString = loggingString + "<PauseTimeStart>" + currentTime.ToString() + "</PauseTimeStart>";
             }
             else
             {
@@ -650,7 +677,7 @@ namespace PT2023
                 f_isAnalysing = true;
                 Grid_Pause.Visibility = Visibility.Collapsed;
                 DateTime currentTime = DateTime.Now;
-                loggingString = loggingString + "<PauseTimeStop>" + currentTime.ToString() + "</PauseTimeStop>";
+               // loggingString = loggingString + "<PauseTimeStop>" + currentTime.ToString() + "</PauseTimeStop>";
             }
             
 
@@ -681,6 +708,7 @@ namespace PT2023
             volumeAnalysis = null;
             rulesAnaliserFIFO = null;
             WelcomePage.currentWord = 0;
+            finishLoggingStuff();
             exitEvent(this, "");
         }
 
@@ -690,6 +718,66 @@ namespace PT2023
             DateTime currentTime = DateTime.Now;
             loggingString = loggingString + "<StartTIme>" + currentTime.ToString() + "</startTime>";
             readyToPresent = true;
+            startLoggingStuff();
+            
+
+        }
+
+        private void startLoggingStuff()
+        {
+            practiceSession = new PracticeSession();
+            practiceSession.scriptVisible = withScript;
+            foreach (Word word in SpeechToText.words)
+            {
+                IdentifiedSentence identifiedSentence = new IdentifiedSentence(word.Text);
+                practiceSession.sentences.Add(identifiedSentence);
+            }
+        }
+
+        private void pauseLoggingStuff()
+        {
+            foreach(PracticeLogAction pa in practiceSession.actions)
+            {
+                TimeSpan tp = new TimeSpan();
+                if(pa.end==tp)
+                {
+                    pa.end = DateTime.Now - practiceSession.start;
+                }
+            }
+        }
+
+        void saveToJSON()
+        {
+            string myString = Newtonsoft.Json.JsonConvert.SerializeObject(practiceSession);
+            Console.WriteLine(myString);
+        }
+        private void finishLoggingStuff()
+        {
+            saveToJSON();
+            string path = System.IO.Path.Combine(UserManagement.usersPathLogs + "\\PracticeSession.json");
+            if (!File.Exists(path))
+            {
+                FileStream fs = File.Create(path);
+                fs.Close();
+                PracticeSessions sessions = new PracticeSessions();
+
+                sessions.sessions.Add(practiceSession);
+                string myString = Newtonsoft.Json.JsonConvert.SerializeObject(sessions);
+                File.WriteAllText(path, myString);
+
+            }
+            else
+            {
+                string jsonOne = File.ReadAllText(path);
+                PracticeSessions sessions = JsonConvert.DeserializeObject<PracticeSessions>(jsonOne);
+                if (sessions == null)
+                {
+                    sessions = new PracticeSessions();
+                }
+                sessions.sessions.Add(practiceSession);
+                string myString = Newtonsoft.Json.JsonConvert.SerializeObject(sessions);
+                File.WriteAllText(path, myString);
+            }
         }
 
         #endregion

@@ -10,6 +10,7 @@ namespace PT2023
         public enum GoodType
         {
             RESETPOSTURE,
+            GESTURE,
             SMILE
         };
 

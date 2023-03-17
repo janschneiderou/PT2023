@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PT2023.LogObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,7 @@ namespace PT2023
         public static bool f_noGestures = true;
         public static bool f_handsFace = true;
         public static bool f_noHands = true;
+        public static bool f_gestureStarted = false;
         #endregion
 
 
@@ -63,6 +65,8 @@ namespace PT2023
         bool possibleGestures = false;
         bool possibleHandsFace = false;
         bool possibleNoHands = false;
+
+        bool gestureReseted = true;
 
         double timeBetweenGestures = 0;
         double timeLastGesture = 0;
@@ -194,23 +198,46 @@ namespace PT2023
         }
         public void analyseCrossedLegs()
         {
+            if (m_keypoints[(int)BodyParts.LEFT_SHOULDER].position.X < m_keypoints[(int)BodyParts.RIGHT_SHOULDER].position.X)
+            {
+                if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X > m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X &&
+                possibleCrossedLegs == false && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
+                {
+                    startCrossedLegs = currentTime;
+                    possibleCrossedLegs = true;
+                }
+                else if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X > m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X &&
+                    possibleCrossedLegs == true && currentTime - startCrossedLegs > t_posture && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
+                {
+                    m_CrossedLegs = true;
+                }
+                else if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X < m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
+                {
+                    m_CrossedLegs = false;
+                    possibleCrossedLegs = false;
+                }
+            }
+            else
+            {
+                if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X < m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X &&
+                possibleCrossedLegs == false && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
+                {
+                    startCrossedLegs = currentTime;
+                    possibleCrossedLegs = true;
+                }
+                else if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X < m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X &&
+                    possibleCrossedLegs == true && currentTime - startCrossedLegs > t_posture && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
+                {
+                    m_CrossedLegs = true;
+                }
+                else if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X > m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
+                {
+                    m_CrossedLegs = false;
+                    possibleCrossedLegs = false;
+                }
+            }
+
             
-            if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X > m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X &&
-                possibleCrossedLegs == false && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty==false)
-            {
-                startCrossedLegs = currentTime;
-                possibleCrossedLegs = true;
-            }
-            else if(m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X > m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X &&
-                possibleCrossedLegs == true && currentTime - startCrossedLegs> t_posture && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
-            {
-                m_CrossedLegs=true;
-            }
-            else if (m_keypoints[(int)BodyParts.LEFT_ANKLE].position.X < m_keypoints[(int)BodyParts.RIGHT_ANKLE].position.X && m_keypoints[(int)BodyParts.LEFT_ANKLE].position_raw.IsEmpty == false)
-            {
-                m_CrossedLegs=false;
-                possibleCrossedLegs=false;
-            }
         }
         public void analyseNoHands()
         {
@@ -280,6 +307,8 @@ namespace PT2023
                 startedSpeaking = true;
                 startGestures = currentTime;
                 startSpeakingCounter++;
+                gestureReseted = true;
+
             }
             else if (VolumeAnalysis.isSpeaking)
             {
@@ -291,19 +320,43 @@ namespace PT2023
                     {
                         m_noGestures = true;
                     }
-                    
+                    f_gestureStarted = false;
+
+
                 }
                 else
                 {
+                    if(CalcArmsMovement2D.currentGesture == CalcArmsMovement2D.Gesture.big)
+                    {
+                        if (gestureReseted)
+                        {
+                            f_gestureStarted = true;
+                            gestureReseted = false;
+                        }
+                        else
+                        {
+                            f_gestureStarted = false;
+                        }
+                    }
+                    else
+                    {
+                        f_gestureStarted = false;
+                    }
+                    
                     m_noGestures = false;
                     startSpeakingCounter = 0;
                     calcArmsMovement2.resetMaxAndMin();
                 }
+              
                 
+
+
             }
             else
             {
                 startedSpeaking = false;
+                f_gestureStarted = false;
+
             }
 
         }

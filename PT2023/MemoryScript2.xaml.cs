@@ -274,7 +274,7 @@ namespace PT2023
         void saveToFile()
         {
             saveToJSON();
-            string path = System.IO.Path.Combine(UserManagement.usersPathLogs + "\\Memory.txt");
+            string path = System.IO.Path.Combine(UserManagement.usersPathLogs + "\\Memory.json");
             if (!File.Exists(path))
             {
                 FileStream fs = File.Create(path);

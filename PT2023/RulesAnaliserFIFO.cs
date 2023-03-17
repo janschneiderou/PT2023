@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PT2023.LogObjects;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -125,7 +126,14 @@ namespace PT2023
                     else
                     {
                        l_mistakesL.Add(ba);
-                        PracticeMode.loggingString = PracticeMode.loggingString + "<Start>" + ba.myMistake + " timestart =" + currentTime.ToString() + "</start>\n";
+                        PracticeLogAction pa = new PracticeLogAction();
+                        pa.id = ba.timeStarted;
+                        pa.start = PracticeMode.practiceSession.start-DateTime.Now;
+                        pa.logAction = ba.myMistake.ToString();
+                        PracticeMode.practiceSession.actions.Add(pa);
+
+
+                       // PracticeMode.loggingString = PracticeMode.loggingString + "<Start>" + ba.myMistake + " timestart =" + currentTime.ToString() + "</start>\n";
                     }
                
 
@@ -157,7 +165,15 @@ namespace PT2023
                 if (nolongerErrors[j - 1] == 0)
                 {
                     // logTimeMistakes(j - 1);
-                    PracticeMode.loggingString = PracticeMode.loggingString + "<stop>" + ((PresentationAction)l_mistakesL[j-1]).myMistake + " timestop =" + currentTime.ToString() + "</stop> \n";
+                    foreach(PracticeLogAction pa in PracticeMode.practiceSession.actions )
+                    {
+                        if(pa.id == ((PresentationAction)l_mistakesL[j-1]).timeStarted)
+                        {
+                            pa.end=PracticeMode.practiceSession.start - DateTime.Now;
+                            break;
+                        }
+                    }
+                   // PracticeMode.loggingString = PracticeMode.loggingString + "<stop>" + ((PresentationAction)l_mistakesL[j-1]).myMistake + " timestop =" + currentTime.ToString() + "</stop> \n";
                     l_mistakesL.RemoveAt(j - 1);
                 }
             }
@@ -225,10 +241,12 @@ namespace PT2023
 
 
         #region analysisCycle
-
+        
 
         public void AnalyseRules()
         {
+            logGoodStuff();
+
             if (checkTimeToGiveFeedback() == true)
             {
                 bool didIGiveFeedback = false;
@@ -316,7 +334,19 @@ namespace PT2023
 
         #endregion
 
-
+        public void logGoodStuff()
+        {
+            if (PoseAnalysis.f_gestureStarted)
+            {
+                PracticeLogAction pa = new PracticeLogAction();
+                pa.id = DateTime.Now.Millisecond;
+                pa.mistake = false;
+                pa.start = DateTime.Now - PracticeMode.practiceSession.start;
+                pa.end = DateTime.Now.AddSeconds(1) - PracticeMode.practiceSession.start;
+                pa.logAction = "BIG_GESTURE";
+                PracticeMode.practiceSession.actions.Add(pa);
+            }
+        }
 
 
     }

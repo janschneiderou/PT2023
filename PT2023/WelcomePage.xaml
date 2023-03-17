@@ -7,58 +7,61 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" >
     <Grid Name="myGrid">
-        <Image Source="Images\background3.png" Name="backgroundImg" Stretch="Fill"  />
+        <Image Source="Images\BackgroundW.png" Name="backgroundImg" Stretch="Fill"  />
         <Image Source="Images\Title.png" VerticalAlignment="Top" HorizontalAlignment="Center" Height="90"/>
         <Grid Name="Grid_for_Mode_Selection" Visibility="Visible">
             <Grid Name="PracticeGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="42,220,620,225" Width="200" >
-                <Image Source="Images\container3.png"  Stretch="Fill"  />
-                <Button  HorizontalAlignment="Left" BorderThickness="0" Margin="10,41,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent" Click="Button_Click_1" Height="50" Width="50">
-                    <Image Source="Images/btn_start.png" />
+                <Image Source="Images\container4.png"  Stretch="Fill"  />
+                <Button  HorizontalAlignment="Left" BorderThickness="0" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent" Click="Button_Click_1" Height="70" Width="70">
+                    <Image Source="Images/btn_speaking.png" />
                 </Button>
-                <Label Content="Practice Presentation" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
-                <CheckBox Content="Script" HorizontalAlignment="Left" Margin="87,75,0,0" VerticalAlignment="Top" Name="checkBoxScript" />
-                <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="87,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeleton"/>
+                <Label Content="Practice Presentation" FontSize="13" HorizontalAlignment="Left" Margin="10,0,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
+                <CheckBox Content="Script" HorizontalAlignment="Left" Margin="95,75,0,0" VerticalAlignment="Top" Name="checkBoxScript" />
+                <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="95,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeleton"/>
 
             </Grid>
             <Grid Name="AddScriptGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="42,70,620,225" Width="200" >
-                <Image Source="Images\container3.png"  Stretch="Fill"  />
-                <Button Name="Button_add_Script" BorderThickness="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="50" Width="50" Click="Button_add_Script_Click">
-                    <Image Source="Images/btn_add.png" />
+                <Image Source="Images\container4.png"  Stretch="Fill"  />
+                <Button Name="Button_add_Script" BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="13" Background="Transparent"  Height="70" Width="70" Click="Button_add_Script_Click">
+                    <Image Source="Images/btn_script.png" />
                 </Button>
-                <Label Content="Work with Script" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+                <Label Content="Work with Script" FontSize="13" HorizontalAlignment="Left" Margin="10,0,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
 
             </Grid>
             <Grid Name="MemoriseScriptGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,70,0,0" Width="200" >
-                <Image Source="Images\container3.png"  Stretch="Fill"  />
-                <Button Name="Button_add_Memory"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="50" Width="50" Click="Button_add_Memory_Click" >
-                    <Image Source="Images/btn_Go.png" />
+                <Image Source="Images\container4.png"  Stretch="Fill"  />
+                <Button Name="Button_add_Memory"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="70" Width="70" Click="Button_add_Memory_Click" >
+                    <Image Source="Images/btn_memory.png" />
                 </Button>
-                <Label Content="Memorise your Script" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
+                <Label Content="Memorise your Script" FontSize="13" HorizontalAlignment="Left" Margin="10,0,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
 
             </Grid>
 
             <Grid Name="PracticeSentenceGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,222,0,0" Width="200" >
-                <Image Source="Images\container3.png"  Stretch="Fill"  />
-                <Button Name="Button_Practice_Sentence"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="50" Width="50" Click="Button_Practice_Sentence_Click" >
-                    <Image Source="Images/btn_start.png" />
+                <Image Source="Images\container4.png"  Stretch="Fill"  />
+                <Button Name="Button_Practice_Sentence"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="70" Width="70" Click="Button_Practice_Sentence_Click" >
+                    <Image Source="Images/btn_speaking.png" />
                 </Button>
-                <Label Content="Practice sentences" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White"/>
-                <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="87,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeletonPractice"/>
+                <Label Content="Practice sentences" FontSize="13" HorizontalAlignment="Left" Margin="10,00,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
+                <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="95,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeletonPractice"/>
             </Grid>
 
 
         </Grid>
+        <Rectangle VerticalAlignment="Bottom" Height="70" Fill="White" Opacity="0.3"></Rectangle>
         <Label Content="Select Camera" HorizontalAlignment="Left" Margin="22,0,0,10" VerticalAlignment="Bottom" FontWeight="Bold" Foreground="White"/>
-        <ComboBox Name="cameraSelector" HorizontalAlignment="Left" Margin="144,0,0,10" VerticalAlignment="Bottom" Width="120" SelectionChanged="cameraSelector_SelectionChanged"/>
-        <Button  HorizontalAlignment="Left" Margin="439,0,0,10" VerticalAlignment="Bottom" Click="Button_Click" BorderThickness="0" Background="Transparent" Height="50" Width="80">
-            <Image Source="Images/btn_volume.png" />
+        <ComboBox Name="cameraSelector" Background="Transparent" BorderBrush="Transparent"  Foreground="Black"  HorizontalAlignment="Left" Margin="144,0,0,10" VerticalAlignment="Bottom" Width="120" SelectionChanged="cameraSelector_SelectionChanged" Opacity="0.5"/>
+        <Button  HorizontalAlignment="Left" Margin="300,0,0,10" VerticalAlignment="Bottom" Click="Button_Click" BorderThickness="0" Background="Transparent" Height="30" Width="30">
+            <Image Source="Images/btn_volume1.png" />
         </Button>
-        <Button Name="UserManagementButton" Content="User" HorizontalAlignment="Left" Margin="533,0,0,10" VerticalAlignment="Bottom" Click="UserManagementButton_Click" BorderThickness="0"  Height="50" Width="80"/>
-        <Button  HorizontalAlignment="Right" Margin="0,0,20,10"   VerticalAlignment="Bottom" Height="50" BorderThickness="0" Click="Button_Click_2" Background="Transparent">
-            <Image Source="Images/btn_exit.png" />
+        <Button Name="UserManagementButton"  Background="Transparent" HorizontalAlignment="Left" Margin="350,0,0,10" VerticalAlignment="Bottom" Click="UserManagementButton_Click" BorderThickness="0"  Height="30" Width="30">
+            <Image Source="Images/btn_user.png" />
+        </Button>
+        <Button  HorizontalAlignment="Right" Margin="0,0,20,10"   VerticalAlignment="Bottom" Height="45" BorderThickness="0" Click="Button_Click_2" Background="Transparent">
+            <Image Source="Images/btn_exit1.png" />
         </Button>
 
-
+        
 
     </Grid>
 </UserControl>
