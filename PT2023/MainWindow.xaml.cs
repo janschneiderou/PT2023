@@ -35,7 +35,7 @@ namespace PT2023
 
         public static string scriptPath="";
 
-        private SpeechToText speechToText;
+ //       private SpeechToText speechToText;
 
         public VolumeAnalysis volumeAnalysis;
 

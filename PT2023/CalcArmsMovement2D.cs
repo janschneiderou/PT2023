@@ -48,19 +48,19 @@ namespace PT2023
 
 
         bool GrowingAngleLeftArmShoulderLineA = true;
-        bool GrowingAngleLeftArmShoulderLineB = true;
+       // bool GrowingAngleLeftArmShoulderLineB = true;
 
 
         bool GrowingAngleRightArmShoulderLineA = true;
-        bool GrowingAngleRightArmShoulderLineB = true;
+       // bool GrowingAngleRightArmShoulderLineB = true;
 
 
         bool GrowingAngleLeftForearmLeftArmA = true;
-        bool GrowingAngleLeftForearmLeftArmB = true;
+       // bool GrowingAngleLeftForearmLeftArmB = true;
 
 
         bool GrowingAngleRightForearmRightArmA = true;
-        bool GrowingAngleRightForearmRightArmB = true;
+       // bool GrowingAngleRightForearmRightArmB = true;
 
 
         public int SwingAngleLeftArmShoulderLineA = 0;

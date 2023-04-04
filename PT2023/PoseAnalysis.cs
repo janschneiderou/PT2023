@@ -399,7 +399,7 @@ namespace PT2023
 
             angRightLowArm = Math.Atan(lowArmLineX / lowArmLineY) * 180 / Math.PI;
 
-            int x = 0;
+            //int x = 0;
 
         }
        

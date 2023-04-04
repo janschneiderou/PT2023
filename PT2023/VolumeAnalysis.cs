@@ -18,7 +18,7 @@ namespace PT2023
         public static double t_pauseThreshold = 1000;
 
         public static double t_speekingTooLongTime = 7000;
-        public static double t_pausingTooLongTime = 3000;
+        public static double t_pausingTooLongTime = 5000;
 
         public static double t_guessTime = 500;
         public static int t_sentencesWithoutPauses = 3;
@@ -64,8 +64,12 @@ namespace PT2023
         public static bool f_speakingLoud = true;
         public static bool f_speakingSoft = true;
         public static bool f_pausingLong = true;
+        public static bool f_pausingGood=false;
+        public static bool f_pausingGoodLogged=false;
 
         #endregion
+
+
 
         public VolumeAnalysis()
         {
@@ -96,16 +100,24 @@ namespace PT2023
                 {
                     m_speakingLongMistake = false;
                     sentencesCounter = 0;
+                    if(!f_pausingGoodLogged)
+                    {
+                        f_pausingGood = true;
+                    }
                 }
                 if(currentTime-pauseTimeStart> t_pausingTooLongTime)
                 {
                     m_pausingLongMistake = true;
+                    f_pausingGood = false;
                 }
 
             }
             else
             {
-                if(f_speakingLoud)
+                f_pausingGoodLogged = false;
+                f_pausingGood = false;
+
+                if (f_speakingLoud)
                 {
                     analyseLoudSpeaking();
                 }

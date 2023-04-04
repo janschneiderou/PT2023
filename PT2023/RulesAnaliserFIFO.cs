@@ -346,6 +346,18 @@ namespace PT2023
                 pa.logAction = "BIG_GESTURE";
                 PracticeMode.practiceSession.actions.Add(pa);
             }
+            if(VolumeAnalysis.f_pausingGood)
+            {
+                PracticeLogAction pa = new PracticeLogAction();
+                pa.id = DateTime.Now.Millisecond;
+                pa.mistake = false;
+                pa.start = DateTime.Now.AddSeconds(-2) - PracticeMode.practiceSession.start;
+                pa.end = DateTime.Now.AddSeconds(1) - PracticeMode.practiceSession.start;
+                pa.logAction = "GOOD_PAUSE";
+                PracticeMode.practiceSession.actions.Add(pa);
+                VolumeAnalysis.f_pausingGood = false;
+                VolumeAnalysis.f_pausingGoodLogged = true;
+            }
         }
 
 

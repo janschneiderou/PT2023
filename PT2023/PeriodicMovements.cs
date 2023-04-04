@@ -9,8 +9,8 @@ namespace PT2023
     public class PeriodicMovements
     {
         int t_minMovementThreshold = 10;
-        double t_averageTimeDiferenceThreshold = 200;
-        int t_averageDistanceDiferenceThreshold = 5;
+      //  double t_averageTimeDiferenceThreshold = 200;
+      //  int t_averageDistanceDiferenceThreshold = 5;
         double t_timeForAction = 4000;
         int t_swingsToTakeAction = 2;
 
@@ -27,23 +27,23 @@ namespace PT2023
         enum Direction { increase, decrease, none };
         Direction directionX;
 
-        float currentMinX;
-        float currentMaxX;
-        float currentMinY;
-        float currentMaxY;
-        float currentMinZ;
-        float currentMaxZ;
-        int maxDisplacement;
-        int minDislpacement;
-        long maxMovementTime;
-        bool isMoving = false;
+        //float currentMinX;
+        //float currentMaxX;
+        //float currentMinY;
+        //float currentMaxY;
+        //float currentMinZ;
+        //float currentMaxZ;
+        //int maxDisplacement;
+        //int minDislpacement;
+        //long maxMovementTime;
+        //bool isMoving = false;
         public int hipNew;
         public int hipOld;
         double startTime;
         double time;
-        int currentCycleX = 0;
-        int currentCycleY = 0;
-        int currentCycleZ = 0;
+        //int currentCycleX = 0;
+        //int currentCycleY = 0;
+        //int currentCycleZ = 0;
 
         public bool result = false;
 
