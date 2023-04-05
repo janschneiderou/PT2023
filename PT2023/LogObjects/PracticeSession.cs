@@ -13,6 +13,7 @@ namespace PT2023.LogObjects
         public List<IdentifiedSentence> sentences;
         public List<PracticeLogAction> actions;
         public bool scriptVisible;
+        public DateTime end;
 
         public PracticeSession()
         {

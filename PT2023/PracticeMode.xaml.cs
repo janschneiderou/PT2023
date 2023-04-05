@@ -759,7 +759,8 @@ namespace PT2023
         }
         private void finishLoggingStuff()
         {
-            saveToJSON();
+            // saveToJSON();
+            practiceSession.end = DateTime.Now;
             string path = System.IO.Path.Combine(UserManagement.usersPathLogs + "\\PracticeSession.json");
             if (!File.Exists(path))
             {
