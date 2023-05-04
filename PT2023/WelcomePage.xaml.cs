@@ -35,6 +35,7 @@ namespace PT2023
         public MemoryScript2 memoryScript2;
         public PracticeSentences practiceSentences;
         public UserManagement userManagement;
+        public ReviewPractice reviewPractice;
 
         #region speech stuff
         private SpeechToText speechToText;
@@ -256,6 +257,19 @@ namespace PT2023
             WelcomePage.currentWord= 0;
         }
 
+        private void Button_Review_Practice_Click(object sender, RoutedEventArgs e)
+        {
+            Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            reviewPractice = new ReviewPractice();
+            myGrid.Children.Add(reviewPractice);
+            reviewPractice.Margin = new Thickness(0, 0, 0, 0);
+            reviewPractice.VerticalAlignment = VerticalAlignment.Center;
+            reviewPractice.HorizontalAlignment = HorizontalAlignment.Center;
+            reviewPractice.exitEvent += ReviewPractice_exitEvent;
+
+        }
+
+      
 
 
         #endregion
@@ -315,6 +329,15 @@ namespace PT2023
             Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
                 practiceSentences.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(practiceSentences);
+                Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+            }));
+        }
+
+        private void ReviewPractice_exitEvent(object sender, string x)
+        {
+            Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                reviewPractice.Visibility = Visibility.Collapsed;
+                myGrid.Children.Remove(reviewPractice);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
             }));
         }

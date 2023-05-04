@@ -23,6 +23,7 @@ using PT2023.LogObjects;
 using System.IO;
 using Newtonsoft.Json;
 
+
 namespace PT2023
 {
     /// <summary>
@@ -38,9 +39,16 @@ namespace PT2023
         bool showScript = true;
 
         public static bool readyToPresent=false;
-        
+
+        FeedbacksSentences feedbackSentences;
+
+        bool readyForManualFeedback = false;
+        bool manualVissible = true;
+
 
         #endregion
+
+        bool autoVissible = true;
 
         public delegate void ExitEvent(object sender, string x);
         public event ExitEvent exitEvent;
@@ -122,6 +130,7 @@ namespace PT2023
 
             initTFstuff();
             initWebcam();
+           
             
             rulesAnaliserFIFO.feedBackEvent += RulesAnaliserFIFO_feedBackEvent;
             rulesAnaliserFIFO.correctionEvent += RulesAnaliserFIFO_correctionEvent;
@@ -139,14 +148,75 @@ namespace PT2023
         private void RulesAnaliserFIFO_feedBackEvent(object sender, PresentationAction x)
         {
             Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
-                FeedbackLabel.Visibility = Visibility.Visible;
-                FeedbackLabel.Content = x.message;
+                if(autoVissible==true)
+                {
+                    FeedbackLabel.Visibility = Visibility.Visible;
+                    FeedbackLabel.Content = x.message;
+                }
+                
             }));
         }
 
         #endregion
 
-      
+
+        #region FeedbacksForScript
+
+        void loadFeedbacks()
+        {
+            string path = System.IO.Path.Combine(UserManagement.usersPathLogs + "\\Feedbacks.json");
+            if (!File.Exists(path))
+            {
+                FileStream fs = File.Create(path);
+                fs.Close();
+                feedbackSentences = new FeedbacksSentences();
+
+                foreach (IdentifiedSentence sentence in practiceSession.sentences)
+                {
+                    FeedbackForSentences f4s = new FeedbackForSentences("", "", "", sentence.sentence);
+                    feedbackSentences.feedbacks.Add(f4s);
+                }
+
+                string myString = Newtonsoft.Json.JsonConvert.SerializeObject(feedbackSentences);
+                File.WriteAllText(path, myString);
+
+            }
+            else
+            {
+                string jsonOne = File.ReadAllText(path);
+                feedbackSentences = JsonConvert.DeserializeObject<FeedbacksSentences>(jsonOne);
+                if (feedbackSentences == null)
+                {
+                    foreach (IdentifiedSentence sentence in practiceSession.sentences)
+                    {
+                        FeedbackForSentences f4s = new FeedbackForSentences("", "", "", sentence.sentence);
+                        feedbackSentences.feedbacks.Add(f4s);
+                    }
+                }
+
+
+            }
+            readyForManualFeedback = true;
+        }
+
+        void displayManualFeedback()
+        {
+            if (withScript == true && readyForManualFeedback == true)
+            {
+               // ManualFeedback.Visibility = Visibility.Visible;
+                foreach (FeedbackForSentences f4s in feedbackSentences.feedbacks)
+                {
+                    if (f4s.sentence == ScriptLabel.Content.ToString())
+                    {
+                        ManualFeedback.Content = f4s.feedbackKeywords;
+                    }
+                }
+
+            }
+        }
+
+
+        #endregion
 
 
         #region initTF stuff
@@ -351,6 +421,11 @@ namespace PT2023
                 if (SpeechToText.words.Count > WelcomePage.currentWord)
                 {
                     ScriptLabel.Content = SpeechToText.words[WelcomePage.currentWord].Text;
+
+                    displayManualFeedback();
+
+                
+                    
                 }
                 else
                 {
@@ -383,6 +458,9 @@ namespace PT2023
                         || identifiedSentence.sentence == " " + text + " ")
                     {
                         identifiedSentence.wasIdentified = true;
+                        identifiedSentence.start = VolumeAnalysis.sentenceStarted;
+                        identifiedSentence.end = DateTime.Now.AddSeconds(0) - PracticeMode.practiceSession.start;
+                        
                     }
                 }
             }
@@ -501,6 +579,29 @@ namespace PT2023
         #endregion
 
         #region checkboxes
+
+        private void CB_Manual_Unchecked(object sender, RoutedEventArgs e)
+        {
+            manualVissible = false;
+            ManualFeedback.Visibility = Visibility.Collapsed;
+        }
+
+        private void CB_Manual_Checked(object sender, RoutedEventArgs e)
+        {
+            manualVissible=true;
+            ManualFeedback.Visibility = Visibility.Visible;
+        }
+
+        private void CB_Auto_Unchecked(object sender, RoutedEventArgs e)
+        {
+            autoVissible=false;
+            FeedbackLabel.Visibility = Visibility.Collapsed;
+        }
+
+        private void CB_Auto_Checked(object sender, RoutedEventArgs e)
+        {
+            autoVissible = true;
+        }
 
         private void CB_Speak_Checked(object sender, RoutedEventArgs e)
         {
@@ -738,6 +839,7 @@ namespace PT2023
                 IdentifiedSentence identifiedSentence = new IdentifiedSentence(word.Text);
                 practiceSession.sentences.Add(identifiedSentence);
             }
+            loadFeedbacks();
         }
 
         private void pauseLoggingStuff()
@@ -790,5 +892,7 @@ namespace PT2023
         }
 
         #endregion
+
+       
     }
 }

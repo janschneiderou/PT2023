@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="PT2023.ReviewPractice"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PT2023"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid Height="600" Width="800">
+        <Image Source="Images/frame.png" Stretch="Fill" Margin="0,0,0,0" />
+        <ComboBox Name="sessionDisplayed" SelectionChanged="sessionDisplayed_SelectionChanged" HorizontalAlignment="Left" Margin="235,26,0,0" VerticalAlignment="Top" Width="216"/>
+        <MediaElement Name="myVideo" LoadedBehavior="Manual" UnloadedBehavior="Manual" HorizontalAlignment="Left" Height="401" Margin="48,96,0,0" VerticalAlignment="Top" Width="484"/>
+        <Button Name="Play" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="200,450,0,0" VerticalAlignment="Top" Click="Play_Click" Height="50" Width="57" >
+            <Image Name="btnPlay" Source="Images/btn_Play.png" />
+        </Button>
+        <Button Name="Stop" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="250,450,0,0" VerticalAlignment="Top" Click="Stop_Click" Height="50" Width="57" >
+            <Image Source="Images/btn_Stop.png" />
+        </Button>
+
+
+        <Button Name="Return" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="55,0,0,30" VerticalAlignment="Bottom" Click="Return_Click" Height="50" Width="57" >
+            <Image Source="Images/btn_return.png" />
+        </Button>
+
+        <Label Foreground="White" Content="Practice Session" HorizontalAlignment="Left" Height="29" Margin="107,24,0,0" VerticalAlignment="Top" Width="101"/>
+
+        <Label Visibility="Collapsed" Name="warningLabel" FontSize="15" Foreground="White" Content="You need to Practice at least once to review your performance" HorizontalAlignment="Center" Margin="0,53,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="selectedSentences" SelectionChanged="selectedSentences_SelectionChanged" HorizontalAlignment="Left" Margin="578,137,0,0" VerticalAlignment="Top" Width="194"/>
+
+        <CheckBox Name="chbSentences" IsChecked="False" Foreground="White" Content="Sentences" HorizontalAlignment="Left" Margin="578,117,0,0" VerticalAlignment="Top"/>
+        <Button Name="PlaySentence" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="578,160,0,0" VerticalAlignment="Top" Click="PlaySentence_Click"  Height="30" Width="37" >
+            <Image  Source="Images/btn_Play.png" />
+        </Button>
+
+        <Button Name="btnAddFeedback" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="578,0,0,30" VerticalAlignment="Bottom" Click="btnAddFeedback_Click"  Height="30" Width="37" >
+            <Image  Source="Images/btn_add.png" />
+        </Button>
+        <Label Foreground="White" Content="Feedback Explanation" HorizontalAlignment="Left" Margin="578,209,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="TextFeedbackExplanation" Height="200" HorizontalAlignment="Left" Margin="578,239,0,0" Width="200" TextWrapping="Wrap" Text="" VerticalAlignment="Top"
+                   ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True"/>
+        <TextBox Name="TextFeedbackKeyword" HorizontalAlignment="Left" Margin="578,482,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="194"/>
+        <Label Foreground="White" Content="Feedback Keywords" HorizontalAlignment="Left" Margin="578,450,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</UserControl>

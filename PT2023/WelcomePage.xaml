@@ -46,6 +46,15 @@
                 <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="95,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeletonPractice"/>
             </Grid>
 
+            <Grid Name="ReviewPracticeGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="494,70,0,0" Width="200" >
+                <Image Source="Images\container4.png"  Stretch="Fill"  />
+                <Button Name="Button_Review_Practice"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="70" Width="70" Click="Button_Review_Practice_Click">
+                    <Image Source="Images/btn_speaking.png" />
+                </Button>
+                <Label Content="Review your practice" FontSize="13" HorizontalAlignment="Left" Margin="10,00,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
+               
+            </Grid>
+
 
         </Grid>
         <Rectangle VerticalAlignment="Bottom" Height="70" Fill="White" Opacity="0.3"></Rectangle>

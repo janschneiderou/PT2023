@@ -159,6 +159,8 @@
     <Compile Include="CountDown.xaml.cs">
       <DependentUpon>CountDown.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LogObjects\FeedbackForSentences.cs" />
+    <Compile Include="LogObjects\FeedbacksSentences.cs" />
     <Compile Include="LogObjects\IdentifiedSentence.cs" />
     <Compile Include="LogObjects\MemorySession.cs" />
     <Compile Include="LogObjects\MemorySessions.cs" />
@@ -181,6 +183,9 @@
     </Compile>
     <Compile Include="PresentationAction.cs" />
     <Compile Include="RecordingClass.cs" />
+    <Compile Include="ReviewPractice.xaml.cs">
+      <DependentUpon>ReviewPractice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RulesAnaliserFIFO.cs" />
     <Compile Include="SpeechToText.cs" />
     <Compile Include="UserManagement.xaml.cs">
@@ -227,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PracticeSentences.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReviewPractice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -436,6 +445,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\BackgroundW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_Play.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_Stop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets" Condition="Exists('..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets')" />

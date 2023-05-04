@@ -19,7 +19,7 @@ namespace PT2023
 
         public static double t_speekingTooLongTime = 7000;
         public static double t_pausingTooLongTime = 5000;
-
+        public static TimeSpan sentenceStarted;
         public static double t_guessTime = 500;
         public static int t_sentencesWithoutPauses = 3;
 
@@ -87,7 +87,12 @@ namespace PT2023
             if (isSpeaking == false)
             {
                 if (currentAudioLevel > t_isSpeakingThreshold && isProbablySpeaking == false)
-                {
+                {   
+                    if(PracticeMode.practiceSession!=null)
+                    {
+                        sentenceStarted = DateTime.Now - PracticeMode.practiceSession.start;
+                    }
+                    
                     speakTimeStart = currentTime;
                     isProbablySpeaking = true;
                 }

@@ -10,11 +10,13 @@ namespace PT2023.LogObjects
     {
         public bool wasIdentified;
         public string sentence;
-
+        public TimeSpan end;
+        public TimeSpan start;
         public IdentifiedSentence(string sentence )
         {
             this.sentence = sentence;
             wasIdentified = false;
+
         }
     }
 }

@@ -13,8 +13,8 @@ namespace PT2023
     public class RecordingClass
     {
 
-        VideoFileWriter vf;
-        AudioCaptureDevice AudioSource;
+        public static VideoFileWriter vf;
+        public static AudioCaptureDevice AudioSource;
 
 
         System.DateTime sartRecordingTime;
@@ -229,10 +229,10 @@ namespace PT2023
                 process.StartInfo.CreateNoWindow = true;
 
                 process.Start();
-                // process.WaitForExit();
+               //  process.WaitForExit();
                 
                // vf.Dispose();
-                AudioSource.Dispose();
+              //  AudioSource.Dispose();
 
             }
             catch 
@@ -273,7 +273,7 @@ namespace PT2023
                 Thread.Sleep(40);
             }
             vf.Close();
-            vf.Dispose();
+           // vf.Dispose();
 
         }
 

@@ -13,7 +13,8 @@
             <Image Source="Images/btn_pause_play.png" />
         </Button>
         <Label Name="DebugLabel" Content="Label" HorizontalAlignment="Left" Margin="201,707,0,0" VerticalAlignment="Top" Height="83" Width="215"/>
-        <Label Name="FeedbackLabel" Visibility="Collapsed" Content="HERE is the FEEDBACK!!!"  Foreground="Red" Height="80" Width="400" Margin="0,0,0,0" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+        <Label Name="FeedbackLabel" Visibility="Collapsed" Content="HERE is the FEEDBACK!!!"  Foreground="Red" Height="80" Width="400" Margin="0,50,0,0" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+        <Label Name="ManualFeedback"  Visibility="Collapsed" Content=""  Foreground="Red" Height="80" Width="400" Margin="0,0,0,50" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
         <Canvas x:Name="scrptCanvas" Visibility="Visible" Height="80" Margin="60,97,230,0" VerticalAlignment="Top">
             <Button Canvas.Left="0" Background="Transparent" Name="buttonBack"  Click="buttonBack_Click" Visibility="Collapsed">
                 <Image Source="Images/btn_back.png" />
@@ -43,6 +44,9 @@
                 <CheckBox Content="Speak" Name="CB_Speak" Canvas.Left="30" Canvas.Top="325" IsChecked="True" Unchecked="CB_Speak_Checked" Checked="CB_Speak_Checked" Foreground="White"/>
                 <Label Content="Scripts Stuff" Canvas.Left="20" Canvas.Top="360" FontWeight="Bold" Foreground="White" />
                 <CheckBox Content="Show Script" Name="CB_Show_Script" Canvas.Left="30" Canvas.Top="385" IsChecked="True" Unchecked="CB_Show_Script_Checked" Checked="CB_Show_Script_Checked" Foreground="White"/>
+                <Label Content="Manual Feedback" Canvas.Left="20" Canvas.Top="415" FontWeight="Bold" Foreground="White" />
+                <CheckBox Content="Manual Feedback" Name="CB_Manual" Canvas.Left="30" Canvas.Top="450" IsChecked="True" Unchecked="CB_Manual_Unchecked" Checked="CB_Manual_Checked" Foreground="White"/>
+                <CheckBox Content="Automatic Feedback" Name="CB_Auto" Canvas.Left="30" Canvas.Top="480" IsChecked="True" Unchecked="CB_Auto_Unchecked" Checked="CB_Auto_Checked" Foreground="White"/>
 
 
             </Canvas>
