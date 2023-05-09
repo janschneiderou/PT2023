@@ -10,17 +10,17 @@
         <Image Source="Images\BackgroundW.png" Name="backgroundImg" Stretch="Fill"  />
         <Image Source="Images\Title.png" VerticalAlignment="Top" HorizontalAlignment="Center" Height="90"/>
         <Grid Name="Grid_for_Mode_Selection" Visibility="Visible">
-            <Grid Name="PracticeGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="42,220,620,225" Width="200" >
+            <Grid Name="PracticeGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="42,230,620,225" Width="200" >
                 <Image Source="Images\container4.png"  Stretch="Fill"  />
                 <Button  HorizontalAlignment="Left" BorderThickness="0" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent" Click="Button_Click_1" Height="70" Width="70">
                     <Image Source="Images/btn_speaking.png" />
                 </Button>
                 <Label Content="Practice Presentation" FontSize="13" HorizontalAlignment="Left" Margin="10,0,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
-                <CheckBox Content="Script" HorizontalAlignment="Left" Margin="95,75,0,0" VerticalAlignment="Top" Name="checkBoxScript" />
-                <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="95,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeleton"/>
+                <CheckBox Content="Script" HorizontalAlignment="Left" Margin="95,55,0,0" VerticalAlignment="Top" Name="checkBoxScript" />
+                <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="95,35,0,0" VerticalAlignment="Top" Name="checkBoxSkeleton"/>
 
             </Grid>
-            <Grid Name="AddScriptGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="42,70,620,225" Width="200" >
+            <Grid Name="AddScriptGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="42,80,620,225" Width="200" >
                 <Image Source="Images\container4.png"  Stretch="Fill"  />
                 <Button Name="Button_add_Script" BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="13" Background="Transparent"  Height="70" Width="70" Click="Button_add_Script_Click">
                     <Image Source="Images/btn_script.png" />
@@ -28,7 +28,7 @@
                 <Label Content="Work with Script" FontSize="13" HorizontalAlignment="Left" Margin="10,0,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
 
             </Grid>
-            <Grid Name="MemoriseScriptGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,70,0,0" Width="200" >
+            <Grid Name="MemoriseScriptGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,80,0,0" Width="200" >
                 <Image Source="Images\container4.png"  Stretch="Fill"  />
                 <Button Name="Button_add_Memory"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="70" Width="70" Click="Button_add_Memory_Click" >
                     <Image Source="Images/btn_memory.png" />
@@ -37,7 +37,7 @@
 
             </Grid>
 
-            <Grid Name="PracticeSentenceGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,222,0,0" Width="200" >
+            <Grid Name="PracticeSentenceGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,232,0,0" Width="200" >
                 <Image Source="Images\container4.png"  Stretch="Fill"  />
                 <Button Name="Button_Practice_Sentence"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="70" Width="70" Click="Button_Practice_Sentence_Click" >
                     <Image Source="Images/btn_speaking.png" />
@@ -46,7 +46,7 @@
                 <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="95,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeletonPractice"/>
             </Grid>
 
-            <Grid Name="ReviewPracticeGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="494,70,0,0" Width="200" >
+            <Grid Name="ReviewPracticeGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="494,80,0,0" Width="200" >
                 <Image Source="Images\container4.png"  Stretch="Fill"  />
                 <Button Name="Button_Review_Practice"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="70" Width="70" Click="Button_Review_Practice_Click">
                     <Image Source="Images/btn_speaking.png" />
@@ -60,14 +60,71 @@
         <Rectangle VerticalAlignment="Bottom" Height="70" Fill="White" Opacity="0.3"></Rectangle>
         <Label Content="Select Camera" HorizontalAlignment="Left" Margin="22,0,0,10" VerticalAlignment="Bottom" FontWeight="Bold" Foreground="White"/>
         <ComboBox Name="cameraSelector" Background="Transparent" BorderBrush="Transparent"  Foreground="Black"  HorizontalAlignment="Left" Margin="144,0,0,10" VerticalAlignment="Bottom" Width="120" SelectionChanged="cameraSelector_SelectionChanged" Opacity="0.5"/>
-        <Button  HorizontalAlignment="Left" Margin="300,0,0,10" VerticalAlignment="Bottom" Click="Button_Click" BorderThickness="0" Background="Transparent" Height="30" Width="30">
-            <Image Source="Images/btn_volume1.png" />
+        <Button  HorizontalAlignment="Left" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" Margin="300,0,0,10" VerticalAlignment="Bottom" Click="Button_Click" BorderThickness="0" Background="Transparent" Height="30" Width="30">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="volumeButtonImg" Source="Images/btn_volume1.png" />
         </Button>
-        <Button Name="UserManagementButton"  Background="Transparent" HorizontalAlignment="Left" Margin="350,0,0,10" VerticalAlignment="Bottom" Click="UserManagementButton_Click" BorderThickness="0"  Height="30" Width="30">
-            <Image Source="Images/btn_user.png" />
+        <Button Name="UserManagementButton" MouseEnter="UserManagementButton_MouseEnter" MouseLeave="UserManagementButton_MouseLeave" Background="Transparent" HorizontalAlignment="Left" Margin="350,0,0,10" VerticalAlignment="Bottom" Click="UserManagementButton_Click" BorderThickness="0"  Height="30" Width="30">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="UserManagementButtonImg" Source="Images/btn_user.png" />
         </Button>
-        <Button  HorizontalAlignment="Right" Margin="0,0,20,10"   VerticalAlignment="Bottom" Height="45" BorderThickness="0" Click="Button_Click_2" Background="Transparent">
-            <Image Source="Images/btn_exit1.png" />
+        <Button  HorizontalAlignment="Right" Margin="0,0,20,10" MouseEnter="Button_MouseEnter_1" MouseLeave="Button_MouseLeave_1"  VerticalAlignment="Bottom" Height="45" BorderThickness="0" Click="Button_Click_2" Background="Transparent">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="buttonExitImg" Source="Images/btn_exit1.png" />
         </Button>
 
         

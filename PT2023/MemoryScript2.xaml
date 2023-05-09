@@ -23,11 +23,49 @@
             <TextBlock Name="resultTextBlock" FontSize="20"   TextWrapping="Wrap" Text="" Background="WhiteSmoke" />
         </ScrollViewer>
 
-        <Button Name="Button_Start" BorderThickness="0" Background="Transparent" FontSize="20" HorizontalAlignment="Right" Margin="0,31,60,0" VerticalAlignment="Top" Click="Button_Start_Click" Height="50" Width="50" RenderTransformOrigin="-0.647,0.288">
-            <Image Source="Images/btn_start.png" />
+        <Button Name="Button_Start" MouseEnter="Button_Start_MouseEnter" MouseLeave="Button_Start_MouseLeave" BorderThickness="0" Background="Transparent" FontSize="20" HorizontalAlignment="Right" Margin="0,31,60,0" VerticalAlignment="Top" Click="Button_Start_Click" Height="50" Width="50" RenderTransformOrigin="-0.647,0.288">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="Button_StartImg" Source="Images/btn_start.png" />
         </Button>
-        <Button Name="Return" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="60,0,0,30" VerticalAlignment="Bottom" Click="Return_Click" Height="50" Width="57" >
-            <Image Source="Images/btn_return.png" />
+        <Button Name="Return" MouseEnter="Return_MouseEnter" MouseLeave="Return_MouseLeave" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="60,0,0,30" VerticalAlignment="Bottom" Click="Return_Click" Height="50" Width="57" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="ReturnImg" Source="Images/btn_return.png" />
         </Button>
         <Image Name="correctImage" Visibility="Collapsed" HorizontalAlignment="Left" Height="107" Margin="326,97,0,0" VerticalAlignment="Top" Width="138" Source="/correct.png"/>
         <Image  Name="incorrectImage" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="341,112,0,0" VerticalAlignment="Top" Width="100" Source="/wrong.png"/>

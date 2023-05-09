@@ -50,6 +50,11 @@ namespace PT2023
         public RecordingClass(string id)
         {
 
+            foreach (var process in Process.GetProcessesByName("ffmpeg.exe"))
+            {
+                process.Kill();
+            }
+
             // filenameAudio = MainWindow.recordingPath + "\\" + MainWindow.recordingID + ".wav";
             filenameAudio = System.IO.Path.Combine(UserManagement.usersPathVideos, id + ".wav");
             //filenameCombined = MainWindow.recordingPath + "\\" + MainWindow.recordingID + "c.mp4";
@@ -207,6 +212,20 @@ namespace PT2023
 
         public void combineFiles()
         {
+            Thread thread = new Thread(combineFilesThread);
+
+
+
+            thread.Start();
+           
+
+
+
+
+        }
+
+        void combineFilesThread()
+        {
             try
             {
                 // Process.Start("ffmpeg", "-i " + filename + " -i " + filenameAudio + " -c:v copy -c:a aac -strict experimental " + filenameCombined + "");
@@ -229,21 +248,17 @@ namespace PT2023
                 process.StartInfo.CreateNoWindow = true;
 
                 process.Start();
-               //  process.WaitForExit();
-                
-               // vf.Dispose();
-              //  AudioSource.Dispose();
+                process.WaitForExit();
+
+                // vf.Dispose();
+                // AudioSource.Dispose();
 
             }
-            catch 
+            catch
             {
                 int x = 0;
                 x++;
             }
-
-
-
-
         }
 
         #endregion

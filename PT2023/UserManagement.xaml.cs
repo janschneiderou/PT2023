@@ -158,5 +158,31 @@ namespace PT2023
             presentationGrid.Visibility = Visibility.Collapsed;
             exitEvent(this, "");
         }
+
+        #region button animations
+        private void selectButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            selectButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_goO.png"));
+        }
+    
+
+        private void selectButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            selectButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Go.png"));
+        }
+
+        private void presentationButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            presentationButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_goO.png"));
+        }
+
+        private void presentationButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            presentationButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Go.png"));
+        }
+
+        #endregion
+
+
     }
 }

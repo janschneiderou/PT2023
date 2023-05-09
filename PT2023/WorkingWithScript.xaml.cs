@@ -239,5 +239,29 @@ namespace PT2023
 
             File.WriteAllText(MainWindow.scriptPath, formattedText);
         }
+
+        #region button animations
+
+        private void Button_Close_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button_CloseImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_save_closeO.png"));
+        }
+
+        private void Button_Close_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button_CloseImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_save_close.png"));
+        }
+
+        private void chunkButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            chunkButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_chunkO.png"));
+        }
+
+        private void chunkButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            chunkButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_chunk.png"));
+        }
+
+        #endregion
     }
 }

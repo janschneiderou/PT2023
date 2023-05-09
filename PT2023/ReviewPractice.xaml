@@ -10,16 +10,73 @@
         <Image Source="Images/frame.png" Stretch="Fill" Margin="0,0,0,0" />
         <ComboBox Name="sessionDisplayed" SelectionChanged="sessionDisplayed_SelectionChanged" HorizontalAlignment="Left" Margin="235,26,0,0" VerticalAlignment="Top" Width="216"/>
         <MediaElement Name="myVideo" LoadedBehavior="Manual" UnloadedBehavior="Manual" HorizontalAlignment="Left" Height="401" Margin="48,96,0,0" VerticalAlignment="Top" Width="484"/>
-        <Button Name="Play" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="200,450,0,0" VerticalAlignment="Top" Click="Play_Click" Height="50" Width="57" >
+        <Button Name="Play" MouseEnter="Play_MouseEnter" MouseLeave="Play_MouseLeave" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="200,450,0,0" VerticalAlignment="Top" Click="Play_Click" Height="50" Width="57" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
             <Image Name="btnPlay" Source="Images/btn_Play.png" />
         </Button>
-        <Button Name="Stop" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="250,450,0,0" VerticalAlignment="Top" Click="Stop_Click" Height="50" Width="57" >
-            <Image Source="Images/btn_Stop.png" />
+        <Button Name="Stop" BorderThickness="0" Background="Transparent" MouseEnter="Stop_MouseEnter" MouseLeave="Stop_MouseLeave" FontSize="15" HorizontalAlignment="Left" Margin="255,450,0,0" VerticalAlignment="Top" Click="Stop_Click" Height="50" Width="57" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="btnStop" Source="Images/btn_Stop.png" />
         </Button>
 
 
-        <Button Name="Return" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="55,0,0,30" VerticalAlignment="Bottom" Click="Return_Click" Height="50" Width="57" >
-            <Image Source="Images/btn_return.png" />
+        <Button Name="Return" BorderThickness="0" Background="Transparent" MouseEnter="Return_MouseEnter" MouseLeave="Return_MouseLeave" FontSize="15" HorizontalAlignment="Left" Margin="55,0,0,30" VerticalAlignment="Bottom" Click="Return_Click" Height="50" Width="57" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="ReturnImg" Source="Images/btn_return.png" />
         </Button>
 
         <Label Foreground="White" Content="Practice Session" HorizontalAlignment="Left" Height="29" Margin="107,24,0,0" VerticalAlignment="Top" Width="101"/>
@@ -28,12 +85,50 @@
         <ComboBox Name="selectedSentences" SelectionChanged="selectedSentences_SelectionChanged" HorizontalAlignment="Left" Margin="578,137,0,0" VerticalAlignment="Top" Width="194"/>
 
         <CheckBox Name="chbSentences" IsChecked="False" Foreground="White" Content="Sentences" HorizontalAlignment="Left" Margin="578,117,0,0" VerticalAlignment="Top"/>
-        <Button Name="PlaySentence" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="578,160,0,0" VerticalAlignment="Top" Click="PlaySentence_Click"  Height="30" Width="37" >
-            <Image  Source="Images/btn_Play.png" />
+        <Button Name="PlaySentence" BorderThickness="0" Background="Transparent" MouseLeave="PlaySentence_MouseLeave" MouseEnter="PlaySentence_MouseEnter" FontSize="15" HorizontalAlignment="Left" Margin="578,160,0,0" VerticalAlignment="Top" Click="PlaySentence_Click"  Height="30" Width="37" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="PlaySentenceImg" Source="Images/btn_Play.png" />
         </Button>
 
-        <Button Name="btnAddFeedback" BorderThickness="0" Background="Transparent" FontSize="15" HorizontalAlignment="Left" Margin="578,0,0,30" VerticalAlignment="Bottom" Click="btnAddFeedback_Click"  Height="30" Width="37" >
-            <Image  Source="Images/btn_add.png" />
+        <Button Name="btnAddFeedback" BorderThickness="0" Background="Transparent" MouseEnter="btnAddFeedback_MouseEnter" MouseLeave="btnAddFeedback_MouseLeave" FontSize="15" HorizontalAlignment="Left" Margin="578,0,0,30" VerticalAlignment="Bottom" Click="btnAddFeedback_Click"  Height="50" Width="50" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="btnAddFeedbackImg"  Source="Images/btn_add.png" />
         </Button>
         <Label Foreground="White" Content="Feedback Explanation" HorizontalAlignment="Left" Margin="578,209,0,0" VerticalAlignment="Top"/>
         <TextBox Name="TextFeedbackExplanation" Height="200" HorizontalAlignment="Left" Margin="578,239,0,0" Width="200" TextWrapping="Wrap" Text="" VerticalAlignment="Top"

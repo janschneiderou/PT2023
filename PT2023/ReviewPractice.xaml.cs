@@ -40,6 +40,8 @@ namespace PT2023
             InitializeComponent();
             getSessions();
 
+            VideoCreation vc = new VideoCreation();
+
         }
 
 
@@ -101,14 +103,16 @@ namespace PT2023
                 sessionDisplayed.SelectedIndex = sessions.sessions.Count() - 1;
                 currentSession = sessions.sessions.Count() - 1;
                 selectVideo();
-                getSentences();
                 loadFeedback();
+                getSentences();
+                
             }
         }
         
         void getSentences()
         {
             selectedSentences.Items.Clear();
+
             foreach (IdentifiedSentence sentence in sessions.sessions[currentSession].sentences)
             {
                 selectedSentences.Items.Add(sentence.sentence);
@@ -176,19 +180,22 @@ namespace PT2023
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
             myVideo.Stop();
-            btnPlay.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_pause_play.png"));
+            btnPlay.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Play.png"));
             isPlaying = false;
         }
 
         private void selectedSentences_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+           
             foreach (FeedbackForSentences f4s in feedbackSentences.feedbacks)
             {
-                if (f4s.sentence == sessions.sessions[currentSession].sentences[selectedSentences.SelectedIndex].sentence)
+                if (selectedSentences.SelectedIndex != -1)
                 {
-                    TextFeedbackExplanation.Text = f4s.Explanation;
-                    TextFeedbackKeyword.Text = f4s.feedbackKeywords;
+                    if (f4s.sentence == sessions.sessions[currentSession].sentences[selectedSentences.SelectedIndex].sentence)
+                    {
+                        TextFeedbackExplanation.Text = f4s.Explanation;
+                        TextFeedbackKeyword.Text = f4s.feedbackKeywords;
+                    }
                 }
             }
         }
@@ -252,5 +259,78 @@ namespace PT2023
             string myString = Newtonsoft.Json.JsonConvert.SerializeObject(feedbackSentences);
             File.WriteAllText(path, myString);
         }
+
+        #region button animations
+        private void Play_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (isPlaying)
+            {
+                btnPlay.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_pause_playO.png"));
+            }
+            else
+            {
+                btnPlay.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_PlayO.png"));
+            }
+            
+        }
+
+        private void Play_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if(isPlaying)
+            {
+                btnPlay.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_pause_play.png"));
+            }
+            else
+            {
+                btnPlay.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Play.png"));
+            }
+            
+        }
+
+        private void Stop_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnStop.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_StopO.png"));
+        }
+
+        private void Stop_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnStop.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Stop.png"));
+        }
+
+        private void Return_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+            ReturnImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_backO.png"));
+        }
+
+        private void Return_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ReturnImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_return.png"));
+        }
+
+        private void PlaySentence_MouseEnter(object sender, MouseEventArgs e)
+        {
+            PlaySentenceImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_PlayO.png"));
+        }
+        private void PlaySentence_MouseLeave(object sender, MouseEventArgs e)
+        {
+            PlaySentenceImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Play.png"));
+        }
+
+        private void btnAddFeedback_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnAddFeedbackImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_add.png"));
+        }
+
+        private void btnAddFeedback_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnAddFeedbackImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_addO.png"));
+        }
+
+        #endregion
+
+
+
+
     }
 }

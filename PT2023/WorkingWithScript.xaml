@@ -11,10 +11,50 @@
         <TextBox Name="scriptText" Height="460" HorizontalAlignment="Left" Margin="60,39,0,0" Width="700" TextWrapping="Wrap" Text="" VerticalAlignment="Top"
                    ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True"/>
         <Label Content="Write the Script for your presentation" HorizontalAlignment="Left" Margin="289,5,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
-        <Button Name="Button_Close"  HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Margin="70,0,0,25" VerticalAlignment="Bottom" Click="Button_Close_Click" Height="50" Width="55">
-            <Image Source="Images/btn_save_close.png" />
+        
+        <Button Name="Button_Close" MouseEnter="Button_Close_MouseEnter" MouseLeave="Button_Close_MouseLeave" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Margin="70,0,0,25" VerticalAlignment="Bottom" Click="Button_Close_Click" Height="50" Width="55">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="Button_CloseImg" Source="Images/btn_save_close.png" />
         </Button>
-        <Button Name="chunkButton" Content="Chunk it down" HorizontalAlignment="Left" Margin="175,0,0,25" VerticalAlignment="Bottom" Height="50" Width="91" Click="chunkButton_Click"/>
-
+        <Button Name="chunkButton" MouseEnter="chunkButton_MouseEnter" MouseLeave="chunkButton_MouseLeave" Background="Transparent" HorizontalAlignment="Left" Margin="175,0,0,25" VerticalAlignment="Bottom" Height="50" Width="55" Click="chunkButton_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="chunkButtonImg" Source="Images/btn_chunk.png" />
+        </Button>
     </Grid>
 </UserControl>

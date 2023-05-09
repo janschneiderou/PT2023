@@ -192,6 +192,7 @@
       <DependentUpon>UserManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="utils.cs" />
+    <Compile Include="VideoCreation.cs" />
     <Compile Include="VolumeAnalysis.cs" />
     <Compile Include="VolumeCalibration.xaml.cs">
       <DependentUpon>VolumeCalibration.xaml</DependentUpon>
@@ -420,7 +421,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\btn_exit1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
@@ -453,6 +454,38 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\btn_Stop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_addO.png" />
+    <Resource Include="Images\btn_backO.png" />
+    <Resource Include="Images\btn_goO.png" />
+    <Resource Include="Images\btn_noO.png" />
+    <Resource Include="Images\btn_pause_playO.png" />
+    <Resource Include="Images\btn_PlayO.png" />
+    <Resource Include="Images\btn_save_closeO.png" />
+    <Resource Include="Images\btn_speakO.png" />
+    <Resource Include="Images\btn_startO.png" />
+    <Resource Include="Images\btn_StopO.png" />
+    <Resource Include="Images\btn_yesO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_chunk.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btn_chunkO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_exit1O.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btn_userO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btn_volume1O.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

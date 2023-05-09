@@ -9,23 +9,100 @@
     <Grid Width="1000" Height="800" >
         <Image Source="Images/frame.png" Stretch="Fill" />
         <Image Name="myImage" HorizontalAlignment="Left" Height="599" Margin="60,60,0,0" VerticalAlignment="Top" Width="750"/>
-        <Button Name="Button_Pause_Play" BorderThickness="0" Background="Transparent" Height="50" Width="50" HorizontalAlignment="Left" Margin="108,700,0,0" VerticalAlignment="Top" Click="Button_Pause_Play_Click">
-            <Image Source="Images/btn_pause_play.png" />
+        
+        <Button Name="Button_Pause_Play" BorderThickness="0" MouseEnter="Button_Pause_Play_MouseEnter" MouseLeave="Button_Pause_Play_MouseLeave" Background="Transparent" Height="50" Width="50" HorizontalAlignment="Left" Margin="108,700,0,0" VerticalAlignment="Top" Click="Button_Pause_Play_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="Button_Pause_PlayImg" Source="Images/btn_pause_play.png" />
         </Button>
         <Label Name="DebugLabel" Content="Label" HorizontalAlignment="Left" Margin="201,707,0,0" VerticalAlignment="Top" Height="83" Width="215"/>
         <Label Name="FeedbackLabel" Visibility="Collapsed" Content="HERE is the FEEDBACK!!!"  Foreground="Red" Height="80" Width="400" Margin="0,50,0,0" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
         <Label Name="ManualFeedback"  Visibility="Collapsed" Content=""  Foreground="Red" Height="80" Width="400" Margin="0,0,0,50" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
-        <Canvas x:Name="scrptCanvas" Visibility="Visible" Height="80" Margin="60,97,230,0" VerticalAlignment="Top">
-            <Button Canvas.Left="0" Background="Transparent" Name="buttonBack"  Click="buttonBack_Click" Visibility="Collapsed">
-                <Image Source="Images/btn_back.png" />
+        <Canvas x:Name="scrptCanvas" Background="Transparent" Visibility="Visible" Height="80"  Width="750"  Margin="60,0,230,110" VerticalAlignment="Bottom">
+            <Button Canvas.Left="0" MouseEnter="buttonBack_MouseEnter" MouseLeave="buttonBack_MouseLeave" Background="Transparent" Name="buttonBack" Height="50"  Click="buttonBack_Click" Visibility="Collapsed">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Name="buttonBackImg" Source="Images/btn_back.png" />
             </Button>
-            <Button Canvas.Left="650" Background="Transparent" Name="buttonNext" Click="buttonNext_Click" Visibility="Collapsed">
-                <Image Source="Images/btn_next.png" />
+            <Button Canvas.Left="690" MouseEnter="buttonNext_MouseEnter" MouseLeave="buttonNext_MouseLeave" Background="Transparent" Height="50" Name="buttonNext" Click="buttonNext_Click" Visibility="Collapsed">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Name="buttonNextImg" Source="Images/btn_next.png" />
             </Button>
             
-            <Label Name="ScriptLabel" Canvas.Left="108" Visibility="Collapsed" Content="" Width="540" Background="WhiteSmoke"  Foreground="Blue" Height="80" FontSize="20"  />
-            <Button Canvas.Left="305" Canvas.Top="40" Background="Transparent" Name="buttonSpeak"  Visibility="Collapsed" Click="buttonSpeak_Click">
-                <Image Source="Images/btn_speak.png" Height="40" />
+            <Label Name="ScriptLabel" Canvas.Left="65" Visibility="Collapsed" Content="" Width="620" Background="WhiteSmoke"  Foreground="Blue" Height="80" FontSize="20"  />
+            <Button Canvas.Left="305" Canvas.Top="40" MouseEnter="buttonSpeak_MouseEnter" MouseLeave="buttonSpeak_MouseLeave" Background="Transparent" Name="buttonSpeak"  Visibility="Collapsed" Click="buttonSpeak_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Name="buttonSpeakImg" Source="Images/btn_speak.png" Height="40" />
             </Button>
         </Canvas>
         <ScrollViewer Width="176" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="700" Margin="824,50,0,50" >
@@ -55,11 +132,49 @@
         <Grid Name="Grid_Pause" Visibility="Collapsed" Width="300" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Transparent">
             <Image Source="Images\container3.png"  Stretch="Fill"  />
             <Label Content="Do you want to stop practicing?" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,0,0,0" Height="60"/>
-            <Button Name="Button_yes_Exit" BorderThickness="0" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="Transparent" Height="60" Width="60" Margin="50,45,0,0" Click="Button_yes_Exit_Click"  >
-                <Image Source="Images/btn_yes.png" />
+            <Button Name="Button_yes_Exit" MouseEnter="Button_yes_Exit_MouseEnter" MouseLeave="Button_yes_Exit_MouseLeave" BorderThickness="0" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="Transparent" Height="60" Width="60" Margin="50,45,0,0" Click="Button_yes_Exit_Click"  >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Name="Button_yes_ExitImg" Source="Images/btn_yes.png" />
             </Button>
-            <Button Name="Button_keep_practicing" BorderThickness="0"  FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="Transparent" Height="60" Width="60" Margin="189,45,0,0" Click="Button_keep_practicing_Click" >
-                <Image Source="Images/btn_no.png" />
+            <Button Name="Button_keep_practicing" MouseEnter="Button_keep_practicing_MouseEnter" MouseLeave="Button_keep_practicing_MouseLeave" BorderThickness="0"  FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="Transparent" Height="60" Width="60" Margin="189,45,0,0" Click="Button_keep_practicing_Click" >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Name="Button_keep_practicingImg" Source="Images/btn_no.png" />
             </Button>
         </Grid>
         <local:CountDown x:Name="myCountDown" HorizontalAlignment="Left" Margin="270,226,0,0" VerticalAlignment="Top" countdownFinished="myCountDown_countdownFinished" />

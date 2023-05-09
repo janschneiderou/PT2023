@@ -345,11 +345,44 @@ namespace PT2023
 
         #endregion
 
+        
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
 
-        
+        #region button animations
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+            volumeButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_volume1O.png"));
+        }
+
+        private void Button_MouseLeave(object sender, MouseEventArgs e)
+        {
+            volumeButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_volume1.png"));
+        }
+
+        private void UserManagementButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            UserManagementButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_userO.png"));
+        }
+
+        private void UserManagementButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            UserManagementButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_user.png"));
+        }
+
+        private void Button_MouseEnter_1(object sender, MouseEventArgs e)
+        {
+            buttonExitImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_exit1O.png"));
+        }
+
+        private void Button_MouseLeave_1(object sender, MouseEventArgs e)
+        {
+            buttonExitImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_exit1.png"));
+        }
+
+        #endregion
     }
 }

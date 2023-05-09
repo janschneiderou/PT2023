@@ -201,7 +201,7 @@ namespace PT2023
 
         void displayManualFeedback()
         {
-            if (withScript == true && readyForManualFeedback == true)
+            if ( readyForManualFeedback == true)
             {
                // ManualFeedback.Visibility = Visibility.Visible;
                 foreach (FeedbackForSentences f4s in feedbackSentences.feedbacks)
@@ -891,8 +891,81 @@ namespace PT2023
             recordingClass.combineFiles();
         }
 
+
         #endregion
 
-       
+        #region button animations
+        private void Button_Pause_Play_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button_Pause_PlayImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_pause_playO.png"));
+        }
+
+        private void Button_Pause_Play_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button_Pause_PlayImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_pause_play.png"));
+        }
+
+        private void buttonBack_MouseEnter(object sender, MouseEventArgs e)
+        {
+           buttonBackImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Back_O.png"));
+        }
+
+        private void buttonBack_MouseLeave(object sender, MouseEventArgs e)
+        {
+            buttonBackImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Back.png"));
+        }
+
+
+        private void buttonNext_MouseEnter(object sender, MouseEventArgs e)
+        {
+            buttonNextImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_NextO.png"));
+        }
+
+        private void buttonNext_MouseLeave(object sender, MouseEventArgs e)
+        {
+            buttonNextImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Next.png"));
+        }
+
+        private void buttonSpeak_MouseEnter(object sender, MouseEventArgs e)
+        {
+            buttonSpeakImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_speakO.png"));
+        }
+
+        private void buttonSpeak_MouseLeave(object sender, MouseEventArgs e)
+        {
+            buttonSpeakImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_speak.png"));
+        }
+
+        private void Button_yes_Exit_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button_yes_ExitImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_yesO.png"));
+        }
+
+        private void Button_yes_Exit_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button_yes_ExitImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_yes.png"));
+        }
+
+        private void Button_keep_practicing_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Button_keep_practicingImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_noO.png"));
+        }
+
+        private void Button_keep_practicing_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Button_keep_practicingImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_no.png"));
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
     }
 }

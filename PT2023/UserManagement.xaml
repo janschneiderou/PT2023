@@ -12,15 +12,61 @@
             <Label Content="Select User" HorizontalAlignment="Left" Margin="47,97,0,0" VerticalAlignment="Top" Foreground="White"/>
             <TextBox Name="userNameTextBox" HorizontalAlignment="Left" Height="26" Margin="156,97,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="162"/>
             <ListBox SelectionChanged="usersListBox_SelectionChanged" Name="usersListBox" HorizontalAlignment="Left" Height="185" Margin="47,186,0,0" VerticalAlignment="Top" Width="513" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-            <Button Name="selectButton" Click="selectButton_Click" Content="select" HorizontalAlignment="Left" Margin="382,97,0,0" VerticalAlignment="Top"/>
+            <Button Name="selectButton" MouseEnter="selectButton_MouseEnter" MouseLeave="selectButton_MouseLeave" Click="selectButton_Click" Background="Transparent" Height="30" HorizontalAlignment="Left" Margin="332,94,0,0" VerticalAlignment="Top">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Name="selectButtonImg" Source="Images/btn_Go.png"/>
+            </Button>
+
             <Label Content="Select User" HorizontalAlignment="Left" Margin="156,40,0,0" Foreground="White" VerticalAlignment="Top" Height="24" Width="203"/>
         </Grid>
         <Grid x:Name="presentationGrid" Visibility="Collapsed">
-            <Label Content="Select Presentation" HorizontalAlignment="Left" Margin="47,97,0,0" VerticalAlignment="Top" Foreground="White"/>
+            <Label Content="Select Presentation:" HorizontalAlignment="Left" Margin="45,97,0,0" VerticalAlignment="Top" Foreground="White"/>
             <TextBox Name="presentationNameTextBox" HorizontalAlignment="Left" Height="26" Margin="156,97,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="162"/>
             <ListBox SelectionChanged="presentationsListBox_SelectionChanged" Name="presentationsListBox" HorizontalAlignment="Left" Height="185" Margin="47,186,0,0" VerticalAlignment="Top" Width="513" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-            <Button Name="presentationButton" Click="presentationButton_Click" Content="select" HorizontalAlignment="Left" Margin="382,97,0,0" VerticalAlignment="Top"/>
+            <Button Name="presentationButton" Click="presentationButton_Click" MouseEnter="presentationButton_MouseEnter" MouseLeave="presentationButton_MouseLeave" Background="Transparent"  HorizontalAlignment="Left" Margin="332,94,0,0" VerticalAlignment="Top" Height="30">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Name="presentationButtonImg" Source="Images/btn_Go.png"/>
+            </Button>
             <Label Content="Select Presentation" HorizontalAlignment="Left" Margin="156,40,0,0" Foreground="White" VerticalAlignment="Top" Height="24" Width="203"/>
         </Grid>
     </Grid>
+    
+    
+    
 </UserControl>
