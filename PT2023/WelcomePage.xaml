@@ -37,19 +37,19 @@
 
             </Grid>
 
-            <Grid Name="PracticeSentenceGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,232,0,0" Width="200" >
+            <!--<Grid Name="PracticeSentenceGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,232,0,0" Width="200" >
                 <Image Source="Images\container4.png"  Stretch="Fill"  />
                 <Button Name="Button_Practice_Sentence"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="70" Width="70" Click="Button_Practice_Sentence_Click" >
                     <Image Source="Images/btn_speaking.png" />
                 </Button>
                 <Label Content="Practice sentences" FontSize="13" HorizontalAlignment="Left" Margin="10,00,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
                 <CheckBox Content="Skeleton" HorizontalAlignment="Left" Margin="95,55,0,0" VerticalAlignment="Top" Name="checkBoxSkeletonPractice"/>
-            </Grid>
+            </Grid>-->
 
-            <Grid Name="ReviewPracticeGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="494,80,0,0" Width="200" >
+            <Grid Name="ReviewPracticeGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="274,232,0,0" Width="200" >
                 <Image Source="Images\container4.png"  Stretch="Fill"  />
                 <Button Name="Button_Review_Practice"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="70" Width="70" Click="Button_Review_Practice_Click">
-                    <Image Source="Images/btn_speaking.png" />
+                    <Image Source="Images/btn_review.png" />
                 </Button>
                 <Label Content="Review your practice" FontSize="13" HorizontalAlignment="Left" Margin="10,00,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
                
@@ -104,6 +104,28 @@
             </Button.Style>
             <Image Name="UserManagementButtonImg" Source="Images/btn_user.png" />
         </Button>
+        <Button Name="SlideSelectionButton" MouseEnter="SlideSelectionButton_MouseEnter" MouseLeave="SlideSelectionButton_MouseLeave" Background="Transparent" HorizontalAlignment="Left" Margin="390,0,0,10" VerticalAlignment="Bottom" Click="SlideSelectionButton_Click" BorderThickness="0"  Height="30" Width="30">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="SlideSelectionButtonImg" Source="Images/btn_slides.png" />
+        </Button>
         <Button  HorizontalAlignment="Right" Margin="0,0,20,10" MouseEnter="Button_MouseEnter_1" MouseLeave="Button_MouseLeave_1"  VerticalAlignment="Bottom" Height="45" BorderThickness="0" Click="Button_Click_2" Background="Transparent">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -126,8 +148,9 @@
             </Button.Style>
             <Image Name="buttonExitImg" Source="Images/btn_exit1.png" />
         </Button>
+        <local:Tutor x:Name="Tutor" HorizontalAlignment="Left" Margin="506,395,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
 
-        
+
 
     </Grid>
 </UserControl>

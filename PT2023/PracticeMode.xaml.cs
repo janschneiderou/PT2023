@@ -22,7 +22,7 @@ using Emgu.CV.Structure;
 using PT2023.LogObjects;
 using System.IO;
 using Newtonsoft.Json;
-
+using PT2023.utilObjects;
 
 namespace PT2023
 {
@@ -39,6 +39,8 @@ namespace PT2023
         bool showScript = true;
 
         public static bool readyToPresent=false;
+
+        public SlideHandler slideHandler;
 
         FeedbacksSentences feedbackSentences;
 
@@ -118,8 +120,15 @@ namespace PT2023
                 CB_Show_Script.IsEnabled = false;
                 CB_Show_Script.IsChecked = false;
                 CB_Show_Script_Checked(null, null);
+
             }
-           
+
+            slideHandler = new SlideHandler();
+            slideHandler.init();
+            if (SlideHandler.SlideConfigs.Count > 0)
+            {
+                SlideImage.Source = new BitmapImage(new Uri(SlideHandler.SlideConfigs[SlideHandler.getCurrentSlide(WelcomePage.currentWord)].fileName));
+            }
 
 
             f_isAnalysing = true;
@@ -208,8 +217,19 @@ namespace PT2023
                 {
                     if (f4s.sentence == ScriptLabel.Content.ToString())
                     {
+                        
                         ManualFeedback.Content = f4s.feedbackKeywords;
+
+                        if(f4s.feedbackKeywords == "" || f4s.feedbackKeywords == " ")
+                        {
+                            ManualFeedback.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            ManualFeedback.Visibility = Visibility.Visible;
+                        }
                     }
+                    
                 }
 
             }
@@ -409,6 +429,17 @@ namespace PT2023
                     || SpeechToText.words[WelcomePage.currentWord].Text == " " + text + " ")
                 {
                     WelcomePage.currentWord++;
+
+                    Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                      
+                            if (SlideHandler.SlideConfigs.Count > 0)
+                            {
+                                SlideImage.Source = new BitmapImage(new Uri(SlideHandler.SlideConfigs[SlideHandler.getCurrentSlide(WelcomePage.currentWord)].fileName));
+                            }
+
+
+                    }));
+
                 }
             }
             logRecognisedWord(text);
@@ -420,6 +451,8 @@ namespace PT2023
             Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
                 if (SpeechToText.words.Count > WelcomePage.currentWord)
                 {
+                   
+
                     ScriptLabel.Content = SpeechToText.words[WelcomePage.currentWord].Text;
 
                     displayManualFeedback();
@@ -749,6 +782,7 @@ namespace PT2023
             }
             else 
             {
+                
                 showScript = true;
                 scrptCanvas.Visibility= Visibility.Visible;
                 buttonBack.Visibility = Visibility.Visible;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PT2023.utilObjects;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,14 +27,26 @@ namespace PT2023
 
         int MaxCharacters = 40;
         string path;
+        List<string> slides;
+        int currentSlide = 0;
+        SlideHandler slideHandler;
 
         public WorkingWithScript()
         {
             InitializeComponent();
-            writeText();
+       
+            getSlides();
+            setSlideAndText();
+            if (SlideHandler.SlideConfigs.Count == 0)
+            {
+                writeText();
+            }
 
-           
+
+
+
         }
+
 
         void writeText()
         {
@@ -52,12 +65,7 @@ namespace PT2023
                 {
                     scriptText.Text = scriptText.Text + s + System.Environment.NewLine;
 
-                    //run = new Run(s);
-                    //run.Foreground = System.Windows.Media.Brushes.Black;
-                    //scriptText.Inlines.Add(run);
-                    //run = new Run(System.Environment.NewLine);
-                    //scriptText.Inlines.Add(run);
-
+                
 
                 }
             }
@@ -76,6 +84,11 @@ namespace PT2023
         {
             
             doChunkstuff();
+            if (SlideHandler.SlideConfigs.Count > 0)
+            {
+                slideHandler.generateScript();
+            }
+                
             exitEvent(this, "");
         }
 
@@ -209,7 +222,15 @@ namespace PT2023
         {
             doChunkstuff();
             refreshText();
-            writeText();
+            if (SlideHandler.SlideConfigs.Count > 0)
+            {
+                setSlideAndText();
+            }
+             else
+            {
+                writeText();
+            }
+
 
         }
 
@@ -237,7 +258,16 @@ namespace PT2023
                 }
             };
 
-            File.WriteAllText(MainWindow.scriptPath, formattedText);
+            if (SlideHandler.SlideConfigs.Count > 0)
+            {
+                SlideHandler.SlideConfigs[currentSlide].scriptText = formattedText;
+            }
+            else
+            {
+                File.WriteAllText(MainWindow.scriptPath, formattedText);
+            }
+
+           // File.WriteAllText(MainWindow.scriptPath, formattedText);
         }
 
         #region button animations
@@ -262,6 +292,80 @@ namespace PT2023
             chunkButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_chunk.png"));
         }
 
+        private void buttonPrevious_MouseEnter(object sender, MouseEventArgs e)
+        {
+            prevButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Back_O.png"));
+        }
+
+        private void buttonPrevious_MouseLeave(object sender, MouseEventArgs e)
+        {
+            prevButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Back.png"));
+        }
+
+        private void buttonNext_MouseEnter(object sender, MouseEventArgs e)
+        {
+            nextButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_NextO.png"));
+        }
+
+        private void buttonNext_MouseLeave(object sender, MouseEventArgs e)
+        {
+            nextButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Next.png"));
+        }
+
+
         #endregion
+
+        #region slides Stuff
+        void setSlideAndText()
+        {
+            if(SlideHandler.SlideConfigs.Count>0)
+            {
+                slideImg.Source = new BitmapImage(new Uri(SlideHandler.SlideConfigs[currentSlide].fileName));
+                scriptText.Text = SlideHandler.SlideConfigs[currentSlide].scriptText;
+            }
+            
+
+        }
+        void getSlides()
+        {
+            slideHandler = new SlideHandler();
+            slideHandler.init();
+
+        }
+
+
+        void updateSlideInfo()
+        {
+            
+            slideHandler.updateScriptText(currentSlide);
+        }
+
+        #endregion
+        private void buttonNext_Click(object sender, RoutedEventArgs e)
+        {
+            if(currentSlide<SlideHandler.SlideConfigs.Count-1)
+            {
+                doChunkstuff();
+                updateSlideInfo();
+                currentSlide++;
+                refreshText();
+                setSlideAndText();
+            }
+        }
+
+        private void buttonPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentSlide > 0)
+            {
+                doChunkstuff();
+                updateSlideInfo();
+                currentSlide--;
+                refreshText();
+                setSlideAndText();
+            }
+        }
+
+
+
     }
 }

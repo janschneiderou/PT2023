@@ -68,7 +68,7 @@ namespace PT2023
             {
                 string jsonOne = File.ReadAllText(path);
                 feedbackSentences = JsonConvert.DeserializeObject<FeedbacksSentences>(jsonOne);
-                if (feedbackSentences == null)
+                if (feedbackSentences.feedbacks.Count != sessions.sessions[currentSession].sentences.Count)
                 {
                     foreach (IdentifiedSentence sentence in sessions.sessions[currentSession].sentences)
                     {

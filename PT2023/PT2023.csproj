@@ -187,10 +187,20 @@
       <DependentUpon>ReviewPractice.xaml</DependentUpon>
     </Compile>
     <Compile Include="RulesAnaliserFIFO.cs" />
+    <Compile Include="SlideSelection.xaml.cs">
+      <DependentUpon>SlideSelection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SpeechToText.cs" />
+    <Compile Include="Tutor.xaml.cs">
+      <DependentUpon>Tutor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserManagement.xaml.cs">
       <DependentUpon>UserManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="utilObjects\LearningDesign.cs" />
+    <Compile Include="utilObjects\LearningTask.cs" />
+    <Compile Include="utilObjects\SlideConfig.cs" />
+    <Compile Include="utilObjects\SlideHandler.cs" />
     <Compile Include="utils.cs" />
     <Compile Include="VideoCreation.cs" />
     <Compile Include="VolumeAnalysis.cs" />
@@ -237,6 +247,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ReviewPractice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SlideSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tutor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -488,6 +506,30 @@
     <Resource Include="Images\btn_volume1O.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_find.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btn_findO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_slides.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\btn_slidesO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_review.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RobotTutor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets" Condition="Exists('..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets')" />

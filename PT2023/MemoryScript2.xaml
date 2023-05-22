@@ -19,8 +19,8 @@
         <Label Visibility="Collapsed" Name="countdownLabel" Content="10" FontSize="30" Foreground="White" Margin="0,100,50,0" HorizontalAlignment="Right"/>
         <TextBlock Name="gameTextBlock" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap" Background="LightGray" Text="" VerticalAlignment="Top" Height="51" Width="600"
                    ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="108,97,0,0" />
-        <ScrollViewer VerticalAlignment="Top" Height="258" Width="600"  Margin="16,190,0,0" HorizontalAlignment="Center">
-            <TextBlock Name="resultTextBlock" FontSize="20"   TextWrapping="Wrap" Text="" Background="WhiteSmoke" />
+        <ScrollViewer VerticalAlignment="Top" Height="258" Width="400"  Margin="50,190,0,0" HorizontalAlignment="Left">
+            <TextBlock Name="resultTextBlock" FontSize="20" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="" Background="WhiteSmoke" Width="400" />
         </ScrollViewer>
 
         <Button Name="Button_Start" MouseEnter="Button_Start_MouseEnter" MouseLeave="Button_Start_MouseLeave" BorderThickness="0" Background="Transparent" FontSize="20" HorizontalAlignment="Right" Margin="0,31,60,0" VerticalAlignment="Top" Click="Button_Start_Click" Height="50" Width="50" RenderTransformOrigin="-0.647,0.288">
@@ -69,5 +69,6 @@
         </Button>
         <Image Name="correctImage" Visibility="Collapsed" HorizontalAlignment="Left" Height="107" Margin="326,97,0,0" VerticalAlignment="Top" Width="138" Source="/correct.png"/>
         <Image  Name="incorrectImage" Visibility="Collapsed" HorizontalAlignment="Left" Height="100" Margin="341,112,0,0" VerticalAlignment="Top" Width="100" Source="/wrong.png"/>
+        <Image Name="SlideImage" HorizontalAlignment="Left" Height="125" Margin="522,196,0,0" VerticalAlignment="Top" Width="188"/>
     </Grid>
 </UserControl>

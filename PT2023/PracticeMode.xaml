@@ -33,8 +33,8 @@
             <Image Name="Button_Pause_PlayImg" Source="Images/btn_pause_play.png" />
         </Button>
         <Label Name="DebugLabel" Content="Label" HorizontalAlignment="Left" Margin="201,707,0,0" VerticalAlignment="Top" Height="83" Width="215"/>
-        <Label Name="FeedbackLabel" Visibility="Collapsed" Content="HERE is the FEEDBACK!!!"  Foreground="Red" Height="80" Width="400" Margin="0,50,0,0" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
-        <Label Name="ManualFeedback"  Visibility="Collapsed" Content=""  Foreground="Red" Height="80" Width="400" Margin="0,0,0,50" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+        <Label Name="FeedbackLabel" Visibility="Collapsed" Background="White" Content="HERE is the FEEDBACK!!!"  Foreground="Red" Height="80" Width="400" Margin="0,50,0,0" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+        <Label Name="ManualFeedback"  Visibility="Collapsed" Background="White" Content=""  Foreground="Red" Height="80" Width="400" Margin="0,0,0,80" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
         <Canvas x:Name="scrptCanvas" Background="Transparent" Visibility="Visible" Height="80"  Width="750"  Margin="60,0,230,110" VerticalAlignment="Bottom">
             <Button Canvas.Left="0" MouseEnter="buttonBack_MouseEnter" MouseLeave="buttonBack_MouseLeave" Background="Transparent" Name="buttonBack" Height="50"  Click="buttonBack_Click" Visibility="Collapsed">
                 <Button.Style>
@@ -109,10 +109,10 @@
             <Canvas>
                 <Label Content="Posture Elements" Canvas.Left="20" Canvas.Top="5" FontWeight="Bold" Foreground="White"/>
                 <CheckBox Content="Arms Crossed" Name="CB_ArmsCrossed" Canvas.Left="30" Canvas.Top="35" IsChecked="True" Unchecked="CB_ArmsCrossed_Checked" Checked="CB_ArmsCrossed_Checked" Foreground="White"/>
-                <CheckBox Content="Legs Crossed" Name="CB_LegsCrossed" Canvas.Left="30" Canvas.Top="65" IsChecked="True" Unchecked="CB_LegsCrossed_Checked" Checked="CB_LegsCrossed_Checked" Foreground="White"/>
+                <CheckBox Content="Legs Crossed" Name="CB_LegsCrossed" Canvas.Left="30" Canvas.Top="65" IsChecked="False" Unchecked="CB_LegsCrossed_Checked" Checked="CB_LegsCrossed_Checked" Foreground="White"/>
                 <CheckBox Content="Gestures" Name="CB_Gestures" Canvas.Left="30" Canvas.Top="95" IsChecked="True" Unchecked="CB_Gestures_Checked" Checked="CB_Gestures_Checked" Foreground="White"/>
                 <CheckBox Content="Dancing" Name="CB_Dancing" Canvas.Left="30" Canvas.Top="125" IsChecked="True" Unchecked="CB_Dancing_Checked" Checked="CB_Dancing_Checked" Foreground="White"/>
-                <CheckBox Content="Hands Visible" Name="CB_Hands" Canvas.Left="30" Canvas.Top="155" IsChecked="True" Unchecked="CB_Hands_Checked" Checked="CB_Hands_Checked" Foreground="White"/>
+                <CheckBox Content="Hands Visible" Name="CB_Hands" Canvas.Left="30" Canvas.Top="155" IsChecked="False" Unchecked="CB_Hands_Checked" Checked="CB_Hands_Checked" Foreground="White"/>
                 <CheckBox Content="Hands near Face" Name="CB_Hands_Face" Canvas.Left="30" Canvas.Top="185" IsChecked="True" Unchecked="CB_Hands_Face_Checked" Checked="CB_Hands_Face_Checked" Foreground="White"/>
                 <Label Content="Volume Elements" Canvas.Left="20" Canvas.Top="210" FontWeight="Bold" Foreground="White" />
                 <CheckBox Content="Speak Loud" Name="CB_Loud" Canvas.Left="30" Canvas.Top="235" IsChecked="True" Unchecked="CB_Loud_Checked"  Checked="CB_Loud_Checked" Foreground="White"/>
@@ -178,6 +178,7 @@
             </Button>
         </Grid>
         <local:CountDown x:Name="myCountDown" HorizontalAlignment="Left" Margin="270,226,0,0" VerticalAlignment="Top" countdownFinished="myCountDown_countdownFinished" />
+        <Image Name="SlideImage" HorizontalAlignment="Left" Height="125" Margin="622,96,0,0" VerticalAlignment="Top" Width="188"/>
 
 
 

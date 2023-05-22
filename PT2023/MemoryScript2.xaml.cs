@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PT2023.LogObjects;
+using PT2023.utilObjects;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,13 +38,22 @@ namespace PT2023
 
         MemorySession memorySession;
 
+        public SlideHandler slideHandler;
+
         int currentLevel = 1;
         public MemoryScript2()
         {
             InitializeComponent();
 
             WelcomePage.currentWord = 0;
-          
+
+            slideHandler = new SlideHandler();
+            slideHandler.init();
+            if (SlideHandler.SlideConfigs.Count > 0)
+            {
+                SlideImage.Source = new BitmapImage(new Uri(SlideHandler.SlideConfigs[SlideHandler.getCurrentSlide(WelcomePage.currentWord)].fileName));
+            }
+
             lines = File.ReadAllLines(MainWindow.scriptPath);
 
         }
@@ -83,6 +93,7 @@ namespace PT2023
                         incorrectImage.Visibility= Visibility.Visible;
 
                     }));
+                    displaySlide();
 
                    
                     currentSecond = 10;
@@ -199,6 +210,7 @@ namespace PT2023
 
                 constructedString = constructedString + " ";
                 currentWord++;
+                
 
             }
 
@@ -229,6 +241,8 @@ namespace PT2023
                         currentSecond=10;
                         correctImage.Visibility = Visibility.Visible;
                     }));
+
+                    displaySlide();
 
                 }
             }
@@ -304,6 +318,23 @@ namespace PT2023
 
         #endregion
 
+
+        #region SlideStuff
+        void displaySlide()
+        {
+            Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+
+                if (SlideHandler.SlideConfigs.Count > 0)
+                {
+                    SlideImage.Source = new BitmapImage(new Uri(SlideHandler.SlideConfigs[SlideHandler.getCurrentSlide(WelcomePage.currentWord)].fileName));
+                }
+
+
+            }));
+        }
+
+        #endregion
+
         #region Interactions
 
         private void Button_Start_Click(object sender, RoutedEventArgs e)
@@ -317,6 +348,8 @@ namespace PT2023
                 resultTextBlock.Text = "";
                 WelcomePage.currentWord = 0;
                
+                displaySlide();
+
                 Thread thread = new Thread(startMemory);
 
                 createSessionStuff();

@@ -8,10 +8,10 @@
              d:DesignHeight="600" d:DesignWidth="800" Background="Transparent">
     <Grid Height="600" Width="800">
         <Image Source="Images/frame.png" Stretch="Fill" />
-        <TextBox Name="scriptText" Height="460" HorizontalAlignment="Left" Margin="60,39,0,0" Width="700" TextWrapping="Wrap" Text="" VerticalAlignment="Top"
+        <TextBox Name="scriptText" Height="460" HorizontalAlignment="Left" Margin="60,39,0,0" Width="341" TextWrapping="Wrap" Text="" VerticalAlignment="Top"
                    ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True"/>
         <Label Content="Write the Script for your presentation" HorizontalAlignment="Left" Margin="289,5,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
-        
+
         <Button Name="Button_Close" MouseEnter="Button_Close_MouseEnter" MouseLeave="Button_Close_MouseLeave" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Margin="70,0,0,25" VerticalAlignment="Bottom" Click="Button_Close_Click" Height="50" Width="55">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -56,5 +56,51 @@
             </Button.Style>
             <Image Name="chunkButtonImg" Source="Images/btn_chunk.png" />
         </Button>
+        <Image Name="slideImg" HorizontalAlignment="Left" Height="215" Margin="444,65,0,0" VerticalAlignment="Top" Width="312"/>
+        <Button Name="buttonPrevious"  MouseEnter="buttonPrevious_MouseEnter" MouseLeave="buttonPrevious_MouseLeave" HorizontalAlignment="Left" Margin="525,300,0,0" VerticalAlignment="Top" Height="35" Click="buttonPrevious_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="prevButtonImg" Source="Images/btn_back.png" />
+        </Button>
+        <Button Name="buttonNext"  HorizontalAlignment="Left" Margin="650,300,0,0" VerticalAlignment="Top" Height="35" MouseEnter="buttonNext_MouseEnter" MouseLeave="buttonNext_MouseLeave" Click="buttonNext_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="nextButtonImg" Source="Images/btn_next.png" />
+        </Button>
+
     </Grid>
 </UserControl>

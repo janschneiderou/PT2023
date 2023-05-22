@@ -18,6 +18,7 @@ using Emgu.CV.Structure;
 using AForge;
 using AForge.Video;
 using AForge.Video.DirectShow;
+using PT2023.utilObjects;
 
 namespace PT2023
 {
@@ -36,6 +37,9 @@ namespace PT2023
         public PracticeSentences practiceSentences;
         public UserManagement userManagement;
         public ReviewPractice reviewPractice;
+        public SlideSelection slideSelection;
+
+        LearningDesign learningDesign;
 
         #region speech stuff
         private SpeechToText speechToText;
@@ -68,7 +72,10 @@ namespace PT2023
             volumeCalibration.HorizontalAlignment = HorizontalAlignment.Left;
 
             addUserMagangement();
-            
+
+            learningDesign = new LearningDesign();
+
+
         }
 
         #region Speech Analysis Init and delete
@@ -162,11 +169,73 @@ namespace PT2023
             
         }
 
+        #region LearningDesign
+
+        void locateTutor()
+        {
+            Tutor.Visibility = Visibility.Visible;
+            Tutor.InstructionLabel.Content = learningDesign.Tasks[0].description;
+
+            switch(learningDesign.Tasks[0].taskType)
+            {
+                case LearningDesign.TaskType.SLIDESELECTION:
+                    Tutor.HorizontalAlignment = SlideSelectionButton.HorizontalAlignment;
+                    Tutor.VerticalAlignment = SlideSelectionButton.VerticalAlignment;
+
+                    Tutor.Margin = new Thickness( SlideSelectionButton.Margin.Left+20, SlideSelectionButton.Margin.Top,
+                        SlideSelectionButton.Margin.Right, SlideSelectionButton.Margin.Bottom - 20);
+                        
+                    
+                    break;
+                case LearningDesign.TaskType.WRITESCRIPT:
+                    Tutor.HorizontalAlignment = AddScriptGrid.HorizontalAlignment;
+                    Tutor.VerticalAlignment = AddScriptGrid.VerticalAlignment;
+
+                    Tutor.Margin = new Thickness(AddScriptGrid.Margin.Left + 100, AddScriptGrid.Margin.Top -50,
+                        AddScriptGrid.Margin.Right, AddScriptGrid.Margin.Bottom);
+                    break;
+                case LearningDesign.TaskType.PRACTICEWITHSCRIPT:
+                    Tutor.HorizontalAlignment = PracticeGrid.HorizontalAlignment;
+                    Tutor.VerticalAlignment = PracticeGrid.VerticalAlignment;
+
+                    Tutor.Margin = new Thickness(PracticeGrid.Margin.Left + 100, PracticeGrid.Margin.Top - 50,
+                        PracticeGrid.Margin.Right, PracticeGrid.Margin.Bottom);
+                    checkBoxScript.IsChecked = true;
+                    break;
+                case LearningDesign.TaskType.PRACTICEWITHOUTSCRIPT:
+                    Tutor.HorizontalAlignment = PracticeGrid.HorizontalAlignment;
+                    Tutor.VerticalAlignment = PracticeGrid.VerticalAlignment;
+
+                    Tutor.Margin = new Thickness(PracticeGrid.Margin.Left + 100, PracticeGrid.Margin.Top - 50,
+                        PracticeGrid.Margin.Right, PracticeGrid.Margin.Bottom);
+                    checkBoxScript.IsChecked = false;
+                    break;
+                case LearningDesign.TaskType.REVIEWPRESENTATION:
+                    Tutor.HorizontalAlignment = ReviewPracticeGrid.HorizontalAlignment;
+                    Tutor.VerticalAlignment = ReviewPracticeGrid.VerticalAlignment;
+
+                    Tutor.Margin = new Thickness(ReviewPracticeGrid.Margin.Left + 100, ReviewPracticeGrid.Margin.Top - 50,
+                        ReviewPracticeGrid.Margin.Right, ReviewPracticeGrid.Margin.Bottom);
+                    break;
+                case LearningDesign.TaskType.MEMORY:
+                    Tutor.HorizontalAlignment = MemoriseScriptGrid.HorizontalAlignment;
+                    Tutor.VerticalAlignment = MemoriseScriptGrid.VerticalAlignment;
+
+                    Tutor.Margin = new Thickness(MemoriseScriptGrid.Margin.Left + 100, MemoriseScriptGrid.Margin.Top - 50,
+                        MemoriseScriptGrid.Margin.Right, MemoriseScriptGrid.Margin.Bottom);
+                    break;
+
+            }
+        }
+
+        #endregion
+
         #region handling selections
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            Tutor.Visibility = Visibility.Collapsed;
             addPracticeMode();
         }
 
@@ -181,6 +250,25 @@ namespace PT2023
             userManagement.Visibility = Visibility.Visible;
             userManagement.exitEvent += UserManagement_exitEvent;
             Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            Tutor.Visibility= Visibility.Collapsed;
+        }
+
+        private void SlideSelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            slideSelection=new SlideSelection();
+            myGrid.Children.Add(slideSelection);
+            slideSelection.Margin = new Thickness(0, 0, 0, 0);
+            slideSelection.VerticalAlignment = VerticalAlignment.Center;
+            slideSelection.HorizontalAlignment = HorizontalAlignment.Center;
+            slideSelection.Visibility = Visibility.Visible;
+            slideSelection.exitEvent += SlideSelection_exitEvent;
+            Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            Tutor.Visibility = Visibility.Collapsed;
+
+            if (learningDesign.Tasks[0].taskType== LearningDesign.TaskType.SLIDESELECTION)
+            {
+                learningDesign.Tasks.Remove(learningDesign.Tasks[0]);
+            }
         }
 
         
@@ -188,7 +276,9 @@ namespace PT2023
         private void addPracticeMode()
         {
             practiceMode = new PracticeMode();
-            if(checkBoxScript.IsChecked==true)
+            Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            Tutor.Visibility= Visibility.Collapsed;
+            if (checkBoxScript.IsChecked==true)
             {
                 practiceMode.setWithScript();
             }
@@ -205,6 +295,11 @@ namespace PT2023
             practiceMode.Visibility = Visibility.Visible;
             WelcomePage.currentWord = 0;
             practiceMode.exitEvent += PracticeMode_exitEvent;
+
+            if (learningDesign.Tasks[0].taskType == LearningDesign.TaskType.PRACTICEWITHSCRIPT || learningDesign.Tasks[0].taskType == LearningDesign.TaskType.PRACTICEWITHOUTSCRIPT)
+            {
+                learningDesign.Tasks.Remove(learningDesign.Tasks[0]);
+            }
         }
 
         private void UserManagementButton_Click(object sender, RoutedEventArgs e)
@@ -215,6 +310,7 @@ namespace PT2023
         private void Button_add_Script_Click(object sender, RoutedEventArgs e)
         {
             Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            Tutor.Visibility = Visibility.Collapsed;
             workingWithScript = new WorkingWithScript();
             myGrid.Children.Add(workingWithScript);
 
@@ -222,50 +318,69 @@ namespace PT2023
             workingWithScript.VerticalAlignment = VerticalAlignment.Center;
             workingWithScript.HorizontalAlignment = HorizontalAlignment.Center;
             workingWithScript.Visibility = Visibility.Visible;
-           
+
+
+            if (learningDesign.Tasks[0].taskType == LearningDesign.TaskType.WRITESCRIPT)
+            {
+                learningDesign.Tasks.Remove(learningDesign.Tasks[0]);
+            }
+
             workingWithScript.exitEvent += WorkingWithScript_exitEvent; 
         }
 
         private void Button_add_Memory_Click(object sender, RoutedEventArgs e)
         {
             Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            Tutor.Visibility = Visibility.Collapsed;
             memoryScript2 = new MemoryScript2();
             myGrid.Children.Add(memoryScript2);
             memoryScript2.Margin = new Thickness(0, 0, 0, 0);
             memoryScript2.VerticalAlignment = VerticalAlignment.Center;      
             memoryScript2.HorizontalAlignment = HorizontalAlignment.Center;
             WelcomePage.currentWord = 0;
+
+            if (learningDesign.Tasks[0].taskType == LearningDesign.TaskType.MEMORY)
+            {
+                learningDesign.Tasks.Remove(learningDesign.Tasks[0]);
+            }
+
             memoryScript2.exitEvent += MemoryScript2_exitEvent;
 
         }
 
         private void Button_Practice_Sentence_Click(object sender, RoutedEventArgs e)
         {
-            Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
-            practiceSentences = new PracticeSentences();
+            //Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            //practiceSentences = new PracticeSentences();
 
-            if (checkBoxSkeletonPractice.IsChecked == true)
-            {
-                practiceSentences.showSkeleton = true;
-            }
+            //if (checkBoxSkeletonPractice.IsChecked == true)
+            //{
+            //    practiceSentences.showSkeleton = true;
+            //}
 
-            myGrid.Children.Add(practiceSentences);
-            practiceSentences.Margin = new Thickness(0, 0, 0, 0);
-            practiceSentences.VerticalAlignment = VerticalAlignment.Center;
-            practiceSentences.HorizontalAlignment = HorizontalAlignment.Center;
-            practiceSentences.exitEvent += PracticeSentences_exitEvent;
-            WelcomePage.currentWord= 0;
+            //myGrid.Children.Add(practiceSentences);
+            //practiceSentences.Margin = new Thickness(0, 0, 0, 0);
+            //practiceSentences.VerticalAlignment = VerticalAlignment.Center;
+            //practiceSentences.HorizontalAlignment = HorizontalAlignment.Center;
+            //practiceSentences.exitEvent += PracticeSentences_exitEvent;
+            //WelcomePage.currentWord= 0;
         }
 
         private void Button_Review_Practice_Click(object sender, RoutedEventArgs e)
         {
             Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            Tutor.Visibility = Visibility.Collapsed;
             reviewPractice = new ReviewPractice();
             myGrid.Children.Add(reviewPractice);
             reviewPractice.Margin = new Thickness(0, 0, 0, 0);
             reviewPractice.VerticalAlignment = VerticalAlignment.Center;
             reviewPractice.HorizontalAlignment = HorizontalAlignment.Center;
             reviewPractice.exitEvent += ReviewPractice_exitEvent;
+
+            if (learningDesign.Tasks[0].taskType == LearningDesign.TaskType.REVIEWPRESENTATION)
+            {
+                learningDesign.Tasks.Remove(learningDesign.Tasks[0]);
+            }
 
         }
 
@@ -282,6 +397,7 @@ namespace PT2023
                 userManagement.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(userManagement);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                locateTutor();
                 initSpeech();
             }));
         }
@@ -293,6 +409,7 @@ namespace PT2023
                 workingWithScript.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(workingWithScript);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                locateTutor();
             }));
         }
 
@@ -302,6 +419,7 @@ namespace PT2023
                 practiceMode.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(practiceMode);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                locateTutor();
             }));
 
         }
@@ -312,6 +430,7 @@ namespace PT2023
                 memoryScript.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(memoryScript);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                locateTutor();
             }));
         }
 
@@ -321,6 +440,7 @@ namespace PT2023
                 memoryScript2.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(memoryScript2);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                locateTutor();
             }));
         }
 
@@ -330,6 +450,7 @@ namespace PT2023
                 practiceSentences.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(practiceSentences);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                locateTutor();
             }));
         }
 
@@ -339,13 +460,22 @@ namespace PT2023
                 reviewPractice.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(reviewPractice);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                locateTutor();
+            }));
+        }
+        private void SlideSelection_exitEvent(object sender, string x)
+        {
+            Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                slideSelection.Visibility = Visibility.Collapsed;
+                myGrid.Children.Remove(slideSelection);
+                Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                locateTutor();
             }));
         }
 
-
         #endregion
 
-        
+
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
@@ -383,6 +513,20 @@ namespace PT2023
             buttonExitImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_exit1.png"));
         }
 
+        private void SlideSelectionButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            SlideSelectionButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_slidesO.png"));
+        }
+
+        private void SlideSelectionButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            SlideSelectionButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_slides.png"));
+        }
+
         #endregion
+
+
+
+
     }
 }

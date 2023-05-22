@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="PT2023.SlideSelection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PT2023"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Width="600" Height="450">
+        <Image Source="Images/frame.png" Stretch="Fill" />
+        <Label Content="Folder with the slides:" HorizontalAlignment="Left" Foreground="White" Margin="52,123,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="textboxPath" HorizontalAlignment="Left" Margin="182,131,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="208"/>
+        <Button Name="Button_findSlides" Click="Button_findSlides_Click" HorizontalAlignment="Left" Margin="415,127,0,0" Width="25" Height="25"  VerticalAlignment="Top" MouseEnter="Button_findSlides_MouseEnter" MouseLeave="Button_findSlides_MouseLeave" >
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="findButtonImg" Source="Images/btn_find.png"/>
+        </Button>
+        <Button Name="Go_back" MouseEnter="Go_back_MouseEnter" MouseLeave="Go_back_MouseLeave" Click="Go_back_Click" HorizontalAlignment="Left" Margin="40,0,0,22" VerticalAlignment="Bottom" Height="40">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Image Name="go_backImg" Source="Images/btn_return.png"/>
+        </Button>
+
+    </Grid>
+</UserControl>
