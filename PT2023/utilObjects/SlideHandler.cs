@@ -58,19 +58,25 @@ namespace PT2023.utilObjects
             {
                 SlideSelection.SlidesPath = File.ReadAllText(path);
             }
-            if(SlideSelection.SlidesPath != "")
+            if(SlideSelection.SlidesPath != "" || SlideSelection.SlidesPath != null)
             {
-                var files = from file in Directory.EnumerateFiles(SlideSelection.SlidesPath) select file;
+                bool exists = System.IO.Directory.Exists(SlideSelection.SlidesPath);
 
-                foreach (var file in files)
+                if ( exists)
                 {
-                    if (file.IndexOf("Slide") != -1 && file.IndexOf(".PNG") != -1)
+                    var files = from file in Directory.EnumerateFiles(SlideSelection.SlidesPath) select file;
+
+                    foreach (var file in files)
                     {
-                        SlideConfig slideConfig = new SlideConfig();
-                        slideConfig.fileName = file;
-                        SlideConfigs.Add(slideConfig);
+                        if (file.IndexOf("Slide") != -1 && file.IndexOf(".PNG") != -1)
+                        {
+                            SlideConfig slideConfig = new SlideConfig();
+                            slideConfig.fileName = file;
+                            SlideConfigs.Add(slideConfig);
+                        }
                     }
                 }
+               
             }
             
         }
@@ -98,13 +104,16 @@ namespace PT2023.utilObjects
         void getStartIndexes()
         {
             int counter = 0;
-
-            SlideConfigs[0].startIndex = 0;
-            for (int i=1; i < SlideConfigs.Count; i++)
+            if (SlideConfigs.Count > 0)
             {
-                counter = counter + CountLines(SlideConfigs[i-1].scriptText);
-                SlideConfigs[i].startIndex = counter;
+                SlideConfigs[0].startIndex = 0;
+                for (int i = 1; i < SlideConfigs.Count; i++)
+                {
+                    counter = counter + CountLines(SlideConfigs[i - 1].scriptText);
+                    SlideConfigs[i].startIndex = counter;
+                }
             }
+            
             //foreach (SlideConfig slideConfig in SlideConfigs)
             //{
             //    counter = counter + CountLines(slideConfig.scriptText);
