@@ -6,6 +6,7 @@ using System.Speech.Recognition;
 using System.Windows;
 using System.Diagnostics;
 using System.Globalization;
+using System.Windows.Controls;
 
 namespace PT2023
 {
@@ -23,6 +24,10 @@ namespace PT2023
 
        // private string GreekCase= "el-GR";
         private string currentLanguage = "en-GB";
+
+        private string selectedLanguage = "en-GB";
+
+        private ComboBox languageSelector;
 
         public delegate void SpeechRecognized(object sender, string text);
         public event SpeechRecognized speechRecognizedEvent;
@@ -60,6 +65,37 @@ namespace PT2023
             }
         }
 
+        public SpeechToText(ComboBox languageComboBox)
+        {
+            try
+            {
+
+                //  currentLanguage = CultureInfo.InstalledUICulture.Name.ToString();
+                // create the engine
+                speechRecognitionEngine = createSpeechEngine();
+
+                // hook to events
+                speechRecognitionEngine.AudioLevelUpdated += new EventHandler<AudioLevelUpdatedEventArgs>(engine_AudioLevelUpdated);
+                speechRecognitionEngine.SpeechRecognized += new EventHandler<SpeechRecognizedEventArgs>(engine_SpeechRecognized);
+
+                // load dictionary
+                loadGrammar();
+
+                // use the system's default microphone
+                speechRecognitionEngine.SetInputToDefaultAudioDevice();
+
+                // start listening
+                speechRecognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Voice recognition failed");
+            }
+            languageSelector = languageComboBox;
+            // Populate the language dropdown menu
+            PopulateLanguageDropdown();
+        }
+
 
 
 
@@ -90,6 +126,30 @@ namespace PT2023
                 MessageBox.Show("The desired culture is not installed on this machine, the speech-engine will continue using "
                     + SpeechRecognitionEngine.InstalledRecognizers()[0].Culture.ToString() + " as the default culture.",
                     "Culture " + preferredCulture + " not found!");
+                speechRecognitionEngine = new SpeechRecognitionEngine(SpeechRecognitionEngine.InstalledRecognizers()[0]);
+            }
+
+            return speechRecognitionEngine;
+        }
+
+
+        private SpeechRecognitionEngine createSpeechEngine()
+        {
+            foreach (RecognizerInfo config in SpeechRecognitionEngine.InstalledRecognizers())
+            {
+                if (config.Culture.ToString() == selectedLanguage)
+                {
+                    speechRecognitionEngine = new SpeechRecognitionEngine(config);
+                    break;
+                }
+            }
+
+            // if the desired culture is not found, then load default
+            if (speechRecognitionEngine == null)
+            {
+                MessageBox.Show("The desired language is not installed on this machine, the speech-engine will continue using " +
+                    SpeechRecognitionEngine.InstalledRecognizers()[0].Culture.ToString() + " as the default language.",
+                    "Language " + selectedLanguage + " not found!");
                 speechRecognitionEngine = new SpeechRecognitionEngine(SpeechRecognitionEngine.InstalledRecognizers()[0]);
             }
 
@@ -133,6 +193,33 @@ namespace PT2023
             {
                 throw ex;
             }
+        }
+
+
+        public void UpdateSelectedLanguage(string languageTag)
+        {
+            selectedLanguage = languageTag;
+
+            // Recreate the speech engine with the new language
+            speechRecognitionEngine = createSpeechEngine();
+
+            // Load the updated grammar
+            loadGrammar();
+        }
+
+        private void PopulateLanguageDropdown()
+        {
+            // Get the available speech recognition languages
+            var availableLanguages = SpeechRecognitionEngine.InstalledRecognizers()
+                .Select(config => new CultureInfo(config.Culture.Name));
+
+            // Populate the language dropdown menu
+            languageSelector.ItemsSource = availableLanguages;
+            languageSelector.DisplayMemberPath = "DisplayName";
+            languageSelector.SelectedValuePath = "Name";
+
+            // Set the currently selected language
+            languageSelector.SelectedItem = availableLanguages.FirstOrDefault(lang => lang.Name == selectedLanguage);
         }
 
 

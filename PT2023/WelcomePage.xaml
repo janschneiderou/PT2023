@@ -54,7 +54,19 @@
                 <Label Content="Review your practice" FontSize="13" HorizontalAlignment="Left" Margin="10,00,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
                
             </Grid>
+            <Grid Name="PresentationTipsGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="50,380,220, 225" Width="200" >
+                <Image Source="Images\container4.png"  Stretch="Fill"  />
+                <Button Name="Button_Presentation_Tips"  BorderThickness="0" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="77" Width="180" Click="Button_Presentation_Tips_Click">
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <TextBlock Text="Get your valuable presentation tips here"/>
+                        </ToolTip>
+                    </Button.ToolTip>
+                    <Image Source="Images/Tips presentation.png" />
+                </Button>
+                <Label Content="Get presentation tips"  FontWeight="Bold" FontSize="13" HorizontalAlignment="Left" Margin="10,00,0,5" VerticalAlignment="Bottom"  Foreground="Black"/>
 
+            </Grid>
 
         </Grid>
         <Rectangle VerticalAlignment="Bottom" Height="70" Fill="White" Opacity="0.3"></Rectangle>
@@ -126,6 +138,14 @@
             </Button.Style>
             <Image Name="SlideSelectionButtonImg" Source="Images/btn_slides.png" />
         </Button>
+        <Label Foreground="White" Content="Select Speech Language:"  HorizontalAlignment="Left" Margin="450,0,0,10" VerticalAlignment="Bottom" FontWeight="Bold"/>
+        <ComboBox Name="languageSelector" Background="Transparent" BorderBrush="Transparent"  Foreground="Black"  HorizontalAlignment="Left" Margin="624,0,0,10" VerticalAlignment="Bottom" Width="120" SelectionChanged="languageSelector_SelectionChanged" Opacity="0.5">
+            <ComboBox.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="Select your desired installed speech language"/>
+                </ToolTip>
+            </ComboBox.ToolTip>
+        </ComboBox>
         <Button  HorizontalAlignment="Right" Margin="0,0,20,10" MouseEnter="Button_MouseEnter_1" MouseLeave="Button_MouseLeave_1"  VerticalAlignment="Bottom" Height="45" BorderThickness="0" Click="Button_Click_2" Background="Transparent">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">

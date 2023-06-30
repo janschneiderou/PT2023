@@ -38,6 +38,8 @@ namespace PT2023
         public UserManagement userManagement;
         public ReviewPractice reviewPractice;
         public SlideSelection slideSelection;
+        public PresentationTips presentationTips;
+
 
         LearningDesign learningDesign;
 
@@ -82,7 +84,11 @@ namespace PT2023
         public void initSpeech()
         {
 
-            speechToText = new SpeechToText();
+            //speechToText = new SpeechToText();
+            //speechToText.speechRecognizedEvent += SpeechRecognition_speechRecognizedEvent;
+            //speechToText.volumeReceivedEvent += SpeechRecognition_volumeReceivedEvent;
+
+            speechToText = new SpeechToText(languageSelector);
             speechToText.speechRecognizedEvent += SpeechRecognition_speechRecognizedEvent;
             speechToText.volumeReceivedEvent += SpeechRecognition_volumeReceivedEvent;
         }
@@ -231,6 +237,20 @@ namespace PT2023
         #endregion
 
         #region handling selections
+
+
+        private void languageSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Check if the selected item is a ComboBoxItem
+            if (languageSelector.SelectedItem is ComboBoxItem comboBoxItem)
+            {
+                // Get the language tag from the Tag property of the ComboBoxItem
+                string languageTag = comboBoxItem.Tag as string;
+
+                // Update the selected language in the speech-to-text instance
+                speechToText.UpdateSelectedLanguage(languageTag);
+            }
+        }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -384,7 +404,18 @@ namespace PT2023
 
         }
 
-      
+
+        private void Button_Presentation_Tips_Click(object sender, RoutedEventArgs e)
+        {
+            Grid_for_Mode_Selection.Visibility = Visibility.Collapsed;
+            presentationTips = new PresentationTips();
+            myGrid.Children.Add(presentationTips);
+            presentationTips.Margin = new Thickness(0, 0, 0, 0);
+            presentationTips.VerticalAlignment = VerticalAlignment.Center;
+            presentationTips.HorizontalAlignment = HorizontalAlignment.Center;
+            presentationTips.exitEvent += PresentationTips_exitEvent;
+        }
+
 
 
         #endregion
@@ -470,6 +501,15 @@ namespace PT2023
                 myGrid.Children.Remove(slideSelection);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
                 locateTutor();
+            }));
+        }
+
+        private void PresentationTips_exitEvent(object sender, string x)
+        {
+            Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate {
+                presentationTips.Visibility = Visibility.Collapsed;
+                myGrid.Children.Remove(presentationTips);
+                Grid_for_Mode_Selection.Visibility = Visibility.Visible;
             }));
         }
 
