@@ -21,7 +21,7 @@ namespace PT2023
         /// </summary>
         public  static List<Word> words = new List<Word>();
 
-
+       // private string GreekCase= "el-GR";
         private string currentLanguage = "en-GB";
 
         public delegate void SpeechRecognized(object sender, string text);
@@ -56,7 +56,7 @@ namespace PT2023
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Voice recognition failed");
+              //  MessageBox.Show(ex.Message, "Voice recognition failed");
             }
         }
 
@@ -121,8 +121,13 @@ namespace PT2023
                     // add the text to the known choices of speechengine
                     texts.Add(line);
                 }
+                if (lines.Length>0)
+                {
+                    
+                }
                 Grammar wordsList = new Grammar(new GrammarBuilder(texts));
                 speechRecognitionEngine.LoadGrammar(wordsList);
+
             }
             catch (Exception ex)
             {

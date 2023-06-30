@@ -136,6 +136,13 @@ namespace PT2023
                 }
                 else
                 {
+                    Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate
+                    {
+                        Button_StartImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_start.png"));
+
+                    }));
+                    
+
                     playing = false;
                     saveToFile();
                 }
@@ -349,7 +356,7 @@ namespace PT2023
                 WelcomePage.currentWord = 0;
                
                 displaySlide();
-
+                Button_StartImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Stop.png"));
                 Thread thread = new Thread(startMemory);
 
                 createSessionStuff();
@@ -358,6 +365,7 @@ namespace PT2023
             }
             else
             {
+                Button_StartImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_start.png"));
                 countdownLabel.Visibility = Visibility.Collapsed;
                 gameTextBlock.Text = "";
                 tempText = "";
@@ -419,12 +427,27 @@ namespace PT2023
 
         private void Button_Start_MouseEnter(object sender, MouseEventArgs e)
         {
-            Button_StartImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_startO.png"));
+            if(playing==false)
+            {
+                Button_StartImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_startO.png"));
+            }
+            else
+            {
+                Button_StartImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_StopO.png"));
+            }
+            
         }
 
         private void Button_Start_MouseLeave(object sender, MouseEventArgs e)
         {
-            Button_StartImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_start.png"));
+            if (playing == false)
+            {
+                Button_StartImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_start.png"));
+            }
+            else
+            {
+                Button_StartImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Stop.png"));
+            }
         }
 
         #endregion

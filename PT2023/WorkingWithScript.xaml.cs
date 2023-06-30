@@ -84,6 +84,7 @@ namespace PT2023
         {
             
             doChunkstuff();
+            updateSlideInfo();
             if (SlideHandler.SlideConfigs.Count > 0)
             {
                 slideHandler.generateScript();
@@ -322,8 +323,15 @@ namespace PT2023
             {
                 slideImg.Source = new BitmapImage(new Uri(SlideHandler.SlideConfigs[currentSlide].fileName));
                 scriptText.Text = SlideHandler.SlideConfigs[currentSlide].scriptText;
+                buttonNext.Visibility=Visibility.Visible;
             }
-            
+            else
+            {
+                buttonNext.Visibility=Visibility.Collapsed;
+                
+            }
+            buttonPrevious.Visibility = Visibility.Collapsed;
+
 
         }
         void getSlides()
@@ -345,12 +353,20 @@ namespace PT2023
         {
             if(currentSlide<SlideHandler.SlideConfigs.Count-1)
             {
+                
                 doChunkstuff();
                 updateSlideInfo();
                 currentSlide++;
                 refreshText();
                 setSlideAndText();
+                buttonPrevious.Visibility = Visibility.Visible;
+                if (currentSlide  == SlideHandler.SlideConfigs.Count-1)
+                {
+                    buttonNext.Visibility = Visibility.Collapsed;
+                }
+
             }
+           
         }
 
         private void buttonPrevious_Click(object sender, RoutedEventArgs e)
@@ -362,7 +378,14 @@ namespace PT2023
                 currentSlide--;
                 refreshText();
                 setSlideAndText();
+                buttonNext.Visibility = Visibility.Visible;
+                buttonPrevious.Visibility = Visibility.Visible;
             }
+            else
+            {
+                buttonPrevious.Visibility = Visibility.Collapsed;
+            }
+
         }
 
 
