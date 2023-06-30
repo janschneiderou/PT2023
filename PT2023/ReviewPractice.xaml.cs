@@ -38,12 +38,31 @@ namespace PT2023
         public ReviewPractice()
         {
             InitializeComponent();
+            setupSize();
+
+
             getSessions();
 
             VideoCreation vc = new VideoCreation();
 
         }
 
+        void setupSize()
+        {
+            this.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+            this.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+
+            mainGrid.Height = this.Height;
+            mainGrid.Width = this.Width;
+
+            imgFrame.Height = this.Height;
+            imgFrame.Width = this.Width;
+
+            myVideo.Width = this.Width - 350;
+            myVideo.Height = this.Height - 301;
+
+
+        }
 
         void loadFeedback()
         {

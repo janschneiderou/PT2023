@@ -109,7 +109,7 @@ namespace PT2023
 
 
             InitializeComponent();
-
+            setupSize();
             speechSynthesizerObj = new SpeechSynthesizer();
             loggingString = "";
             readyToPresent = false;
@@ -125,6 +125,8 @@ namespace PT2023
 
             slideHandler = new SlideHandler();
             slideHandler.init();
+         
+
             if (SlideHandler.SlideConfigs.Count > 0)
             {
                 SlideImage.Source = new BitmapImage(new Uri(SlideHandler.SlideConfigs[SlideHandler.getCurrentSlide(WelcomePage.currentWord)].fileName));
@@ -146,6 +148,27 @@ namespace PT2023
 
 
         }
+
+        #region setupSize
+
+        void setupSize()
+        {
+            this.Width= System.Windows.SystemParameters.PrimaryScreenWidth;
+            this.Height=System.Windows.SystemParameters.PrimaryScreenHeight;
+
+            mainGrid.Height = this.Height;
+            mainGrid.Width = this.Width;
+
+            imgFrame.Height = this.Height;
+            imgFrame.Width = this.Width;
+
+            myImage.Width = this.Width-350;
+            myImage.Height = this.Height-301;
+
+
+        }
+     
+        #endregion
         #region event catchers from the Analysis
         private void RulesAnaliserFIFO_correctionEvent(object sender, PresentationAction x)
         {

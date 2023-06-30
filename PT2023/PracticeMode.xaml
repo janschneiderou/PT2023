@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:PT2023"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000" Background="Transparent">
-    <Grid Width="1000" Height="800" >
-        <Image Source="Images/frame.png" Stretch="Fill" />
+    <Grid x:Name="mainGrid" Width="1000" Height="800" >
+        <Image Name="imgFrame" Source="Images/frame.png" Stretch="Fill" />
         <Image Name="myImage" HorizontalAlignment="Left" Height="599" Margin="60,60,0,0" VerticalAlignment="Top" Width="750"/>
         
-        <Button Name="Button_Pause_Play" BorderThickness="0" MouseEnter="Button_Pause_Play_MouseEnter" MouseLeave="Button_Pause_Play_MouseLeave" Background="Transparent" Height="50" Width="50" HorizontalAlignment="Left" Margin="108,700,0,0" VerticalAlignment="Top" Click="Button_Pause_Play_Click">
+        <Button Name="Button_Pause_Play" BorderThickness="0" MouseEnter="Button_Pause_Play_MouseEnter" MouseLeave="Button_Pause_Play_MouseLeave" Background="Transparent" Height="50" Width="50" HorizontalAlignment="Left" Margin="108,0,0,100" VerticalAlignment="Bottom" Click="Button_Pause_Play_Click">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -105,7 +105,7 @@
                 <Image Name="buttonSpeakImg" Source="Images/btn_speak.png" Height="40" />
             </Button>
         </Canvas>
-        <ScrollViewer Width="176" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="700" Margin="824,50,0,50" >
+        <ScrollViewer Width="176" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Height="700" Margin="0,50,10,50" >
             <Canvas>
                 <Label Content="Posture Elements" Canvas.Left="20" Canvas.Top="5" FontWeight="Bold" Foreground="White"/>
                 <CheckBox Content="Arms Crossed" Name="CB_ArmsCrossed" Canvas.Left="30" Canvas.Top="35" IsChecked="True" Unchecked="CB_ArmsCrossed_Checked" Checked="CB_ArmsCrossed_Checked" Foreground="White"/>
