@@ -390,11 +390,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Title.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\btn_exit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -451,7 +446,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\container4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
@@ -539,12 +534,35 @@
     <Resource Include="Images\RobotTutor.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Tips presentation.png">
+    <Resource Include="Images\btn_NextO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_scriptO.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\btn_NextO.png" />
+    <Resource Include="Images\btn_memoryO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_reviewO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_tips_presentation.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\btn_tips_presentationO.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets" Condition="Exists('..\packages\EMGU.TF.1.14.0.569\build\EMGU.TF.targets')" />

@@ -563,9 +563,59 @@ namespace PT2023
             SlideSelectionButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_slides.png"));
         }
 
+        private void Button_add_Script_MouseEnter(object sender, MouseEventArgs e)
+        {
+            imgButtonScript.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_scriptO.png"));
+        }
+
+        private void Button_add_Script_MouseLeave(object sender, MouseEventArgs e)
+        {
+            imgButtonScript.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_script.png"));
+        }
+
+
+
+        private void PracticeButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            imgPracticeButton.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_speakingO.png"));
+        }
+
+        private void PracticeButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            imgPracticeButton.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_speaking.png"));
+        }
+
+        private void Button_add_Memory_MouseEnter(object sender, MouseEventArgs e)
+        {
+            imgMemoryButton.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_memoryO.png"));
+        }
+
+        private void Button_add_Memory_MouseLeave(object sender, MouseEventArgs e)
+        {
+            imgMemoryButton.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_memory.png"));
+        }
+
+        private void Button_Review_Practice_MouseEnter(object sender, MouseEventArgs e)
+        {
+            imgButtonReview.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_reviewO.png"));
+        }
+
+        private void Button_Review_Practice_MouseLeave(object sender, MouseEventArgs e)
+        {
+            imgButtonReview.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_review.png"));
+        }
+
+        private void Button_Presentation_Tips_MouseEnter(object sender, MouseEventArgs e)
+        {
+            imgButtonTips.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_tips_presentationO.png"));
+        }
+
+        private void Button_Presentation_Tips_MouseLeave(object sender, MouseEventArgs e)
+        {
+            imgButtonTips.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_tips_presentation.png"));
+        }
+
         #endregion
-
-
 
 
     }

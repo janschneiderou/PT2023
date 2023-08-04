@@ -153,8 +153,8 @@ namespace PT2023
 
         void setupSize()
         {
-            this.Width= System.Windows.SystemParameters.PrimaryScreenWidth;
-            this.Height=System.Windows.SystemParameters.PrimaryScreenHeight;
+            this.Width= System.Windows.SystemParameters.PrimaryScreenWidth*.75;
+            this.Height=System.Windows.SystemParameters.PrimaryScreenHeight*.75;
 
             mainGrid.Height = this.Height;
             mainGrid.Width = this.Width;
@@ -163,7 +163,7 @@ namespace PT2023
             imgFrame.Width = this.Width;
 
             myImage.Width = this.Width-350;
-            myImage.Height = this.Height-301;
+            myImage.Height = this.Height-300;
 
 
         }
