@@ -16,6 +16,9 @@ namespace PT2023
         string filenameCombined;
         Process process;
 
+        public delegate void FileCreated(object sender, string x);
+        public event FileCreated fileCreated;
+
         public VideoCreation()
         {
             foreach (var process in Process.GetProcessesByName("ffmpeg.exe"))
@@ -102,8 +105,10 @@ namespace PT2023
 
         public void combineFiles()
         {
-            Thread thread = new Thread(combineFilesThread);
-            thread.Start();
+           // Thread thread = new Thread(combineFilesThread);
+           // thread.Start();
+
+            Task taskA = Task.Run(() => combineFilesThread());
 
         }
 
@@ -111,37 +116,52 @@ namespace PT2023
         {
             try
             {
-                // Process.Start("ffmpeg", "-i " + filename + " -i " + filenameAudio + " -c:v copy -c:a aac -strict experimental " + filenameCombined + "");
+               
 
                 string FFmpegFilename;
-                //string executingDirectory = Directory.GetCurrentDirectory();
-                //string[] text = File.ReadAllLines(executingDirectory + "\\Config\\FFMPEGLocation.txt");
+                
                 FFmpegFilename = Directory.GetCurrentDirectory() + "\\FFmpeg\\bin\\ffmpeg.exe";
 
                 process = new Process();
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.RedirectStandardOutput = true; /// try with false this might overflow... 
+                process.StartInfo.RedirectStandardError = true; //try with false
                 process.StartInfo.FileName = FFmpegFilename;
-                // process.StartInfo.FileName = @"C:\FFmpeg\bin\ffmpeg.exe";
+            
 
                 process.StartInfo.Arguments = "-i " + filename + " -i " + filenameAudio + " -c:v copy -c:a aac -strict experimental " + filenameCombined + " -shortest";
 
 
+               
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.CreateNoWindow = true;
+                
 
-                process.Start();
+                  process.Start();
+
+                string processOutput = null;
+                while ((processOutput = process.StandardOutput.ReadLine()) != null)
+                {
+                    // do something with processOutput
+                    Debug.WriteLine(processOutput);
+                }
+
+                process.Exited += Process_Exited;
+
                 process.WaitForExit();
-
-                // vf.Dispose();
-                // AudioSource.Dispose();
-
+             
+                int a = 1;
+                a++;
             }
             catch
             {
                 int x = 0;
                 x++;
             }
+        }
+
+        private void Process_Exited(object sender, EventArgs e)
+        {
+            fileCreated(this, "");
         }
     }
 }

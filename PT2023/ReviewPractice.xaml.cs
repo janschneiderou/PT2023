@@ -32,6 +32,8 @@ namespace PT2023
         bool isPlaying=false;
         bool keepPlaying;
 
+        private Thread loadingVideoThread;
+
         public delegate void ExitEvent(object sender, string x);
         public event ExitEvent exitEvent;
 
@@ -44,8 +46,11 @@ namespace PT2023
             getSessions();
 
             VideoCreation vc = new VideoCreation();
+            vc.fileCreated += Vc_fileCreated;
 
         }
+
+       
 
         void setupSize()
         {
@@ -121,7 +126,10 @@ namespace PT2023
 
                 sessionDisplayed.SelectedIndex = sessions.sessions.Count() - 1;
                 currentSession = sessions.sessions.Count() - 1;
-                selectVideo();
+                
+                loadingVideoThread = new Thread(new ThreadStart(SelectVideoThread));
+                loadingVideoThread.Start();
+
                 loadFeedback();
                 getSentences();
                 
@@ -146,12 +154,36 @@ namespace PT2023
             getSentences();
         }
 
-        
+        void SelectVideoThread()
+        {
+            string videoPath = UserManagement.usersPathVideos + "\\" + sessions.sessions[currentSession].videoId + "c.mp4";
+            bool loading = true;
+            while (loading)
+            {
+                if (File.Exists(videoPath))
+                {
+                    Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate
+                    {
+
+                        selectVideo();
+
+                    }));
+                    loading = false;
+
+                }
+                else
+                {
+                    Thread.Sleep(500);
+                }
+            }
+            
+        }
 
         void selectVideo()
         {
             try
             {
+               
                 string videoPath = UserManagement.usersPathVideos + "\\" + sessions.sessions[currentSession].videoId + "c.mp4";
                 myVideo.Source = new System.Uri(videoPath);
                 videoLoaded = true;
@@ -165,7 +197,15 @@ namespace PT2023
                 videoLoaded = false;
             }
         }
-        
+        private void Vc_fileCreated(object sender, string x)
+        {
+            Dispatcher.BeginInvoke(new System.Threading.ThreadStart(delegate
+            {
+
+                selectVideo();
+
+            }));
+        }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
@@ -319,7 +359,7 @@ namespace PT2023
         private void Return_MouseEnter(object sender, MouseEventArgs e)
         {
 
-            ReturnImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_backO.png"));
+            ReturnImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_returnO.png"));
         }
 
         private void Return_MouseLeave(object sender, MouseEventArgs e)

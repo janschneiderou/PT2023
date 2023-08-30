@@ -113,7 +113,7 @@
                 <CheckBox Content="Gestures" Name="CB_Gestures" Canvas.Left="30" Canvas.Top="95" IsChecked="True" Unchecked="CB_Gestures_Checked" Checked="CB_Gestures_Checked" Foreground="White"/>
                 <CheckBox Content="Dancing" Name="CB_Dancing" Canvas.Left="30" Canvas.Top="125" IsChecked="True" Unchecked="CB_Dancing_Checked" Checked="CB_Dancing_Checked" Foreground="White"/>
                 <CheckBox Content="Hands Visible" Name="CB_Hands" Canvas.Left="30" Canvas.Top="155" IsChecked="False" Unchecked="CB_Hands_Checked" Checked="CB_Hands_Checked" Foreground="White"/>
-                <CheckBox Content="Hands near Face" Name="CB_Hands_Face" Canvas.Left="30" Canvas.Top="185" IsChecked="True" Unchecked="CB_Hands_Face_Checked" Checked="CB_Hands_Face_Checked" Foreground="White"/>
+                <CheckBox Content="Hands near Face" Name="CB_Hands_Face" Canvas.Left="30" Canvas.Top="185" IsChecked="False" Unchecked="CB_Hands_Face_Checked" Checked="CB_Hands_Face_Checked" Foreground="White"/>
                 <Label Content="Volume Elements" Canvas.Left="20" Canvas.Top="210" FontWeight="Bold" Foreground="White" />
                 <CheckBox Content="Speak Loud" Name="CB_Loud" Canvas.Left="30" Canvas.Top="235" IsChecked="True" Unchecked="CB_Loud_Checked"  Checked="CB_Loud_Checked" Foreground="White"/>
                 <CheckBox Content="Speak Soft" Name="CB_Soft" Canvas.Left="30" Canvas.Top="265" IsChecked="True" Unchecked="CB_Soft_Checked" Checked="CB_Soft_Checked" Foreground="White"/>

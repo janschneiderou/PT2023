@@ -79,7 +79,7 @@ namespace PT2023
         }
         private void Go_back_MouseEnter(object sender, MouseEventArgs e)
         {
-            go_backImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_backO.png"));
+            go_backImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_returnO.png"));
         }
 
         private void Go_back_MouseLeave(object sender, MouseEventArgs e)

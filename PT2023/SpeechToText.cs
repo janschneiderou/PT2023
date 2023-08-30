@@ -166,6 +166,12 @@ namespace PT2023
             {
                 words = new List<Word>();
                 Choices texts = new Choices();
+
+                if(File.Exists(MainWindow.scriptPath)==false)
+                {
+                    File.WriteAllText(MainWindow.scriptPath, "test Script");
+                }
+
                 string[] lines = File.ReadAllLines(MainWindow.scriptPath);
                 foreach (string line in lines)
                 {

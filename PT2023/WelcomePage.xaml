@@ -131,7 +131,7 @@
                 <Label Content="Review your practice" FontSize="13" HorizontalAlignment="Left" Margin="10,00,0,5" VerticalAlignment="Bottom"  Foreground="Black" FontWeight="Bold"/>
                
             </Grid>
-            <Grid Name="PresentationTipsGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="50,380,220, 225" Width="200" >
+            <Grid Name="PresentationTipsGrid" Height="120" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="42,380,220, 225" Width="200" >
                 <Image Source="Images\container4.png"  Stretch="Fill"  />
                 <Button Name="Button_Presentation_Tips"  BorderThickness="0" HorizontalAlignment="Center" MouseEnter="Button_Presentation_Tips_MouseEnter" MouseLeave="Button_Presentation_Tips_MouseLeave" Margin="0,5,0,0" VerticalAlignment="Top" FontSize="20" Background="Transparent"  Height="77" Width="180" Click="Button_Presentation_Tips_Click">
                     <Button.Style>
@@ -186,7 +186,7 @@
             </Button.Style>
             <Image Name="volumeButtonImg" Source="Images/btn_volume1.png" />
         </Button>
-        <Button Name="UserManagementButton" MouseEnter="UserManagementButton_MouseEnter" MouseLeave="UserManagementButton_MouseLeave" Background="Transparent" HorizontalAlignment="Left" Margin="350,0,0,10" VerticalAlignment="Bottom" Click="UserManagementButton_Click" BorderThickness="0"  Height="30" Width="30">
+        <Button Name="UserManagementButton" IsEnabled="False" MouseEnter="UserManagementButton_MouseEnter" MouseLeave="UserManagementButton_MouseLeave" Background="Transparent" HorizontalAlignment="Left" Margin="350,0,0,10" VerticalAlignment="Bottom" Click="UserManagementButton_Click" BorderThickness="0"  Height="30" Width="30">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>
@@ -208,7 +208,7 @@
             </Button.Style>
             <Image Name="UserManagementButtonImg" Source="Images/btn_user.png" />
         </Button>
-        <Button Name="SlideSelectionButton" MouseEnter="SlideSelectionButton_MouseEnter" MouseLeave="SlideSelectionButton_MouseLeave" Background="Transparent" HorizontalAlignment="Left" Margin="390,0,0,10" VerticalAlignment="Bottom" Click="SlideSelectionButton_Click" BorderThickness="0"  Height="30" Width="30">
+        <Button Name="SlideSelectionButton" IsEnabled="False" MouseEnter="SlideSelectionButton_MouseEnter" MouseLeave="SlideSelectionButton_MouseLeave" Background="Transparent" HorizontalAlignment="Left" Margin="390,0,0,10" VerticalAlignment="Bottom" Click="SlideSelectionButton_Click" BorderThickness="0"  Height="30" Width="30">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background" Value="Transparent"/>

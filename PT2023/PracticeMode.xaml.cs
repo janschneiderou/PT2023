@@ -55,7 +55,7 @@ namespace PT2023
         public delegate void ExitEvent(object sender, string x);
         public event ExitEvent exitEvent;
 
-        RecordingClass recordingClass;
+        public RecordingClass recordingClass;
         private VideoCapture m_Webcam;
 
         /// <summary>
@@ -115,6 +115,8 @@ namespace PT2023
             readyToPresent = false;
             myCountDown.startAnimation();
 
+            lookSelections();
+
             if (withScript == false)
             {
                 CB_Show_Script.IsEnabled = false;
@@ -164,6 +166,31 @@ namespace PT2023
 
             myImage.Width = this.Width-350;
             myImage.Height = this.Height-300;
+            RecordingClass.SourceWidth = (int)myImage.Width;
+            RecordingClass.SourceHeight = (int)myImage.Height;
+           
+            RecordingClass.SourceLeft = (int)myImage.Margin.Left + (int)(this.Margin.Left + (System.Windows.SystemParameters.PrimaryScreenWidth - this.Width)/2);
+            RecordingClass.SourceTop = (int)myImage.Margin.Top + (int)(this.Margin.Top + (System.Windows.SystemParameters.PrimaryScreenHeight - this.Height) / 2); ;
+
+
+        }
+
+        public void lookSelections()
+        {
+            CB_Manual_Checked(null, null);
+            CB_Auto_Checked(null, null);
+            CB_Speak_Checked(null, null);
+            CB_Pauses_Checked(null, null);
+            CB_Soft_Checked(null, null);
+            CB_Loud_Checked(null, null);
+            CB_Hands_Face_Checked(null, null);
+            CB_Hands_Checked(null, null);
+            CB_Dancing_Checked(null, null);
+            CB_Gestures_Checked(null, null);
+            CB_LegsCrossed_Checked(null, null);
+            CB_ArmsCrossed_Checked(null, null);
+            CB_Show_Script_Checked(null, null);
+
 
 
         }
@@ -901,14 +928,22 @@ namespace PT2023
 
         private void pauseLoggingStuff()
         {
-            foreach(PracticeLogAction pa in practiceSession.actions)
+            try
             {
-                TimeSpan tp = new TimeSpan();
-                if(pa.end==tp)
+                foreach (PracticeLogAction pa in practiceSession.actions)
                 {
-                    pa.end = DateTime.Now - practiceSession.start;
+                    TimeSpan tp = new TimeSpan();
+                    if (pa.end == tp)
+                    {
+                        pa.end = DateTime.Now - practiceSession.start;
+                    }
                 }
             }
+            catch
+            {
+
+            }
+            
         }
 
         void saveToJSON()
@@ -964,7 +999,7 @@ namespace PT2023
 
         private void buttonBack_MouseEnter(object sender, MouseEventArgs e)
         {
-           buttonBackImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Back_O.png"));
+           buttonBackImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_BackO.png"));
         }
 
         private void buttonBack_MouseLeave(object sender, MouseEventArgs e)

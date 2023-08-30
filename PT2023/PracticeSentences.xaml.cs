@@ -729,7 +729,7 @@ namespace PT2023
 
         private void buttonBack_MouseEnter(object sender, MouseEventArgs e)
         {
-            buttonBackImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Back_O.png"));
+            buttonBackImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_BackO.png"));
         }
 
         private void buttonBack_MouseLeave(object sender, MouseEventArgs e)
@@ -779,7 +779,7 @@ namespace PT2023
 
         private void Button_Pause_Play_MouseEnter(object sender, MouseEventArgs e)
         {
-            Button_Pause_PlayImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_backO.png"));
+            Button_Pause_PlayImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_returnO.png"));
         }
 
         private void Button_Pause_Play_MouseLeave(object sender, MouseEventArgs e)

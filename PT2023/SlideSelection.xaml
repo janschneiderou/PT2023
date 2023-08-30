@@ -54,6 +54,8 @@
             </Button.Style>
             <Image Name="go_backImg" Source="Images/btn_return.png"/>
         </Button>
+        <TextBox HorizontalAlignment="Center" Margin="0,225,0,0" IsEnabled="False" TextWrapping="Wrap" Text="In Powerpoint, open the presentation that you want to practice. Go to File, Save As, then in the option of Save Type As: select PNG Portable Network Graphic Format (*.png). Press Save. 
+Select the folder where the files of the presentation were saved." VerticalAlignment="Top" Width="460" Height="125" Background="Transparent" Foreground="White"/>
 
     </Grid>
 </UserControl>

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VaderSharp2;
 
 namespace PT2023
 {
@@ -295,7 +296,7 @@ namespace PT2023
 
         private void buttonPrevious_MouseEnter(object sender, MouseEventArgs e)
         {
-            prevButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Back_O.png"));
+            prevButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_BackO.png"));
         }
 
         private void buttonPrevious_MouseLeave(object sender, MouseEventArgs e)
@@ -313,6 +314,15 @@ namespace PT2023
             nextButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_Next.png"));
         }
 
+        private void sentimentButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            sentimentButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_sentimentO.png"));
+        }
+
+        private void sentimentButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            sentimentButtonImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_sentiment.png"));
+        }
 
         #endregion
 
@@ -348,25 +358,25 @@ namespace PT2023
             slideHandler.updateScriptText(currentSlide);
         }
 
-        #endregion
         private void buttonNext_Click(object sender, RoutedEventArgs e)
         {
-            if(currentSlide<SlideHandler.SlideConfigs.Count-1)
+            if (currentSlide < SlideHandler.SlideConfigs.Count - 1)
             {
-                
+
                 doChunkstuff();
                 updateSlideInfo();
                 currentSlide++;
                 refreshText();
                 setSlideAndText();
                 buttonPrevious.Visibility = Visibility.Visible;
-                if (currentSlide  == SlideHandler.SlideConfigs.Count-1)
+                if (currentSlide == SlideHandler.SlideConfigs.Count - 1)
                 {
                     buttonNext.Visibility = Visibility.Collapsed;
                 }
+                sentimentButton_Click(null, null);
 
             }
-           
+
         }
 
         private void buttonPrevious_Click(object sender, RoutedEventArgs e)
@@ -385,10 +395,43 @@ namespace PT2023
             {
                 buttonPrevious.Visibility = Visibility.Collapsed;
             }
+            sentimentButton_Click(null, null);
 
         }
 
+        #endregion
 
 
+        private void sentimentButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the text from the scriptText TextBox
+            string text = scriptText.Text;
+
+            // Create an instance of the SentimentIntensityAnalyzer
+            var analyzer = new SentimentIntensityAnalyzer();
+
+            // Perform sentiment analysis on the text
+            var sentimentScores = analyzer.PolarityScores(text);
+
+            // Interpret the sentiment scores
+            var compoundScore = sentimentScores.Compound;
+            string sentimentLabel;
+
+            if (compoundScore >= 0.05)
+            {
+                sentimentLabel = "Positive";
+            }
+            else if (compoundScore <= -0.05)
+            {
+                sentimentLabel = "Negative";
+            }
+            else
+            {
+                sentimentLabel = "Neutral";
+            }
+
+            // Update the analyseTextBlock with the sentiment label
+            analyseTextBlock.Text = "Sentiment: " + sentimentLabel;
+        }
     }
 }

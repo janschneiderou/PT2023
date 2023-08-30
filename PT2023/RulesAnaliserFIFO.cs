@@ -128,7 +128,7 @@ namespace PT2023
                        l_mistakesL.Add(ba);
                         PracticeLogAction pa = new PracticeLogAction();
                         pa.id = ba.timeStarted;
-                        pa.start = PracticeMode.practiceSession.start-DateTime.Now;
+                        pa.start = DateTime.Now- PracticeMode.practiceSession.start;
                         pa.logAction = ba.myMistake.ToString();
                         PracticeMode.practiceSession.actions.Add(pa);
 

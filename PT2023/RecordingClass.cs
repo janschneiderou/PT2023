@@ -7,6 +7,7 @@ using Accord.Audio;
 using Accord.Audio.Formats;
 using Accord.DirectSound;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace PT2023
 {
@@ -15,6 +16,10 @@ namespace PT2023
 
         public static VideoFileWriter vf;
         public static AudioCaptureDevice AudioSource;
+        public static int SourceTop;
+        public static int SourceLeft;
+        public static int SourceWidth;
+        public static int SourceHeight;
 
 
         System.DateTime sartRecordingTime;
@@ -41,6 +46,7 @@ namespace PT2023
         string filenameAudio;
         string filenameCombined;
         int i;
+        bool audioReady=false;
 
         private Thread myCaptureThread;
         public bool isRecording = false;
@@ -73,6 +79,7 @@ namespace PT2023
 
             try
             {
+                audioReady = false;
                 AudioSource = new AudioCaptureDevice();
                 AudioDeviceInfo info = null;
                 var adc = new AudioDeviceCollection(AudioDeviceCategory.Capture);
@@ -174,6 +181,7 @@ namespace PT2023
             // Also zero out the buffers and screen
             Array.Clear(current, 0, current.Length);
             // AudioSource.Dispose();
+            audioReady = true;
 
         }
 
@@ -189,7 +197,13 @@ namespace PT2023
             int screenHeight = (int)System.Windows.SystemParameters.PrimaryScreenHeight * 2;
             bmpScreenShot = new Bitmap(screenWidth, screenHeight);
 
-            vf.Open(filename, screenWidth, screenHeight, 25, VideoCodec.Default, 400000);
+
+            //vf.Open(filename, screenWidth, screenHeight, 25, VideoCodec.Default, 400000); //new comment
+
+
+
+
+            vf.Open(filename, SourceWidth*2, SourceHeight*2, 25, VideoCodec.Default, 400000); //new line
 
             myCaptureThread = new Thread(new ThreadStart(captureFunction));
             myCaptureThread.Start();
@@ -204,7 +218,11 @@ namespace PT2023
         public void stopRecording()
         {
             isRecording = false;
-            
+            //vf.Close();
+            while(vf.IsOpen==true)
+            {
+
+            }
             doAudioStop();
 
 
@@ -212,22 +230,36 @@ namespace PT2023
 
         public void combineFiles()
         {
-            Thread thread = new Thread(combineFilesThread);
+            //Thread thread = new Thread(combineFilesThread);
+            //thread.Start();
 
-
-
-            thread.Start();
-           
-
+            Task taskA = Task.Run(() => combineFilesThread());
 
 
 
         }
 
+        void combineFilesThread1()
+        {
+            //string args = "/c ffmpeg -i \"video.mp4\" -i \"mic.wav\" -shortest outPutFile.mp4";
+            //ProcessStartInfo startInfo = new ProcessStartInfo();
+            //startInfo.CreateNoWindow = false;
+            //startInfo.FileName = "cmd.exe";
+            //startInfo.WorkingDirectory = @"" + outputPath;
+            //startInfo.Arguments = args;
+            //using Process exeProcess = Process.Start(startInfo)
+
+            //exeProcess.WaitForExit();
+        }
         void combineFilesThread()
         {
             try
             {
+                
+                while(audioReady== false && vf.IsOpen == false)
+                {
+                   Thread.Sleep(100);
+                }
                 // Process.Start("ffmpeg", "-i " + filename + " -i " + filenameAudio + " -c:v copy -c:a aac -strict experimental " + filenameCombined + "");
 
                 string FFmpegFilename;
@@ -236,22 +268,48 @@ namespace PT2023
                 FFmpegFilename = Directory.GetCurrentDirectory() + "\\FFmpeg\\bin\\ffmpeg.exe";
 
                 process = new Process();
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.RedirectStandardOutput = false;
+                process.StartInfo.RedirectStandardError = false;
                 process.StartInfo.FileName = FFmpegFilename;
-                // process.StartInfo.FileName = @"C:\FFmpeg\bin\ffmpeg.exe";
+
 
                 process.StartInfo.Arguments = "-i " + filename + " -i " + filenameAudio + " -c:v copy -c:a aac -strict experimental " + filenameCombined + " -shortest";
+                //  process.StartInfo.Arguments = "-i " + filename + " -i " + filenameAudio + " -map 0:v -map 1:a -c:v copy -c:a aac -strict experimental" + filenameCombined;
+                //process.StartInfo.Arguments = "-i " + filename + " -i " + filenameAudio + " -c:v copy -c:a aac -strict experimental" + filenameCombined;
+                // process.StartInfo.Arguments = "-i " + filename + " -i " + filenameAudio + " - c:v copy - map 0:v - map 1:a  " + filenameCombined  + " -shortest";
 
 
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.CreateNoWindow = true;
 
                 process.Start();
+
+
+
+                // string cmd = FFmpegFilename + " -i " + filename + " -i " + filenameAudio + " -c:v copy -c:a aac -strict experimental " + filenameCombined + " -shortest";
+                // Process.Start(cmd);
+
+                //string processOutput = null;
+                //while ((processOutput = process.StandardOutput.ReadLine()) != null)
+                //{
+                //    // do something with processOutput
+                //    Debug.WriteLine(processOutput);
+                //}
+
+
+              
+
+
+
                 process.WaitForExit();
 
-                // vf.Dispose();
-                // AudioSource.Dispose();
+
+
+
+
+                int a = 1;
+                a++;
+            
 
             }
             catch
@@ -259,6 +317,10 @@ namespace PT2023
                 int x = 0;
                 x++;
             }
+            
+
+            
+
         }
 
         #endregion
@@ -274,18 +336,26 @@ namespace PT2023
                     int screenHeight = (int)System.Windows.SystemParameters.PrimaryScreenHeight * 2;
 
 
-                    //Bitmap bmpScreenShot = new Bitmap(screenWidth, screenHeight);
+                    Bitmap bmpScreenShot = new Bitmap(SourceWidth * 2, SourceHeight * 2); //new lines
+                   
                     Graphics gfx = Graphics.FromImage((System.Drawing.Image)bmpScreenShot);
-                    gfx.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size(screenWidth, screenHeight));
+
+                    gfx.CopyFromScreen(SourceLeft*2, SourceTop*2, 0, 0, new System.Drawing.Size(SourceWidth*2, SourceHeight*2)); //new lines
+
+                    //gfx.CopyFromScreen(0, 0, 0, 0, new System.Drawing.Size(screenWidth, screenHeight));  //new comment
                     System.TimeSpan diff1 = DateTime.Now.Subtract(sartRecordingTime);
-                    vf.WriteVideoFrame(bmpScreenShot, diff1);
+                    if(vf.IsOpen==true)
+                    {
+                        vf.WriteVideoFrame(bmpScreenShot, diff1);
+                    }
+                    
                 }
                 catch
                 {
 
                 }
 
-                Thread.Sleep(40);
+                Thread.Sleep(30);
             }
             vf.Close();
            // vf.Dispose();

@@ -417,7 +417,7 @@ namespace PT2023
         #region Animation for buttons
         private void Return_MouseEnter(object sender, MouseEventArgs e)
         {
-            ReturnImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_backO.png"));
+            ReturnImg.Source = new BitmapImage(new Uri(System.IO.Directory.GetCurrentDirectory() + "\\Images\\btn_returnO.png"));
         }
 
         private void Return_MouseLeave(object sender, MouseEventArgs e)

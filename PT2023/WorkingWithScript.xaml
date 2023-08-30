@@ -10,7 +10,7 @@
         <Image Source="Images/frame.png" Stretch="Fill" />
         <TextBox Name="scriptText" Height="460" HorizontalAlignment="Left" Margin="60,39,0,0" Width="341" TextWrapping="Wrap" Text="" VerticalAlignment="Top"
                    ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsEnabled="True" AcceptsReturn="True"/>
-        <Label Content="Write the Script for your presentation" HorizontalAlignment="Left" Margin="289,5,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
+        <Label Content="Write the Script for your presentation" HorizontalAlignment="Left" Margin="289,10,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold"/>
 
         <Button Name="Button_Close" MouseEnter="Button_Close_MouseEnter" MouseLeave="Button_Close_MouseLeave" HorizontalAlignment="Left" Background="Transparent" BorderThickness="0" Margin="70,0,0,25" VerticalAlignment="Bottom" Click="Button_Close_Click" Height="50" Width="55">
             <Button.Style>
@@ -101,6 +101,36 @@
             </Button.Style>
             <Image Name="nextButtonImg" Source="Images/btn_next.png" />
         </Button>
+        <Button Name="sentimentButton" MouseEnter="sentimentButton_MouseEnter"  MouseLeave="sentimentButton_MouseLeave"  Background="Transparent" HorizontalAlignment="Left" Margin="275,0,0,25" VerticalAlignment="Bottom" Height="50" Width="55" Click="sentimentButton_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.ToolTip>
+                <ToolTip>
+                    <TextBlock Text="Sentiment analyse based on the entered text"/>
+                </ToolTip>
+            </Button.ToolTip>
+            <Image Name="sentimentButtonImg" Source="Images/btn_sentiment.png" />
+        </Button>
+        <TextBlock Text="Sentiment analysis:" Foreground="White" Margin="508, 377, 0, 0"/>
+        <TextBlock Name="analyseTextBlock" FontSize="20" HorizontalAlignment="Left" TextWrapping="Wrap" Background="LightGray" Text="{Binding AnalyseText}" VerticalAlignment="Top" Height="100" Width="200"
+                   ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="508,397,0,0" />
 
     </Grid>
 </UserControl>

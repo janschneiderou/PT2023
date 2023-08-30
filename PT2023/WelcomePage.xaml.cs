@@ -19,6 +19,7 @@ using AForge;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using PT2023.utilObjects;
+using System.Diagnostics;
 
 namespace PT2023
 {
@@ -40,6 +41,7 @@ namespace PT2023
         public SlideSelection slideSelection;
         public PresentationTips presentationTips;
 
+        int audioFactor = 5;
 
         LearningDesign learningDesign;
 
@@ -95,7 +97,7 @@ namespace PT2023
 
         private void SpeechRecognition_volumeReceivedEvent(object sender, int audioLevel)
         {
-            VolumeAnalysis.currentAudioLevel = audioLevel;
+            VolumeAnalysis.currentAudioLevel = audioLevel * audioFactor;
             if (volumeCalibration.Visibility == Visibility.Visible)
             {
                 volumeCalibration.showWave();
@@ -428,6 +430,8 @@ namespace PT2023
                 userManagement.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(userManagement);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+                SlideSelectionButton.IsEnabled = true;
+                UserManagementButton.IsEnabled = true;
                 locateTutor();
                 initSpeech();
             }));
@@ -450,6 +454,7 @@ namespace PT2023
                 practiceMode.Visibility = Visibility.Collapsed;
                 myGrid.Children.Remove(practiceMode);
                 Grid_for_Mode_Selection.Visibility = Visibility.Visible;
+               // practiceMode.recordingClass.combineFiles();
                 locateTutor();
             }));
 
@@ -518,6 +523,10 @@ namespace PT2023
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            foreach (var process in Process.GetProcessesByName("ffmpeg.exe"))
+            {
+                process.Kill();
+            }
             System.Windows.Application.Current.Shutdown();
         }
 

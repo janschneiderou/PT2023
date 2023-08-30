@@ -129,8 +129,11 @@ namespace PT2023.utilObjects
         {
             int slideTemp = slide + 1;
             string path = System.IO.Path.Combine(UserManagement.usersPathScripts + "\\Slide" + slideTemp + ".txt");
-
-            File.WriteAllText(path, SlideConfigs[slide].scriptText);
+            if(SlideConfigs.Count > 0)
+            {
+                File.WriteAllText(path, SlideConfigs[slide].scriptText);
+            }
+            
             getStartIndexes();
         }
 
